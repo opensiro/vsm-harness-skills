@@ -1,6 +1,6 @@
 ---
 name: vsmskill
-description: Assess whether a software or agent project should adopt Stafford Beer's Viable System Model (VSM), estimate token-compute and duplicated context when repository evidence and model data permit, diagnose the current maturity of an existing VSM, and produce an evidence-backed visual report. Use for VSM feasibility, VSM readiness, VSM status, autonomy, agent-topology, coordination, audit, intelligence, policy, token duplication, or migration questions. Do not use VSM terminology as decoration for a simple single-agent project that lacks independent operational units or persistent coordination needs.
+description: Assess agentic VSM adoption for AI-native systems, reject agentic VSM for conventional or merely AI-assisted projects, identify bounded potential AI insertion points, estimate token-compute and duplicated context when evidence permits, and diagnose existing VSM maturity. Use for VSM feasibility, AI-native readiness, VSM status, autonomy, agent topology, token duplication, or migration questions. Do not treat microservices, ordinary ML, CI, or repository size as proof that agents are needed.
 ---
 
 # VSM project assessment
@@ -11,6 +11,72 @@ Evaluate a project in one or both modes:
 2. **Current VSM status** — how complete, operational, autonomous, and evidence-backed is its existing VSM?
 
 The result is a decision instrument, not a generic architecture essay. Inspect the repository before judging it. Separate observations, calculations, external facts, assumptions, and recommendations.
+
+
+## AI-native gate — run this first
+
+This skill evaluates **agentic VSM for AI-native systems**. Distributed software architecture, microservices, CI pipelines, ordinary ML inference, and organizational complexity do not by themselves justify agents or an agentic VSM.
+
+Classify the project before applying any VSM readiness score:
+
+| Class | Definition | Typical evidence |
+|---|---|---|
+| **NOT AI-NATIVE** | The primary value loop is deterministic software or human-operated workflows. AI is absent. | services, queues, APIs, schedulers, rules, conventional analytics |
+| **AI-ASSISTED** | AI performs a bounded optional feature but does not own the system's primary decisions or autonomous work loop. | one LLM enrichment call, copy generation, classifier fallback, operator-invoked assistant |
+| **AI-NATIVE** | Models/agents are indispensable operational actors: they perceive context, make non-trivial decisions, use tools or coordinate work, and their behavior must be governed and evaluated. | agent loops, tool calls, planning, model routing, memory/state, evals, autonomous recovery, multi-agent handoffs |
+
+Ask four gating questions:
+
+1. If the AI component is replaced by a deterministic stub, does the project's defining value proposition disappear?
+2. Does an AI actor choose actions or merely return bounded content/predictions inside a conventional program?
+3. Is there a persistent or repeated AI work loop with state, tools, feedback, retries, or delegation?
+4. Are model behavior, context, autonomy, and evaluation first-class operational risks?
+
+Classification rules:
+
+- A recommendation model, ranking model, MAB, computer-vision model, or LLM endpoint is not automatically an **agent**.
+- A single prompt used to generate text or JSON is normally **AI-assisted**, not AI-native.
+- Microservices are software deployment units, not agentic S1 units, unless an AI actor inside them has meaningful local autonomy.
+- Tests and CI are ordinary verification. They become S3* in an agentic VSM only when they independently verify AI/agent claims or autonomous outcomes.
+- Do not award agentic-VSM readiness points for complexity that standard software architecture, workflow orchestration, SRE, or governance already handles well.
+
+### Gate outcomes
+
+- **NOT AI-NATIVE → NO AGENTIC VSM.** Stop the agent-topology score. Briefly note whether ordinary VSM is useful as an organizational metaphor, but recommend conventional engineering controls.
+- **AI-ASSISTED → NO AGENTIC VSM or EXPLORE.** Assess the bounded AI feature and potential insertion points. Cap the topology at MIN until an autonomous loop is proven valuable.
+- **AI-NATIVE → continue** to the full feasibility and status rubrics.
+
+Never hide this gate inside the final score. Put the AI-native classification beside the headline verdict.
+
+## Potential AI insertion scan
+
+For NOT AI-NATIVE and AI-ASSISTED projects, do not end at “no”. Identify only plausible places where AI could add value, while preserving deterministic systems where they are superior.
+
+Evaluate candidate insertion points for:
+
+- unstructured inputs that resist stable rules;
+- repeated human judgment or investigation bottlenecks;
+- planning or coordination across changing constraints;
+- external intelligence synthesis where sources and premises change;
+- anomaly explanation, incident triage, or experiment interpretation;
+- adaptive content/decision generation requiring evaluation and rollback.
+
+Reject or downgrade candidates when:
+
+- exact rules, SQL, optimization, schemas, tests, or standard ML solve the task more reliably;
+- the action is high-impact but no independent verifier or human approval is available;
+- there is no feedback signal for evaluating model behavior;
+- latency, privacy, determinism, or unit economics make AI inappropriate;
+- “add an agent” merely wraps an existing API or cron job.
+
+For every credible candidate report:
+
+```text
+candidate · current human/deterministic bottleneck · proposed AI role · required tools/data
+decision authority · verifier · failure containment · measurable pilot · expected token/latency class
+```
+
+Use `EXPLORE` only when at least one candidate has a measurable outcome, bounded authority, available evidence, and a reversible pilot.
 
 ## Core model
 
@@ -52,6 +118,8 @@ Infer the mode from the request. Run both when the user asks for a general VSM r
 
 Answer:
 
+- Is the project NOT AI-NATIVE, AI-ASSISTED, or AI-NATIVE?
+- Which components are actual AI actors, and which are only conventional services or ML models?
 - Is there enough operational variety to justify VSM?
 - Which existing units map to S1?
 - Which coordination pathologies already exist?
@@ -135,11 +203,13 @@ Record commit/ref, working-tree state, scan time, relevant model IDs, and eviden
 
 ## Adoption feasibility rubric
 
+Apply this rubric only after the AI-native gate passes. For AI-assisted projects, use it only as a hypothetical score for a named insertion-point pilot and label it `candidate`, never as the current project's VSM readiness.
+
 Score each dimension 0–4 using evidence, then apply the gating rules.
 
 | Dimension | 0 | 1 | 2 | 3 | 4 |
 |---|---|---|---|---|---|
-| Operational plurality | one indivisible task | weak modules | 2 units with shared dependencies | 3+ semi-autonomous units | recursive units with independent environments |
+| Agentic operational plurality | one AI action or none | weakly separated AI steps | 2 AI actors/loops with shared dependencies | 3+ semi-autonomous AI units | recursive AI units with independent environments |
 | Coordination pressure | none | occasional | recurring collisions/handoffs | costly oscillation/contention | coordination dominates delivery risk |
 | Environmental volatility | stable | rare changes | regular dependency/user changes | several changing external domains | continuous strategic adaptation required |
 | Information asymmetry | direct observable work | small gaps | self-report differs from tests sometimes | independent audit is regularly needed | false positives or adversarial evidence are material |
@@ -158,11 +228,13 @@ This percentage is a communication aid, not a scientific probability.
 
 ### Gating rules
 
+- Recommend **NO AGENTIC VSM** when the AI-native gate fails. Do not let microservice count, test volume, or repository size override this.
+- Recommend **EXPLORE** when the current project is not AI-native but one or more bounded AI insertion points warrant a measured pilot.
 - Recommend **NO VSM** when there is only one meaningful S1 unit, no persistent coordination problem, and no credible need for independent S3* or S4.
 - Recommend **MIN** when VSM is useful as one agent's reasoning/control frame but separate agents would mainly duplicate context.
 - Recommend **MODULAR** when one orchestrator should load function-specific prompt sections on demand.
 - Recommend **MAX** when at least two S1 units act independently, coordination/audit must run concurrently or independently, durable state exists, and the token/latency budget can support multiple contexts.
-- A high readiness score cannot override absent S1 plurality for MAX.
+- A high readiness score cannot override the AI-native gate or absent agentic S1 plurality for MAX.
 - Low observability caps the recommendation at a reversible pilot.
 
 Suggested verdict bands:
@@ -313,6 +385,8 @@ Assign token-estimate confidence:
 
 ## Existing VSM status rubric
 
+Run the existing-status rubric as an **agentic VSM** assessment only for AI-native systems. For other projects, you may map implicit organizational VSM functions separately, but label the result `organizational VSM analogy`; do not describe ordinary tests, services, or deployment control as evidence of an existing agentic VSM.
+
 Score every function on two axes:
 
 - **design (0–3):** absent, declared, implemented, coherent;
@@ -412,6 +486,14 @@ Recommend the smallest topology that satisfies requisite variety.
 
 Use ordinary architecture, tests, ownership, and incident handling. Mention which VSM ideas remain useful without adopting the vocabulary.
 
+### NO AGENTIC VSM
+
+State that the project is not AI-native enough to justify agent governance. Preserve deterministic architecture. If useful, list candidate AI insertion points separately; do not install agents merely to make the project appear AI-native.
+
+### EXPLORE
+
+Run one bounded AI-native pilot around a named insertion point. Keep authority narrow, add a deterministic or human verifier, collect token/latency/quality data, and define rollback before considering MIN/MODULAR/MAX.
+
 ### MIN
 
 Use one general prompt containing mission, S1–S5 questions, evidence rules, a single state snapshot, and escalation boundary. Best when one agent can hold the whole task and independence is not essential.
@@ -452,13 +534,14 @@ Lead with the verdict. Make the report scannable, evidence-rich, and honest abou
 ```markdown
 # VSM assessment — <project>
 
-> **Verdict: <NO VSM | MIN | MODULAR | MAX | HOLD>**
+> **Verdict: <NO AGENTIC VSM | EXPLORE | MIN | MODULAR | MAX | HOLD>**
 > <one sentence explaining why>
 
 | Snapshot | Value |
 |---|---|
 | Repository / ref | `<repo>` · `<commit>` |
 | Assessment mode | feasibility / status / both |
+| AI-native class | NOT AI-NATIVE / AI-ASSISTED / AI-NATIVE |
 | Evidence coverage | <high/medium/low> |
 | Model/topology | <known values or unknown> |
 | Generated | <ISO date> |
@@ -502,6 +585,12 @@ Open-data snapshot: <source, version/date>.
 - **Against:** <observed reason>
 - **Unknown:** <missing evidence that could change verdict>
 
+## Potential AI insertion points
+
+| Candidate | Why AI | Why not deterministic | Authority | Verifier | Pilot metric |
+|---|---|---|---|---|---|
+| ... | ... | ... | ... | ... | ... |
+
 ## Recommended target
 
 <small diagram or prose describing the chosen topology>
@@ -543,6 +632,9 @@ Urgent S1 evidence ─────────► S5/human (algedonic)
 Before delivering, verify:
 
 - verdict appears first and is actionable;
+- AI-native classification is explicit and precedes VSM scoring;
+- ordinary services, ML models, queues, tests, and microservices are not counted as agents;
+- a failed AI-native gate produces NO AGENTIC VSM, not a high readiness score;
 - every score can be reconstructed from visible sub-scores;
 - `unknown` is not counted as zero;
 - filenames are not mistaken for operation;
