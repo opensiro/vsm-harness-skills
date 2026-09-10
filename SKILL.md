@@ -1,6 +1,6 @@
 ---
 name: vsmskill
-description: Assess agentic VSM adoption for AI-native systems, reject agentic VSM for conventional or merely AI-assisted projects, identify bounded potential AI insertion points, estimate token-compute and duplicated context when evidence permits, and diagnose existing VSM maturity. Use for VSM feasibility, AI-native readiness, VSM status, autonomy, agent topology, token duplication, or migration questions. Do not treat microservices, ordinary ML, CI, or repository size as proof that agents are needed.
+description: Assess agentic VSM adoption for AI-native systems, reject agentic VSM for conventional or merely AI-assisted projects, identify bounded potential AI insertion points, estimate token-compute and duplicated context when evidence permits, diagnose existing VSM maturity, persist comparable assessment artifacts, and maintain groupable harness metric tables. Use for VSM feasibility, AI-native readiness, VSM status, autonomy, agent topology, token duplication, or migration questions. Do not treat microservices, ordinary ML, CI, or repository size as proof that agents are needed.
 ---
 
 # VSM project assessment
@@ -527,6 +527,126 @@ Propose reversible steps:
 
 Every step needs a success criterion, rollback condition, and measurement window.
 
+## Durable assessment artifact
+
+When the user asks to save, compare, benchmark, track, or retain an assessment, emit a machine-readable artifact in addition to the human report. Do not silently write files for an ordinary read-only assessment.
+
+Default paths when the user does not choose them:
+
+```text
+.vsm/assessments/<project-slug>/<ISO-date>-<short-ref>.json
+.vsm/harnesses.csv
+.vsm/harness-metrics.csv
+```
+
+The JSON artifact is the source of truth. The CSV files are derived comparison indexes and may be rebuilt. Use `scripts/upsert_harness.py <artifact.json> --output-dir <dir>` when this repository's helper is available.
+
+### Artifact contract
+
+Use schema version `vsm-assessment/v1`. Preserve missing observations as `null` with `availability: unknown`; never coerce unknown to zero. Store raw sub-scores as well as percentages so every aggregate can be reconstructed.
+
+```json
+{
+  "schema_version": "vsm-assessment/v1",
+  "assessment_id": "<stable project-ref-date id>",
+  "generated_at": "<ISO-8601>",
+  "snapshot": {
+    "project_name": "<name>",
+    "repository": "<path-or-url>",
+    "ref": "<commit/ref>",
+    "dirty": null,
+    "assessment_mode": "feasibility|status|both",
+    "rubric_version": "vsmskill/v1"
+  },
+  "harness": {
+    "harness_id": "<stable normalized id>",
+    "harness_kind": "single-agent|multi-agent|framework|eval-harness|runtime|hybrid",
+    "execution_model": "one-shot|loop|graph|manager-workers|swarm|mixed",
+    "state_mode": "stateless|session|persistent|mixed|unknown",
+    "tool_mode": "none|fixed|dynamic|mixed|unknown",
+    "human_gate": "none|optional|required|mixed|unknown",
+    "audit_independence": "none|same-agent|separate-prompt|separate-model|external-ground-truth|unknown"
+  },
+  "summary": {
+    "ai_native_class": "NOT AI-NATIVE|AI-ASSISTED|AI-NATIVE",
+    "verdict": "NO AGENTIC VSM|EXPLORE|MIN|MODULAR|MAX|HOLD",
+    "recommended_topology": "none|min|modular|max",
+    "maturity_stage": "<stage>",
+    "vsm_tldr": "<one sentence produced under the vsm-tldr contract>"
+  },
+  "metrics": [],
+  "functions": [],
+  "compute": [],
+  "pathologies": [],
+  "evidence": [],
+  "caveats": []
+}
+```
+
+Represent metrics in long form so results can be grouped without parsing prose:
+
+```json
+{
+  "metric_id": "vsm.structural_completeness",
+  "metric_group": "vsm_completeness",
+  "vsm_function": null,
+  "axis": "design",
+  "scenario": null,
+  "workload_id": null,
+  "value": 14,
+  "max_value": 30,
+  "unit": "score",
+  "status": "observed",
+  "confidence": "medium",
+  "evidence_level": "E2",
+  "availability": "available"
+}
+```
+
+Use stable metric identifiers:
+
+- `gate.ai_native`;
+- `adoption.readiness` and `adoption.<dimension>`;
+- `vsm.structural_completeness`, `vsm.operational_maturity`, and `vsm.<s1|s2|s3|s3star|s4|s5|channels|algedonic|recursion|observability>.<design|operation>`;
+- `autonomy.assisted`;
+- `compute.calls`, `compute.tokens.sent`, `compute.tokens.avoidable_duplicate`, `compute.duplication_rate`, and `compute.latency`.
+
+For each entry in `functions`, retain `function`, `design`, `operation`, `status`, `evidence_level`, `confidence`, and evidence references. For each compute scenario retain `scenario`, `workload_id`, model-by-role, calls, token fields, duplication bounds, assumptions, source level, and confidence. Do not compare token metrics across different `workload_id` values without prominently stating the mismatch.
+
+### Harness comparison tables
+
+`harnesses.csv` is one row per assessment and contains categorical dimensions plus headline metrics and `vsm_tldr`. It is intended for filtering and joins.
+
+`harness-metrics.csv` is one row per metric and is the preferred group-by table. Its stable dimensions are:
+
+```text
+assessment_id, harness_id, project_name, ref, generated_at,
+ai_native_class, verdict, recommended_topology,
+harness_kind, execution_model, state_mode, tool_mode,
+metric_id, metric_group, vsm_function, axis, scenario, workload_id,
+value, max_value, unit, status, confidence, evidence_level, availability
+```
+
+Compare completeness using raw VSM function/axis rows or normalized `value / max_value`. Keep AI-native class, rubric version, evidence level, and availability in the grouping context; otherwise a sparse repository can look worse than a measured one merely because unknowns were flattened to zero.
+
+### VSM TL;DR contract
+
+Generate `summary.vsm_tldr` for every persisted harness assessment. If the separate `vsm-tldr` skill is available, use it; otherwise apply this same contract:
+
+```text
+<what kind of AI harness it is>; <strongest VSM functions>; <decisive missing or constrained functions>; <recommended VSM depth when material>.
+```
+
+Keep it to one neutral sentence, normally 18–45 words. Describe observed structure, not marketing intent. Mention no more than two strengths and two decisive gaps. Do not repeat percentages, the project name, or generic phrases such as “uses VSM”.
+
+Before finalizing a persisted assessment:
+
+1. validate required fields and unique `(metric_id, scenario, workload_id)` keys within the artifact;
+2. derive tables from the JSON rather than manually copying scores;
+3. upsert by `assessment_id`, making reruns idempotent;
+4. sort comparison tables deterministically;
+5. report the written paths to the user.
+
 ## Beautiful result format
 
 Lead with the verdict. Make the report scannable, evidence-rich, and honest about uncertainty. Use Unicode symbols only as supplements to words.
@@ -545,6 +665,8 @@ Lead with the verdict. Make the report scannable, evidence-rich, and honest abou
 | Evidence coverage | <high/medium/low> |
 | Model/topology | <known values or unknown> |
 | Generated | <ISO date> |
+| Artifact | `<path or not persisted>` |
+| VSM TL;DR | <one neutral sentence> |
 
 ## Executive scorecard
 

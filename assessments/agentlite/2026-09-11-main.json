@@ -1,0 +1,88 @@
+{
+  "schema_version": "vsm-assessment/v1",
+  "assessment_id": "salesforce-agentlite-main-2026-09-11",
+  "generated_at": "2026-09-11T00:00:00+03:00",
+  "snapshot": {
+    "project_name": "AgentLite",
+    "repository": "https://github.com/SalesforceAIResearch/AgentLite",
+    "ref": "main (commit unavailable)",
+    "dirty": null,
+    "assessment_mode": "both",
+    "rubric_version": "vsmskill/v1"
+  },
+  "harness": {
+    "harness_id": "salesforce-agentlite",
+    "harness_kind": "framework",
+    "execution_model": "manager-workers",
+    "state_mode": "session",
+    "tool_mode": "fixed",
+    "human_gate": "unknown",
+    "audit_independence": "none"
+  },
+  "summary": {
+    "ai_native_class": "AI-NATIVE",
+    "verdict": "MODULAR",
+    "recommended_topology": "modular",
+    "maturity_stage": "Phase 2 — S2",
+    "vsm_tldr": "Lightweight manager–worker LLM harness with strong S1 and basic S2; resource control and independent audit are not established, so MODULAR is appropriate."
+  },
+  "metrics": [
+    {"metric_id":"gate.ai_native","metric_group":"classification","vsm_function":null,"axis":"gate","value":1,"max_value":1,"unit":"boolean","status":"observed","confidence":"high","evidence_level":"E2","availability":"available"},
+    {"metric_id":"adoption.readiness","metric_group":"adoption","vsm_function":null,"axis":"aggregate","value":18,"max_value":32,"unit":"score","status":"assessed","confidence":"medium","evidence_level":"E2","availability":"available"},
+    {"metric_id":"adoption.agentic_operational_plurality","metric_group":"adoption","vsm_function":null,"axis":"dimension","value":4,"max_value":4,"unit":"score","status":"assessed","confidence":"high","evidence_level":"E2","availability":"available"},
+    {"metric_id":"adoption.coordination_pressure","metric_group":"adoption","vsm_function":"S2","axis":"dimension","value":3,"max_value":4,"unit":"score","status":"assessed","confidence":"medium","evidence_level":"E3","availability":"available"},
+    {"metric_id":"adoption.environmental_volatility","metric_group":"adoption","vsm_function":"S4","axis":"dimension","value":2,"max_value":4,"unit":"score","status":"assessed","confidence":"low","evidence_level":"E1","availability":"available"},
+    {"metric_id":"adoption.information_asymmetry","metric_group":"adoption","vsm_function":"S3*","axis":"dimension","value":3,"max_value":4,"unit":"score","status":"assessed","confidence":"medium","evidence_level":"E2","availability":"available"},
+    {"metric_id":"adoption.identity_policy_tension","metric_group":"adoption","vsm_function":"S5","axis":"dimension","value":1,"max_value":4,"unit":"score","status":"assessed","confidence":"low","evidence_level":"E1","availability":"available"},
+    {"metric_id":"adoption.persistence","metric_group":"adoption","vsm_function":null,"axis":"dimension","value":2,"max_value":4,"unit":"score","status":"assessed","confidence":"medium","evidence_level":"E1","availability":"available"},
+    {"metric_id":"adoption.observability_readiness","metric_group":"adoption","vsm_function":"Observability","axis":"dimension","value":2,"max_value":4,"unit":"score","status":"assessed","confidence":"medium","evidence_level":"E2","availability":"available"},
+    {"metric_id":"adoption.economic_headroom","metric_group":"adoption","vsm_function":"S3","axis":"dimension","value":1,"max_value":4,"unit":"score","status":"assessed","confidence":"low","evidence_level":"E0","availability":"available"},
+    {"metric_id":"vsm.structural_completeness","metric_group":"vsm_completeness","vsm_function":null,"axis":"design","value":14,"max_value":30,"unit":"score","status":"assessed","confidence":"medium","evidence_level":"E2","availability":"available"},
+    {"metric_id":"vsm.operational_maturity","metric_group":"vsm_completeness","vsm_function":null,"axis":"operation","value":10,"max_value":30,"unit":"score","status":"assessed","confidence":"medium","evidence_level":"E3","availability":"available"},
+    {"metric_id":"vsm.s1.design","metric_group":"vsm_function","vsm_function":"S1","axis":"design","value":3,"max_value":3,"unit":"score","status":"green","confidence":"high","evidence_level":"E3","availability":"available"},
+    {"metric_id":"vsm.s1.operation","metric_group":"vsm_function","vsm_function":"S1","axis":"operation","value":3,"max_value":3,"unit":"score","status":"green","confidence":"high","evidence_level":"E3","availability":"available"},
+    {"metric_id":"vsm.s2.design","metric_group":"vsm_function","vsm_function":"S2","axis":"design","value":2,"max_value":3,"unit":"score","status":"yellow","confidence":"medium","evidence_level":"E3","availability":"available"},
+    {"metric_id":"vsm.s2.operation","metric_group":"vsm_function","vsm_function":"S2","axis":"operation","value":1,"max_value":3,"unit":"score","status":"yellow","confidence":"medium","evidence_level":"E3","availability":"available"},
+    {"metric_id":"vsm.s3.design","metric_group":"vsm_function","vsm_function":"S3","axis":"design","value":1,"max_value":3,"unit":"score","status":"red","confidence":"medium","evidence_level":"E2","availability":"available"},
+    {"metric_id":"vsm.s3.operation","metric_group":"vsm_function","vsm_function":"S3","axis":"operation","value":1,"max_value":3,"unit":"score","status":"red","confidence":"medium","evidence_level":"E2","availability":"available"},
+    {"metric_id":"vsm.s3star.design","metric_group":"vsm_function","vsm_function":"S3*","axis":"design","value":1,"max_value":3,"unit":"score","status":"red","confidence":"medium","evidence_level":"E1","availability":"available"},
+    {"metric_id":"vsm.s3star.operation","metric_group":"vsm_function","vsm_function":"S3*","axis":"operation","value":0,"max_value":3,"unit":"score","status":"red","confidence":"medium","evidence_level":"E1","availability":"available"},
+    {"metric_id":"vsm.s4.design","metric_group":"vsm_function","vsm_function":"S4","axis":"design","value":0,"max_value":3,"unit":"score","status":"red","confidence":"medium","evidence_level":"E0","availability":"available"},
+    {"metric_id":"vsm.s4.operation","metric_group":"vsm_function","vsm_function":"S4","axis":"operation","value":0,"max_value":3,"unit":"score","status":"red","confidence":"medium","evidence_level":"E0","availability":"available"},
+    {"metric_id":"vsm.s5.design","metric_group":"vsm_function","vsm_function":"S5","axis":"design","value":1,"max_value":3,"unit":"score","status":"red","confidence":"low","evidence_level":"E1","availability":"available"},
+    {"metric_id":"vsm.s5.operation","metric_group":"vsm_function","vsm_function":"S5","axis":"operation","value":0,"max_value":3,"unit":"score","status":"red","confidence":"low","evidence_level":"E1","availability":"available"},
+    {"metric_id":"vsm.channels.design","metric_group":"vsm_function","vsm_function":"Channels","axis":"design","value":2,"max_value":3,"unit":"score","status":"yellow","confidence":"high","evidence_level":"E2","availability":"available"},
+    {"metric_id":"vsm.channels.operation","metric_group":"vsm_function","vsm_function":"Channels","axis":"operation","value":2,"max_value":3,"unit":"score","status":"yellow","confidence":"high","evidence_level":"E2","availability":"available"},
+    {"metric_id":"vsm.algedonic.design","metric_group":"vsm_function","vsm_function":"Algedonic","axis":"design","value":0,"max_value":3,"unit":"score","status":"red","confidence":"medium","evidence_level":"E0","availability":"available"},
+    {"metric_id":"vsm.algedonic.operation","metric_group":"vsm_function","vsm_function":"Algedonic","axis":"operation","value":0,"max_value":3,"unit":"score","status":"red","confidence":"medium","evidence_level":"E0","availability":"available"},
+    {"metric_id":"vsm.recursion.design","metric_group":"vsm_function","vsm_function":"Recursion","axis":"design","value":2,"max_value":3,"unit":"score","status":"yellow","confidence":"medium","evidence_level":"E2","availability":"available"},
+    {"metric_id":"vsm.recursion.operation","metric_group":"vsm_function","vsm_function":"Recursion","axis":"operation","value":2,"max_value":3,"unit":"score","status":"yellow","confidence":"medium","evidence_level":"E2","availability":"available"},
+    {"metric_id":"vsm.observability.design","metric_group":"vsm_function","vsm_function":"Observability","axis":"design","value":2,"max_value":3,"unit":"score","status":"yellow","confidence":"medium","evidence_level":"E2","availability":"available"},
+    {"metric_id":"vsm.observability.operation","metric_group":"vsm_function","vsm_function":"Observability","axis":"operation","value":1,"max_value":3,"unit":"score","status":"yellow","confidence":"medium","evidence_level":"E2","availability":"available"},
+    {"metric_id":"compute.calls","metric_group":"compute","vsm_function":null,"axis":"upper_bound","scenario":"current","workload_id":"unbounded-generic-task","value":420,"max_value":null,"unit":"llm_calls_per_run","status":"modeled","confidence":"medium","evidence_level":"E2","availability":"available"},
+    {"metric_id":"compute.tokens.sent","metric_group":"compute","vsm_function":null,"axis":"current","scenario":"current","workload_id":"unbounded-generic-task","value":null,"max_value":null,"unit":"tokens_per_run","status":"unknown","confidence":"unavailable","evidence_level":"E0","availability":"unknown"},
+    {"metric_id":"compute.tokens.avoidable_duplicate","metric_group":"compute","vsm_function":null,"axis":"current","scenario":"current","workload_id":"unbounded-generic-task","value":null,"max_value":null,"unit":"tokens_per_run","status":"unknown","confidence":"unavailable","evidence_level":"E0","availability":"unknown"}
+  ],
+  "functions": [
+    {"function":"S1","design":3,"operation":3,"status":"green","evidence_level":"E3","confidence":"high","evidence_refs":["agentlite/agents/BaseAgent.py"]},
+    {"function":"S2","design":2,"operation":1,"status":"yellow","evidence_level":"E3","confidence":"medium","evidence_refs":["agentlite/agents/ManagerAgent.py","example/simple_manager.py"]},
+    {"function":"S3","design":1,"operation":1,"status":"red","evidence_level":"E2","confidence":"medium","evidence_refs":["agentlite/agents/BaseAgent.py:max_exec_steps"]},
+    {"function":"S3*","design":1,"operation":0,"status":"red","evidence_level":"E1","confidence":"medium","evidence_refs":["benchmark/"]},
+    {"function":"S4","design":0,"operation":0,"status":"red","evidence_level":"E0","confidence":"medium","evidence_refs":[]},
+    {"function":"S5","design":1,"operation":0,"status":"red","evidence_level":"E1","confidence":"low","evidence_refs":["agent role prompts"]},
+    {"function":"Channels","design":2,"operation":2,"status":"yellow","evidence_level":"E2","confidence":"high","evidence_refs":["TaskPackage","ManagerAgent.forward"]},
+    {"function":"Algedonic","design":0,"operation":0,"status":"red","evidence_level":"E0","confidence":"medium","evidence_refs":[]},
+    {"function":"Recursion","design":2,"operation":2,"status":"yellow","evidence_level":"E2","confidence":"medium","evidence_refs":["manager and worker execution loops"]},
+    {"function":"Observability","design":2,"operation":1,"status":"yellow","evidence_level":"E2","confidence":"medium","evidence_refs":["agentlite/logging","agentlite/memory"]}
+  ],
+  "compute": [
+    {"scenario":"current","workload_id":"unbounded-generic-task","model_by_role":{"manager":"gpt-3.5-turbo-16k-0613","worker":"gpt-3.5-turbo-16k-0613"},"calls":{"upper":420},"tokens":{"sent":null,"avoidable_duplicate":{"lower":null,"upper":null}},"assumptions":["20 manager steps","up to one worker delegation per manager step","20 worker steps per delegation"],"source_level":"architecture-bound","confidence":"medium"}
+  ],
+  "pathologies":["agent multiplication","context tax","missing independent audit"],
+  "evidence":[
+    {"claim":"Agents run LLM action loops with tools and memory","level":"E2","source":"https://raw.githubusercontent.com/SalesforceAIResearch/AgentLite/main/agentlite/agents/BaseAgent.py","observed_at":"2026-09-11"},
+    {"claim":"A manager delegates to labor agents","level":"E2","source":"https://raw.githubusercontent.com/SalesforceAIResearch/AgentLite/main/agentlite/agents/ManagerAgent.py","observed_at":"2026-09-11"},
+    {"claim":"The shipped trace repeats the same Wikipedia action","level":"E3","source":"https://raw.githubusercontent.com/SalesforceAIResearch/AgentLite/main/example/simple_manager.py","observed_at":"2026-09-11"}
+  ],
+  "caveats":["Git clone did not retrieve objects; the GitHub main branch was inspected through published files.","The exact commit hash and provider token usage were unavailable."]
+}
