@@ -1,54 +1,34 @@
 ---
 name: assess-vsm-harness
-description: Reconstruct an evidence-backed VSM/OSM Autonomy TL;DR for an autonomous AI agent harness at a pinned revision. Use for vsm-harness-index entries, categorical harness comparisons, autonomy boundaries, or VSM function mapping.
+description: Produce a standalone evidence-backed VSM assessment of one autonomous AI agent harness at a pinned repository revision, including out-of-the-box autonomy states.
 ---
 
 # Assess a Harness as a Viable System
 
-Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1–S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The profile snapshot is generated from `vsm-harness-profile`; do not redefine it here.
+Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The output is a standalone repository assessment, not a cross-catalog comparison.
 
-## Set the review boundary
+Read [assessment-format.md](references/assessment-format.md) for the required artifact and [autonomy-states.md](references/autonomy-states.md) for local autonomy notation.
 
-Declare the system-in-focus, purpose, standard-distribution boundary, recursion level, reviewed version/ref, and observation date. For public index work, assess only what the standard documented installation supplies: ready agent-owned enactment, first-party primitives that still require composition, parent-assisted S5 closure, no supplied path, or insufficient evidence. Use only the categorical states defined in `tldr.md`; do not introduce a parallel comparison scale.
+## Workflow
 
-Read [tldr.md](references/tldr.md) for the categorical states, chronological review order, and index update procedure. Read [token-compute.md](references/token-compute.md) only when a separate token/coordination estimate is requested, and [interventions.md](references/interventions.md) only when designing changes after the review.
+1. Pin the repository revision and declare system-in-focus, purpose, environment, standard-distribution boundary, recursion level, and review date.
+2. Describe repository architecture before VSM mapping: runtime, agent loop, state, tools, delegation, persistence, scheduling, evaluation, human involvement, and external integration when material.
+3. Identify operational outcomes and real S1 units.
+4. For each VSM function, first establish the organizational function from behavior and relationships; only then identify the responsible actor and decision right.
+5. Record supporting mechanisms separately from the actor that owns the decision right.
+6. For every material mapping record primary evidence, basis (`explicit`, `structural`, `inferred`, or `unknown`), confidence, and caveat.
+7. Assign the local autonomy state only after the function mapping is complete.
+8. Record recursion, variety, escalation, and unresolved evidence gaps separately from the six-state vector.
+9. Write `assessments/<harness_id>.md` for index work. Do not generate a cohort-relative signature in this skill.
 
-## Evidence workflow
+## Hard distinctions
 
-1. Declare the system-in-focus, purpose, relevant environment, standard-distribution boundary, recursion level, reviewed version/ref, and observation date.
-2. Prefer primary maintainer documentation, source, architecture descriptions, examples, traces, and observed behaviour.
-3. Identify operational outcomes and autonomous agent decision rights before mapping software components.
-4. Map S1, S2, S3, S3*, S4, and S5 separately by asking which agent absorbs variety and exercises each role; record deterministic or human mechanisms only as supporting constraints.
-5. For every material claim record evidence, basis (`explicit`, `structural`, `inferred`, or `unknown`), confidence, and caveat.
-6. Reconstruct a selective, out-of-the-box VSM/OSM Autonomy TL;DR from the evidence, never from marketing copy.
-7. For index work, update the matching row in `data/catalog.psv`, preserve its review ref and date, regenerate `TLDR.md`, and run the index validators.
+- Delegation, routing, sequencing, or handoff alone is not S2; require evidence of interference or oscillation regulation among operational units.
+- A manager is not S3; require a whole-system current view plus authority over shared resources, commitments, priorities, or constraints.
+- A routine verifier is not S3*; require complementary and sufficiently independent access to operational reality.
+- Planning, learning, self-improvement, or event reaction alone is not S4; require an external-and-prospective adaptation loop whose options can affect current capability.
+- A prompt, static policy, guardrail, or approval step alone is not S5; require runtime identity or ultimate-policy closure.
+- Spawning or nesting is not VSM recursion.
+- Missing evidence is `?`, not `—`.
 
-## Non-negotiable distinctions
-
-- A manager is not automatically S3; a planner is not automatically S4; a prompt is not automatically S5.
-- A router, scheduler, graph edge, log, interrupt, or human gate is not agentic VSM enactment unless an autonomous agent holds the corresponding decision rights.
-- For S1-S4 and S3*, distinguish ready agent-owned enactment from first-party
-  primitives that a developer must compose. For S5 only, parent-assisted closure
-  may also be reported, but it is not full agent autonomy.
-- S5 requires a runtime path for identity or ultimate-policy decisions that can
-  close otherwise unresolved tension and bind subsequent operation. Static goals,
-  constitutions, permissions, guardrails, approval gates, and configuration only
-  bound autonomy; they are not S5 by themselves.
-- Logs, tracing, and ordinary tests are not automatically S3*.
-- Agent spawning, teams, and subgraphs are not automatically VSM recursion.
-- Missing evidence is `unknown`, not zero or `no`.
-- The categorical autonomy states are a local publication notation, not Stafford Beer constructs or an external harness standard.
-- Do not reward terminology or prescribe a VSM protocol, manifest, runtime, transport, or required number of agents.
-
-## Output order
-
-Lead with:
-
-1. verdict and VSM/OSM Autonomy TL;DR;
-2. review boundary and evidence coverage;
-3. VSM function mappings with evidence basis and confidence;
-4. decisive gaps, unknowns, and alternative interpretations;
-5. smallest next evidence or intervention step;
-6. updated catalog and generated TL;DR paths for index work.
-
-A second reviewer should be able to reproduce every categorical state from the cited primary evidence.
+A second reviewer must be able to reconstruct every positive autonomy state from cited primary evidence and the declared boundary.
