@@ -1,0 +1,24 @@
+name: validate
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  skills-and-profile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: vsm-skills
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/vsm-harness-profile
+          path: vsm-harness-profile
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/validate_skills.py
+        working-directory: vsm-skills
+      - run: python scripts/sync_profile.py --profile-dir ../vsm-harness-profile --check
+        working-directory: vsm-skills
