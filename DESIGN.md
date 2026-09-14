@@ -1,17 +1,13 @@
-# Skill boundary decision
+# Workflow boundary decision
 
 ## Decision
 
-Publish one coherent `assess-vsm-harness` skill. Keep VSM definitions in `vsm-harness-profile`, and load TL;DR, token, or intervention references only when needed.
+Keep `assess-vsm-harness` focused on one repository at one pinned revision. Document ordered cross-catalog comparison separately in `SYNTHESIS.md`.
 
-## Objective test
+## Rationale
 
-A separate skill requires a distinguishable trigger, materially independent workflow, and independently useful output. The earlier candidates for mapping, design, diagnosis, S3* audit, escalation, recursion, S3–S4 balance, variety, and TL;DR shared one boundary/evidence chain. Separate metadata and entrypoints increased discovery and context overhead without independent outcomes.
+A standalone assessment is repository-relative and should remain stable when the catalog changes. A comparison signature is cohort-relative and may change when an older harness is inserted. Mixing them would make evidence artifacts depend on unrelated catalog membership.
 
-TL;DR is the single public comparison view of an evidence review rather than a separate theoretical capability. Specialized interventions remain available as one conditional reference.
+Within one assessment, S1-S5, S3*, recursion, variety, escalation, topology, token cost, and intervention analysis still share one boundary and evidence chain, so they remain one skill.
 
-This follows the progressive-disclosure pattern used by the [OpenAI skills repository](https://github.com/openai/skills) and [Anthropic skills repository](https://github.com/anthropics/skills): lean entrypoint, detailed references on demand, profile synchronization and deterministic index rendering.
-
-## Revisit condition
-
-Split a reference into another skill only after observed usage demonstrates a standalone trigger and output that does not require the harness assessment first.
+Cohort synthesis reads completed assessments and preserves their autonomy states. Ranking is a deterministic projection of those states rather than another interpretive workflow.
