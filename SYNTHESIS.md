@@ -38,12 +38,12 @@ For each included canonical assessment:
 - counts of `C`, `P`, and `?` are descriptive only;
 - the categorical six-state vector is preserved exactly.
 
-Order ranking rows by:
+Rank by `(metasystem A, total A)` in descending order. Harnesses with the same pair receive the same rank. `C`, `P`, and `?` are never converted to fractional weights or used as tie-breakers. Presentation order inside an equal rank may use non-semantic metadata such as repository creation date; that does not change the rank key.
 
-1. descending `total A`;
-2. descending `metasystem A`;
-3. ascending canonical `catalog_position` as the deterministic tie-break.
+This ranking measures recorded out-of-box agent ownership coverage only. It is not product quality, maturity, organizational viability, or an ordering of `— < C < P < A`.
 
-Do not assign numeric weights to `C`, `P`, `—`, or `?`. In particular, do not treat the state space as `— < C < P < A`: `C` and `P` describe different ownership arrangements, while `?` is an evidence state.
+## Generated views
 
-A ranking change may therefore result from a canonical assessment change or a catalog-order tie-break change; it is not an independent semantic judgment.
+`vsm-harness-index` owns the materialized `TLDR.md` and `RANKINGS.md` files and the implementation that renders them. Those files do not receive independent semantic versions. Their exact corpus/output identity is the Git revision of the Index repository that contains them.
+
+A Methodology change may require re-synthesis or re-ranking without changing repository-relative assessments. An assessment or cohort change may also require regeneration without changing the Methodology version.
