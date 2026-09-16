@@ -17,10 +17,20 @@ def git_blob_sha(data: bytes) -> str:
 
 
 def git_commit_sha(repo: Path) -> str:
-    """Return the exact Git revision of the source profile checkout."""
+    """Return the revision that last changed the normative Profile contract."""
     try:
         completed = subprocess.run(
-            ["git", "-C", str(repo), "rev-parse", "HEAD"],
+            [
+                "git",
+                "-C",
+                str(repo),
+                "log",
+                "-1",
+                "--format=%H",
+                "--",
+                "PROFILE.md",
+                "VERSION",
+            ],
             check=True,
             capture_output=True,
             text=True,
