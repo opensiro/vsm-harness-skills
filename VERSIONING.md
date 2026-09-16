@@ -85,9 +85,13 @@ A change to Profile semantics may require reassessment. A change to Methodology 
 At this release boundary:
 
 ```text
-Profile:     0.2.0
-Methodology: 0.2.2
+Profile:     0.2.1
+Methodology: 0.2.3
 Index:       exact Git revision
 ```
 
+The bundled Profile is synchronized to exact upstream revision `e1aaff7d2cd50d5d5ed9ab76c3606a6ef39d1976`.
+
 The Profile and Methodology are versioned contracts. The Index commit is the immutable identity of a particular corpus/output state.
+
+Frozen downstream work keeps its declared historical contract. In particular, Index Reassessment R1 remains on Profile `0.2.0` / Methodology `0.2.1`; releasing this active contract does not silently migrate that round.

@@ -1,6 +1,6 @@
 # Standalone assessment format
 
-**Methodology version:** 0.2.2
+**Methodology version:** 0.2.3
 
 An assessment is repository-relative and revision-relative. It must not contain cohort-relative signatures, rank positions, or claims that depend on which other harnesses happen to be indexed.
 
@@ -13,10 +13,10 @@ project_name: LangGraph
 repository: https://github.com/langchain-ai/langgraph
 review_ref: <40-character commit SHA>
 reviewed_at: YYYY-MM-DD
-generated_profile_version: 0.2.0
-generated_assessment_procedure_version: 0.2.2
-profile_version: 0.2.0
-assessment_procedure_version: 0.2.2
+generated_profile_version: 0.2.1
+generated_assessment_procedure_version: 0.2.3
+profile_version: 0.2.1
+assessment_procedure_version: 0.2.3
 status: included
 autonomy_s1: A
 autonomy_s2: C
@@ -81,7 +81,14 @@ Identify the actual operational outcomes and S1 units. Separate agent decision r
 
 ## S2 — Coordination
 
-Use the same fields.
+Use the same fields, and additionally make explicit:
+- distinct S1 operational units at the declared recursion level;
+- specific actual or structurally evidenced inter-S1 interference / conflict / oscillation;
+- coordination relation that attenuates that disturbance;
+- feedback / closure path into subsequent S1 behaviour;
+- why the cited primitive is S2-specific rather than generic communication, routing, sequencing, shared state, or delegation.
+
+For `S2=C`, the S2 function itself must already be established. `C` means a first-party S2-specific decision/feedback path exists but the autonomous actor, authority, or closure still requires composition; it does not mean a generic framework could be programmed into S2.
 
 ## S3 — Inside-and-now control
 
@@ -120,7 +127,7 @@ For `P`, show the complete parent closure: identity/policy issue → legitimate 
 ## Evidence gaps
 ```
 
-`Closure path` may be `not applicable` when the function or negative finding does not require a distinct returned decision, but positive S3*, S4, and S5 claims should normally make the relevant feedback path explicit.
+`Closure path` may be `not applicable` when the function or negative finding does not require a distinct returned decision, but positive S2, S3*, S4, and S5 claims should make the relevant feedback path explicit enough for a second reviewer to reconstruct the regulation loop.
 
 ## Evidence requirements
 

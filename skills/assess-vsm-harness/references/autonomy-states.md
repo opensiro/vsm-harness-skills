@@ -1,8 +1,8 @@
 # Local autonomy states
 
-**Methodology version:** 0.2.2
+**Methodology version:** 0.2.3
 
-**Autonomy-state semantics:** unchanged from Methodology v0.2.0; v0.2.1 added provenance and v0.2.2 clarifies the unified Methodology release boundary.
+**Autonomy-state semantics:** unchanged from Methodology v0.2.0; v0.2.1 added provenance, v0.2.2 unified the Methodology release boundary, and v0.2.3 makes the existing S2 function-before-state threshold mechanically explicit.
 
 These states are a publication notation for harness assessments. They are not Stafford Beer concepts and do not redefine S1-S5.
 
@@ -25,6 +25,26 @@ Do not choose a state from component names or feature lists. Use this order:
 5. separate supporting/enforcement machinery from ownership;
 6. establish the return/closure path into subsequent operation where required;
 7. apply the local state.
+
+## S2 constructor threshold
+
+`C` does not mean "this framework has communication or orchestration primitives from which S2 could be programmed." The S2 function must already be established before any positive state is assigned.
+
+For positive S2, first reconstruct the Profile witness:
+
+1. distinct S1 operational units at the declared recursion level;
+2. a specific actual or structurally evidenced interference, conflict, or oscillation arising from their interaction;
+3. a first-party coordination relation specifically capable of attenuating that disturbance;
+4. a feedback path by which the coordination result can alter subsequent S1 behaviour.
+
+Only after that functional witness exists should ownership determine the state:
+
+- `A` when an autonomous agent owns the decisive coordination discretion and the loop is closed in the standard setup;
+- `C` when a first-party **S2-specific** decision/feedback path is present but the developer must still compose the autonomous actor, authority, or closure;
+- `—` when the reviewed boundary supplies only generic communication/routing/shared-state primitives with no material first-party S2-specific path;
+- `?` when evidence is insufficient to decide.
+
+A mailbox, queue, shared task board, graph edge, speaker selector, lifecycle API, or dependency field is not enough for `C` merely because it could participate in a future coordination design. Evidence must tie the primitive to regulation of the identified inter-S1 disturbance.
 
 ## Ownership rules
 

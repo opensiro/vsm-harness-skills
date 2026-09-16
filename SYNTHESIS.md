@@ -1,6 +1,6 @@
 # Index synthesis
 
-**Methodology version:** 0.2.2
+**Methodology version:** 0.2.3
 
 This procedure operates on completed standalone harness assessments. It does not reassess repositories and must not change their recorded `A/C/P/—/?` states merely to make rows look different.
 

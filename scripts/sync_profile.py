@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import subprocess
 import sys
 from pathlib import Path
 
@@ -15,9 +16,28 @@ def git_blob_sha(data: bytes) -> str:
     return hashlib.sha1(header + data).hexdigest()
 
 
-def generated_header(version: str, source_blob: str) -> str:
+def git_commit_sha(repo: Path) -> str:
+    """Return the exact Git revision of the source profile checkout."""
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(repo), "rev-parse", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise RuntimeError(f"unable to resolve profile source revision: {repo}") from exc
+
+    revision = completed.stdout.strip()
+    if len(revision) != 40:
+        raise RuntimeError(f"invalid profile source revision: {revision!r}")
+    return revision
+
+
+def generated_header(version: str, source_commit: str, source_blob: str) -> str:
     return (
         f"<!-- Generated from opensiro/vsm-harness-profile v{version}. -->\n"
+        f"<!-- Source commit: {source_commit} -->\n"
         f"<!-- Source PROFILE.md blob: {source_blob} -->\n"
         "<!-- Do not edit here. -->\n\n"
     )
@@ -47,23 +67,31 @@ def main() -> int:
         print(f"empty profile version: {version_file}", file=sys.stderr)
         return 1
 
+    try:
+        source_commit = git_commit_sha(profile_dir)
+    except RuntimeError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+
     source_bytes = source.read_bytes()
     source_text = source_bytes.decode("utf-8")
     source_blob = git_blob_sha(source_bytes)
-    expected = generated_header(version, source_blob) + source_text
+    expected = generated_header(version, source_commit, source_blob) + source_text
 
     if args.check:
         if not target.is_file() or target.read_text(encoding="utf-8") != expected:
             print(
                 f"stale profile snapshot: {target} "
-                f"(expected v{version}, source blob {source_blob})",
+                f"(expected v{version}, source commit {source_commit}, source blob {source_blob})",
                 file=sys.stderr,
             )
             return 1
     else:
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(expected, encoding="utf-8")
-        print(f"Synced Profile v{version} ({source_blob}) into {target}")
+        print(
+            f"Synced Profile v{version} ({source_commit}, {source_blob}) into {target}"
+        )
     return 0
 
 
