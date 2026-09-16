@@ -1,5 +1,14 @@
 # assess-vsm-harness changelog
 
+## 0.2.1 — 2026-09-16
+
+- add immutable generation-origin provenance for newly created assessments;
+- distinguish `generated_profile_version` / `generated_assessment_procedure_version` from the current accepted `profile_version` / `assessment_procedure_version`;
+- require new v0.2.1+ artifacts to preserve their generation pair while allowing current semantic provenance to advance through reassessment;
+- keep legacy origin unknown rather than fabricating historical generator versions.
+
+This is a provenance/schema patch. It does not change VSM function semantics or autonomy-state classification rules.
+
 ## 0.2.0 — 2026-09-16
 
 - align the procedure with VSM Harness Profile v0.2.0;
