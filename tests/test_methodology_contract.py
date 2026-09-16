@@ -1,5 +1,4 @@
 from pathlib import Path
-import re
 import unittest
 
 
@@ -27,11 +26,13 @@ class MethodologyContractTests(unittest.TestCase):
     def test_parent_mode_publication_boundary_is_explicit(self):
         text = self.text("skills/assess-vsm-harness/references/autonomy-states.md")
         self.assertIn("**S3, S4, or S5 only.**", text)
-        self.assertIn("S1 and S2 remain agent-harness operational/coordination states", text)
-        self.assertIn("Methodology does not publish `P`, `A(P)`, or `C(P)` for S1 or S2", text)
-        self.assertIn("S5 is the canonical parent-governed case", text)
-        self.assertIn("S3 and S4 are explicit parent-assisted exceptions", text)
-        self.assertIn("S3* remains outside the parent-mode publication notation in the 0.3.x line", text)
+        self.assertIn("**S1:** `P` is not published.", text)
+        self.assertIn("**S2:** `P` is not published.", text)
+        self.assertIn("**S3:** `P`, `A(P)`, and `C(P)` are permitted", text)
+        self.assertIn("**S3*:** parent-mode notation is not published in the `0.3.x` line", text)
+        self.assertIn("**S4:** `P`, `A(P)`, and `C(P)` are permitted", text)
+        self.assertIn("**S5:** parent governance is the canonical `P` case", text)
+        self.assertIn("This boundary is methodological, not ontological.", text)
 
     def test_parent_modes_are_not_described_as_a_maturity_ladder(self):
         text = self.text("skills/assess-vsm-harness/references/autonomy-states.md")
@@ -42,9 +43,13 @@ class MethodologyContractTests(unittest.TestCase):
     def test_assessment_format_only_documents_parent_modes_for_s3_s4_s5(self):
         text = self.text("skills/assess-vsm-harness/references/assessment-format.md")
         self.assertIn("valid only for S3, S4, and S5", text)
-        self.assertIn("does not publish `(P)` or standalone `P` for S1, S2, or S3*", text)
+        self.assertIn("S1 and S2 do not publish `P`", text)
+        self.assertIn("S3* does not publish the parent modifier in `0.3.x`", text)
+        self.assertIn("S5 is the canonical parent-governed case", text)
         for function in ("S3", "S4", "S5"):
-            self.assertRegex(text, rf"For `{function}=P`|For `{function}=P`,|For `{function}=P`.*`{function}=A\(P\)`")
+            self.assertIn(f"For `{function}=P`", text)
+            self.assertIn(f"`{function}=A(P)`", text)
+            self.assertIn(f"`{function}=C(P)`", text)
 
     def test_synthesis_keeps_parent_mode_unweighted(self):
         text = self.text("SYNTHESIS.md")
@@ -53,21 +58,18 @@ class MethodologyContractTests(unittest.TestCase):
         self.assertIn("parent-mode presence", text)
         self.assertIn("never converted to fractional weights", text)
 
-    def test_no_parent_publication_shortcut_is_added_for_s1_s2_s3star(self):
+    def test_skill_explicitly_rejects_parent_publication_for_s1_s2_s3star(self):
         text = self.text("skills/assess-vsm-harness/SKILL.md")
-        forbidden = (
-            "S1=P",
-            "S2=P",
-            "S3*=P",
-            "S1=A(P)",
-            "S2=A(P)",
-            "S3*=A(P)",
-            "S1=C(P)",
-            "S2=C(P)",
-            "S3*=C(P)",
+        self.assertIn(
+            "Methodology `0.3.x` does not apply `(P)` or standalone `P` to S1, S2, or S3*.",
+            text,
         )
-        for token in forbidden:
-            self.assertNotIn(token, text, token)
+        self.assertIn("**S1:** no `P` publication state.", text)
+        self.assertIn("**S2:** no `P` publication state.", text)
+        self.assertIn("**S3*:** no parent-mode modifier in the `0.3.x` line.", text)
+        self.assertIn("**S3:** parent mode is an explicit supervisory/current-control exception.", text)
+        self.assertIn("**S4:** parent mode is an explicit adaptation exception.", text)
+        self.assertIn("**S5:** parent governance is the canonical `P` case", text)
 
 
 if __name__ == "__main__":
