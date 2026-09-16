@@ -1,6 +1,6 @@
 # Index synthesis
 
-**Methodology version:** 0.3.0
+**Methodology version:** 0.3.1
 
 This procedure operates on completed standalone harness assessments. It does not reassess repositories and must not change their recorded `A/A(P)/C/C(P)/P/—/?` states merely to make rows look different.
 
@@ -56,8 +56,10 @@ Rank by `(metasystem A, total A)` in descending order. Harnesses with the same p
 
 This preserves the meaning of the ranking: it measures first-party agent-owned mode coverage, not product quality, maturity, organizational viability, or an ordering of `— < C < P < A`. `A(P)` is not ranked above `A`, and `C(P)` is not ranked above `C`; the modifier records another supported ownership configuration.
 
+Methodology `0.3.1` clarifies that parent-mode notation is intentionally limited to S3/S4/S5. S5 is the canonical parent-governed case; S3/S4 are explicit supervisory/adaptation exceptions. S1/S2/S3* do not acquire `P` publication states merely because human ownership can exist in a broader organization.
+
 ## Generated views
 
 `vsm-harness-index` owns the materialized `TLDR.md` and `RANKINGS.md` files and the implementation that renders them. Those files do not receive independent semantic versions. Their exact corpus/output identity is the Git revision of the Index repository that contains them.
 
-A Methodology change may require reassessment, re-synthesis, re-ranking, or regeneration depending on which procedure changed. Methodology v0.3.0 specifically requires the Index parser/validator/ranking projection to understand `A(P)` and `C(P)` before canonical assessments using those symbols are admitted.
+A Methodology change may require reassessment, re-synthesis, re-ranking, or regeneration depending on which procedure changed. Methodology `0.3.x` requires the Index parser/validator/ranking projection to understand `A(P)` and `C(P)` before canonical assessments using those symbols are admitted.

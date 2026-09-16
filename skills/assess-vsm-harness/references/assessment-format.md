@@ -1,6 +1,6 @@
 # Standalone assessment format
 
-**Methodology version:** 0.3.0
+**Methodology version:** 0.3.1
 
 An assessment is repository-relative and revision-relative. It must not contain cohort-relative signatures, rank positions, or claims that depend on which other harnesses happen to be indexed.
 
@@ -14,9 +14,9 @@ repository: https://github.com/example/harness
 review_ref: <40-character commit SHA>
 reviewed_at: YYYY-MM-DD
 generated_profile_version: 0.2.1
-generated_assessment_procedure_version: 0.3.0
+generated_assessment_procedure_version: 0.3.1
 profile_version: 0.2.1
-assessment_procedure_version: 0.3.0
+assessment_procedure_version: 0.3.1
 status: included
 autonomy_s1: A
 autonomy_s2: C
@@ -45,13 +45,22 @@ The allowed publication symbols are:
 A  A(P)  C  C(P)  P  —  ?
 ```
 
-`A(P)`, `C(P)`, and standalone `P` are valid only for S3, S4, and S5 in Methodology v0.3.0.
+`A(P)`, `C(P)`, and standalone `P` are valid only for S3, S4, and S5 in Methodology `0.3.x`.
 
 - `A(P)` means the autonomous `A` mode is established and a distinct first-party parent-governed mode for the same function is also operationally closed.
 - `C(P)` means the constructor `C` mode is established and a distinct first-party parent-governed mode for the same function is also operationally closed.
 - `P` means the parent-governed mode is the only positive ownership mode established at the reviewed boundary; no first-party `A` or `C` autonomous mode is established there.
 
 The composite notation records supported first-party ownership modes, not simultaneous dual ownership. For each concrete mode used as evidence, the decisive right must still have a reconstructable owner and closure path.
+
+The parent-mode boundary is intentional:
+
+- S1 and S2 do not publish `P`; the Methodology is assessing autonomous agent harnesses rather than every possible human-owned organizational arrangement;
+- S3 and S4 admit parent modes as explicit supervisory/current-control and adaptation exceptions;
+- S3* does not publish the parent modifier in `0.3.x`;
+- S5 is the canonical parent-governed case for identity / ultimate-policy authority.
+
+This is a publication choice, not a claim that human-owned S1/S2/S3* cannot exist outside the assessed autonomous-harness boundary.
 
 ## Required body
 
@@ -105,7 +114,7 @@ Use the same fields, and additionally make explicit:
 - feedback / closure path into subsequent S1 behaviour;
 - why the cited primitive is S2-specific rather than generic communication, routing, sequencing, shared state, or delegation.
 
-For `S2=C`, the S2 function itself must already be established. `C` means a first-party S2-specific decision/feedback path exists but the autonomous actor, authority, or closure still requires composition; it does not mean a generic framework could be programmed into S2. Methodology v0.3.0 does not apply `(P)` or standalone `P` to S2.
+For `S2=C`, the S2 function itself must already be established. `C` means a first-party S2-specific decision/feedback path exists but the autonomous actor, authority, or closure still requires composition; it does not mean a generic framework could be programmed into S2. Methodology `0.3.x` does not apply `(P)` or standalone `P` to S2.
 
 ## S3 — Inside-and-now control
 
@@ -130,7 +139,7 @@ Use the same fields, and make explicit:
 - independence boundary;
 - who acts on findings.
 
-Methodology v0.3.0 does not apply the parent-mode modifier to S3*.
+Methodology `0.3.x` does not apply the parent-mode modifier to S3*.
 
 ## S4 — Outside-and-then intelligence
 

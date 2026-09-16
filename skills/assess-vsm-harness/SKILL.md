@@ -5,7 +5,7 @@ description: Produce a standalone evidence-backed VSM assessment of one autonomo
 
 # Assess a Harness as a Viable System
 
-**Methodology version:** 0.3.0
+**Methodology version:** 0.3.1
 
 Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this methodology is **v0.2.1**. The output is a standalone repository assessment, not a cross-catalog comparison.
 
@@ -34,7 +34,7 @@ Every assessment newly created by Methodology v0.2.1 or later must preserve whic
 
 ```yaml
 generated_profile_version: 0.2.1
-generated_assessment_procedure_version: 0.3.0
+generated_assessment_procedure_version: 0.3.1
 ```
 
 These two fields are **immutable origin metadata**. Do not change them during reassessment, same-ref correction, methodology migration, or later Methodology upgrades.
@@ -52,9 +52,9 @@ record the semantics/procedure under which the current canonical classification 
 
 For legacy artifacts whose original generation versions were never recorded, do not guess or backfill them. Absence means generation provenance is unknown.
 
-## Methodology v0.3.0 ownership notation
+## Methodology 0.3 ownership notation
 
-Methodology v0.3.0 keeps the Profile's function semantics unchanged and changes only how first-party ownership arrangements are published for S3, S4, and S5.
+Methodology `0.3.x` keeps the Profile's function semantics unchanged and changes only how first-party ownership arrangements are published for S3, S4, and S5.
 
 Allowed publication symbols are:
 
@@ -70,6 +70,19 @@ For S3/S4/S5:
 
 The parent modifier is **multi-mode capability notation**, not simultaneous dual ownership. A concrete deployment/run still has one reconstructable decisive owner for the function at a time.
 
+### Intentional publication boundary
+
+The Methodology is not a complete ontology of every human-owned VSM arrangement that can exist in a real organization. Its assessment target is an autonomous AI agent harness, so the publication notation intentionally focuses on ownership topologies useful at that boundary.
+
+- **S1:** no `P` publication state. Ordinary operational ownership is expected to be agent-owned for an included autonomous harness; otherwise the harness may fail the inclusion boundary rather than receive `S1=P`.
+- **S2:** no `P` publication state. Inter-S1 coordination may be `A`, `C`, `—`, or `?`; ordinary human coordination is not promoted to a parent-mode harness state.
+- **S3:** parent mode is an explicit supervisory/current-control exception. `P`, `A(P)`, and `C(P)` are available when the S3 parent loop is first-party and operationally closed.
+- **S3*:** no parent-mode modifier in the `0.3.x` line. Classify complementary audit through independence, audit judgment, ownership, and feedback without a separate `P` publication mode.
+- **S4:** parent mode is an explicit adaptation exception. `P`, `A(P)`, and `C(P)` are available when the S4 parent adaptation loop is first-party and operationally closed.
+- **S5:** parent governance is the canonical `P` case because identity / ultimate-policy authority may legitimately remain at a parent recursion while the return-to-operation loop is complete.
+
+This boundary is methodological, not ontological. Human ownership of S1, S2, or S3* can exist in the world; this Methodology intentionally does not encode those cases with `P` for autonomous-harness publication.
+
 This is especially relevant to self-hosted OSS harnesses and distributed open-source organizations. A harness may deliberately support both autonomous and operator-governed S3/S4/S5 modes. Conversely, a non-human organization such as a swarm may close S3/S4/S5 autonomously without exposing any qualifying parent mode; plain `A` remains correct in that case.
 
 Open-source contributors may also run agents in private/local execution contexts that are not centrally visible. Missing centralized access does not imply that every human decision is S5. Current-control decisions may be S3, adaptation decisions may be S4, and identity/ultimate-policy decisions may be S5, each mapped by function first and ownership second.
@@ -80,7 +93,7 @@ A contributor's local intervention does not automatically establish organization
 
 - Delegation, routing, sequencing, or handoff alone is not S2; require evidence of a specific actual or structurally evidenced interference/conflict/oscillation among distinct operational units plus a path that attenuates it and feeds the result back into later S1 behaviour.
 - A generic mailbox, shared task state, queue, graph edge, speaker selector, or lifecycle API does not receive `S2=C` merely because a developer could build coordination from it. The S2 function itself must first be established.
-- Methodology v0.3.0 does not apply `(P)` or standalone `P` to S2 or S3*.
+- Methodology `0.3.x` does not apply `(P)` or standalone `P` to S1, S2, or S3*.
 - A manager is not S3; require a whole-system current view plus authority over shared resources, commitments, priorities, constraints, accountability, synergy, or intervention. Any S3 parent-mode claim additionally requires legitimate parent ownership and returned closure.
 - **Runtime enforcement is not S3 ownership.** A hard budget, concurrency gate, scheduler, or kill mechanism may enforce an S3 decision while the decisive choice belongs to an agent, developer, human, or another actor.
 - A routine verifier is not S3*; require complementary and sufficiently independent access to operational reality.
