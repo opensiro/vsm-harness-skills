@@ -1,6 +1,6 @@
 # Index synthesis
 
-**Methodology version:** 0.2.3
+**Methodology version:** 0.3.0
 
 This procedure operates on completed standalone harness assessments. It does not reassess repositories and must not change their recorded `A/C/P/—/?` states merely to make rows look different.
 
@@ -16,7 +16,7 @@ Process assessments in ascending `catalog_position`. For candidate `N`:
 4. identify the smallest evidence-backed architectural distinction that is informative relative to the earlier cohort;
 5. write one compact signature sentence.
 
-Two harnesses may legitimately have the same autonomy vector. Do not manufacture categorical differences. The textual signature may distinguish actor, decision right, coordination mechanism, feedback path, authority boundary, persistence model, audit path, or adaptation loop when those differences are already evidenced in the assessments.
+Two harnesses may legitimately have the same autonomy vector. Do not manufacture categorical differences. The textual signature may distinguish actor, decision right, coordination mechanism, feedback path, authority boundary, persistence model, audit path, adaptation loop, or parent-governed closure when those differences are already evidenced in the assessments.
 
 ## Signature rules
 
@@ -39,6 +39,8 @@ For each included canonical assessment:
 - the categorical six-state vector is preserved exactly.
 
 Rank by `(metasystem A, total A)` in descending order. Harnesses with the same pair receive the same rank. `C`, `P`, and `?` are never converted to fractional weights or used as tie-breakers. Presentation order inside an equal rank may use non-semantic metadata such as repository creation date; that does not change the rank key.
+
+Methodology v0.3.0 permits `P` for S3, S4, and S5. This does not alter the ranking key: `P` reports parent-governed ownership and is not treated as partial `A`.
 
 This ranking measures recorded out-of-box agent ownership coverage only. It is not product quality, maturity, organizational viability, or an ordering of `— < C < P < A`.
 
