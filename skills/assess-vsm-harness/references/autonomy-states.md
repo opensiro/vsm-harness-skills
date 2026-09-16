@@ -1,10 +1,10 @@
 # Local autonomy states
 
-**Methodology version:** 0.3.0
+**Methodology version:** 0.3.1
 
-Methodology v0.3.0 adds a parent-governed mode modifier for S3, S4, and S5. This is a classification-procedure change, not a change to VSM Harness Profile semantics.
+Methodology `0.3.x` adds a parent-governed mode modifier for S3, S4, and S5. This is a classification/publication procedure layered on unchanged VSM Harness Profile semantics.
 
-These symbols are publication notation for harness assessments. They are not Stafford Beer concepts and do not redefine S1-S5.
+These symbols are publication notation for autonomous AI agent harness assessments. They are not Stafford Beer concepts and do not attempt to enumerate every ownership arrangement possible in a real organization.
 
 | State | Meaning |
 | --- | --- |
@@ -20,6 +20,19 @@ These symbols are publication notation for harness assessments. They are not Sta
 
 A parent-governed mode is not established merely because a human can edit configuration, stop a process, approve a PR, or invoke an extension point. The relevant S3/S4/S5 function must first be established, and the parent path must itself contain a legitimate decisive right plus a return/closure path into subsequent operation.
 
+## Publication boundary
+
+The Methodology intentionally distinguishes **what can exist organizationally** from **what it publishes as a useful ownership state for an autonomous agent harness**.
+
+- **S1:** `P` is not published. Included harnesses are expected to establish autonomous operational ownership; a system whose ordinary S1 decision right remains human-owned does not receive `S1=P` merely to keep it inside the autonomy table.
+- **S2:** `P` is not published. Human coordination can exist in real organizations, but ordinary parent/human coordination between S1 units is outside the Methodology's parent-mode notation for autonomous harnesses.
+- **S3:** `P`, `A(P)`, and `C(P)` are permitted as explicit supervisory/current-control topologies.
+- **S3*:** parent-mode notation is not published in the `0.3.x` line. Audit is classified through complementary access, independence, audit judgment, ownership, and feedback.
+- **S4:** `P`, `A(P)`, and `C(P)` are permitted as explicit parent-assisted adaptation topologies.
+- **S5:** parent governance is the canonical `P` case because identity / ultimate-policy authority can legitimately remain at a parent recursion while the return-to-operation loop is complete.
+
+This boundary is methodological, not ontological. It does not claim that human-owned S1, S2, or S3* are impossible. It says those cases are not useful `P` publication states for the autonomous-harness assessment target.
+
 ## Decision order
 
 Do not choose a state from component names or feature lists. Use this order:
@@ -33,7 +46,7 @@ Do not choose a state from component names or feature lists. Use this order:
 7. classify the autonomous base mode as `A`, `C`, `—`, or `?`;
 8. for S3/S4/S5, add `(P)` only when a distinct parent-governed mode is independently established; use standalone `P` when the parent mode is the only positive ownership mode established.
 
-The new notation does not relax the function-first rule. A human, maintainer, approval gate, roadmap, or issue tracker does not establish S3, S4, or S5 merely because it is present.
+The notation does not relax the function-first rule. A human, maintainer, approval gate, roadmap, or issue tracker does not establish S3, S4, or S5 merely because it is present.
 
 ## S2 constructor threshold
 
@@ -52,8 +65,6 @@ Only after that functional witness exists should ownership determine the state:
 - `C` when a first-party **S2-specific** decision/feedback path is present but the developer must still compose the autonomous actor, authority, or closure;
 - `—` when the reviewed boundary supplies only generic communication/routing/shared-state primitives with no material first-party S2-specific path;
 - `?` when evidence is insufficient to decide.
-
-Methodology v0.3.0 does not apply the parent-mode modifier to S2 or S3*. This release is deliberately limited to parent-governed current control, prospective adaptation, and identity/policy paths.
 
 A mailbox, queue, shared task board, graph edge, speaker selector, lifecycle API, or dependency field is not enough for `C` merely because it could participate in a future coordination design. Evidence must tie the primitive to regulation of the identified inter-S1 disturbance.
 
@@ -111,7 +122,7 @@ An ordinary task approval, permission prompt, verifier escalation, or accept/ret
 
 Open-source harnesses may be operated or developed by multiple independent contributors whose local agent runs, transcripts, credentials, and runtime state are not centrally visible. Lack of shared private execution context does not force all human authority into S5.
 
-A distributed parent arrangement may therefore own S3, S4, or S5 rights when primary evidence establishes the relevant function, legitimate decision holders, and return/closure path at the declared recursion. Examples of evidence may include maintainer decisions, accepted proposals, issue/PR governance, release decisions, public operating constraints, or other repository-visible closure paths.
+A distributed parent arrangement may own S3, S4, or S5 rights when primary evidence establishes the relevant function, legitimate decision holders, and return/closure path at the declared recursion. Examples of evidence may include maintainer decisions, accepted proposals, issue/PR governance, release decisions, public operating constraints, or other repository-visible closure paths.
 
 Do not infer organization-level parent governance from the mere existence of multiple contributors. A contributor's local intervention may establish ownership only at a lower recursion if no organization-level function/closure can be reconstructed.
 
