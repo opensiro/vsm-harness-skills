@@ -1,0 +1,69 @@
+name: publish-methodology-v0.2.3
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/publish-methodology-v0.2.3.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TARGET_SHA: 30474da360b76edd1458ef51457fb2bb2323dcd1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify release target
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git show "$TARGET_SHA:skills/assess-vsm-harness/VERSION" | tr -d '\r\n')" = "0.2.3"
+          git merge-base --is-ancestor "$TARGET_SHA" HEAD
+
+      - name: Create immutable Methodology tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/v0.2.3" >/dev/null 2>&1; then
+            existing="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/v0.2.3" --jq '.object.sha')"
+            test "$existing" = "$TARGET_SHA"
+          else
+            gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
+              -f ref='refs/tags/v0.2.3' \
+              -f sha="$TARGET_SHA"
+          fi
+
+      - name: Publish Methodology v0.2.3
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v0.2.3 >/dev/null 2>&1; then
+            echo 'Release v0.2.3 already exists.'
+            exit 0
+          fi
+          cat > /tmp/release-notes.md <<'EOF'
+          Aligns the VSM Harness Methodology with Profile v0.2.1 and makes the existing System 2 function-before-state threshold mechanically explicit.
+
+          Key changes:
+          - positive S2 requires distinct S1 units, a specific actual or structurally evidenced inter-S1 disturbance, an attenuating coordination relation, and feedback into subsequent S1 behaviour;
+          - `S2=C` requires an already-established S2 function plus a first-party S2-specific decision/feedback path; generic mailboxes, shared state, routing, sequencing, and extension points remain insufficient;
+          - bundled Profile provenance records the exact normative source commit and Profile blob while tolerating unrelated later repository commits;
+          - validation fetches sufficient Profile history to reconstruct that normative source revision;
+          - ranking semantics remain unchanged;
+          - Reassessment R1 remains frozen on Profile v0.2.0 / Methodology v0.2.1.
+
+          Bundled Profile source: `e1aaff7d2cd50d5d5ed9ab76c3606a6ef39d1976`.
+          Release target: `30474da360b76edd1458ef51457fb2bb2323dcd1`.
+          EOF
+          gh release create v0.2.3 \
+            --title 'VSM Harness Methodology v0.2.3' \
+            --notes-file /tmp/release-notes.md
