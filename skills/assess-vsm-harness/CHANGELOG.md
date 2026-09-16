@@ -1,5 +1,15 @@
 # assess-vsm-harness changelog
 
+## 0.2.3 — 2026-09-16
+
+- sync the bundled normative dependency to VSM Harness Profile `0.2.1` at exact source revision `e1aaff7d2cd50d5d5ed9ab76c3606a6ef39d1976`;
+- make the existing S2 evidence threshold mechanically reconstructable in the assessment workflow and artifact format;
+- require positive S2 mappings to identify distinct S1 units, a specific actual or structurally evidenced inter-S1 disturbance, the coordination relation that attenuates it, and feedback into later S1 behaviour;
+- clarify that `S2=C` requires an already-established S2 function plus a first-party S2-specific decision/feedback path; generic communication, routing, shared state, sequencing, or extension points remain insufficient;
+- keep ownership separate from function evidence so deterministic coordination support does not become agent-owned `A` by enforcement alone.
+
+This is a procedural clarification aligned with Profile `0.2.1`. It does not redefine the `A/C/P/—/?` states. Existing canonical assessments that violate the already-frozen Profile `0.2.0` / Methodology `0.2.1` S2 rule may be corrected as same-ref corrections rather than treated as migrations caused by this release.
+
 ## 0.2.2 — 2026-09-16
 
 - define the existing `0.2.x` release line as the unified VSM Harness Methodology version;
