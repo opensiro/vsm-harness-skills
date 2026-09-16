@@ -1,0 +1,99 @@
+name: publish-methodology-v0.2.x
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/publish-methodology-v0.2.x.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      V021_SHA: ad972042c7469e63b69cd14ed817044c0b073c92
+      V022_SHA: 02218798bb8861774d8e9dfdad1f75d9b12839ac
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify release targets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git show "$V021_SHA:skills/assess-vsm-harness/VERSION" | tr -d '\r\n')" = "0.2.1"
+          test "$(git show "$V022_SHA:skills/assess-vsm-harness/VERSION" | tr -d '\r\n')" = "0.2.2"
+          git merge-base --is-ancestor "$V021_SHA" HEAD
+          git merge-base --is-ancestor "$V022_SHA" HEAD
+
+      - name: Create immutable Methodology tags
+        shell: bash
+        run: |
+          set -euo pipefail
+          ensure_tag() {
+            local tag="$1"
+            local sha="$2"
+            if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" >/dev/null 2>&1; then
+              existing="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" --jq '.object.sha')"
+              test "$existing" = "$sha"
+            else
+              gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
+                -f ref="refs/tags/$tag" \
+                -f sha="$sha"
+            fi
+          }
+          ensure_tag v0.2.1 "$V021_SHA"
+          ensure_tag v0.2.2 "$V022_SHA"
+
+      - name: Publish Methodology v0.2.1
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v0.2.1 >/dev/null 2>&1; then
+            echo 'Release v0.2.1 already exists.'
+            exit 0
+          fi
+          cat > /tmp/v021.md <<'EOF'
+          Provenance/schema patch over Profile v0.2.0.
+
+          Key changes:
+          - records immutable `generated_profile_version` and `generated_assessment_procedure_version` origin metadata for newly generated assessments;
+          - keeps current semantic provenance separate from immutable generation provenance;
+          - leaves VSM function semantics and autonomy-state semantics unchanged.
+
+          This is the Methodology release frozen for Reassessment R1.
+
+          Release target: `ad972042c7469e63b69cd14ed817044c0b073c92`.
+          EOF
+          gh release create v0.2.1 \
+            --title 'VSM Harness Methodology v0.2.1' \
+            --notes-file /tmp/v021.md
+
+      - name: Publish Methodology v0.2.2
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v0.2.2 >/dev/null 2>&1; then
+            echo 'Release v0.2.2 already exists.'
+            exit 0
+          fi
+          cat > /tmp/v022.md <<'EOF'
+          Consolidates assessment, synthesis, ranking projection, and their validation under one VSM Harness Methodology release boundary.
+
+          The ecosystem reconstruction model is now:
+
+          `Profile version + Methodology version + exact Index Git revision`.
+
+          This release does not change VSM Profile semantics or autonomy-state classification semantics. Existing storage keys such as `assessment_procedure_version` remain for corpus compatibility and carry the Methodology version value.
+
+          Release target: `02218798bb8861774d8e9dfdad1f75d9b12839ac`.
+          EOF
+          gh release create v0.2.2 \
+            --title 'VSM Harness Methodology v0.2.2' \
+            --notes-file /tmp/v022.md
