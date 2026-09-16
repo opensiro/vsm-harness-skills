@@ -1,5 +1,5 @@
 <!-- Generated from opensiro/vsm-harness-profile v0.2.0. -->
-<!-- Source revision: 74da4aef7f111612c11fa5e2a6e5de1d8f00b84b -->
+<!-- Source PROFILE.md blob: 3a835229659b218d29cde26ff02bdb355ca98ea7 -->
 <!-- Do not edit here. -->
 
 # VSM Harness Profile
