@@ -1,18 +1,24 @@
 # Local autonomy states
 
-**Methodology version:** 0.2.3
+**Methodology version:** 0.3.0
 
-**Autonomy-state semantics:** unchanged from Methodology v0.2.0; v0.2.1 added provenance, v0.2.2 unified the Methodology release boundary, and v0.2.3 makes the existing S2 function-before-state threshold mechanically explicit.
+Methodology v0.3.0 adds a parent-governed mode modifier for S3, S4, and S5. This is a classification-procedure change, not a change to VSM Harness Profile semantics.
 
-These states are a publication notation for harness assessments. They are not Stafford Beer concepts and do not redefine S1-S5.
+These symbols are publication notation for harness assessments. They are not Stafford Beer concepts and do not redefine S1-S5.
 
 | State | Meaning |
 | --- | --- |
-| `A` | The VSM function is established and its **decisive organizational decision/feedback loop is closed by an autonomous agent** through the standard documented setup. Deterministic runtime machinery may transport or enforce the agent's decision without changing ownership. |
+| `A` | The VSM function is established and its **decisive organizational decision/feedback loop is closed by an autonomous agent** through a first-party standard-distribution mode. Deterministic runtime machinery may transport or enforce the agent's decision without changing ownership. |
+| `A(P)` | The `A` condition is established **and** the same function has a distinct first-party parent-governed mode that is operationally closed. The two modes need not be active simultaneously; in any concrete deployment/run the decisive right must still have a reconstructable owner. |
 | `C` | The VSM function is established and a first-party primitive specifically exposes the relevant decisive decision or feedback path, but the developer must still compose the autonomous actor, authority, independence, or closure loop. |
-| `P` | **S5 only.** An identity/ultimate-policy issue reaches a legitimate parent authority, the parent decides, and that decision returns to govern subsequent operation. Ultimate S5 authority remains parent-owned. |
+| `C(P)` | The `C` condition is established **and** the same function also has a distinct first-party parent-governed mode that is operationally closed. |
+| `P` | **S3, S4, or S5 only.** The function is established and an operationally closed parent-governed mode exists, but no first-party `A` or `C` autonomous mode is established at the reviewed boundary. |
 | `—` | Within the reviewed standard-distribution boundary, no material first-party path for the function is supplied. This does not prove that the function can never be built. |
 | `?` | The reviewed primary evidence is insufficient to establish either a positive path or a defensible no-path conclusion. |
+
+`A`, `C`, and `P` describe ownership arrangements, not maturity levels. `A(P)` and `C(P)` add a supported parent-governed mode; they do not mean partial autonomy and must not be converted to numeric weights.
+
+A parent-governed mode is not established merely because a human can edit configuration, stop a process, approve a PR, or invoke an extension point. The relevant S3/S4/S5 function must first be established, and the parent path must itself contain a legitimate decisive right plus a return/closure path into subsequent operation.
 
 ## Decision order
 
@@ -21,10 +27,13 @@ Do not choose a state from component names or feature lists. Use this order:
 1. establish the VSM function at the declared system boundary;
 2. identify the disturbance or variety it regulates;
 3. identify the decisive decision right or feedback path that closes the function;
-4. identify the owner of that right;
+4. identify the owner of that right in each first-party mode being claimed;
 5. separate supporting/enforcement machinery from ownership;
 6. establish the return/closure path into subsequent operation where required;
-7. apply the local state.
+7. classify the autonomous base mode as `A`, `C`, `—`, or `?`;
+8. for S3/S4/S5, add `(P)` only when a distinct parent-governed mode is independently established; use standalone `P` when the parent mode is the only positive ownership mode established.
+
+The new notation does not relax the function-first rule. A human, maintainer, approval gate, roadmap, or issue tracker does not establish S3, S4, or S5 merely because it is present.
 
 ## S2 constructor threshold
 
@@ -44,6 +53,8 @@ Only after that functional witness exists should ownership determine the state:
 - `—` when the reviewed boundary supplies only generic communication/routing/shared-state primitives with no material first-party S2-specific path;
 - `?` when evidence is insufficient to decide.
 
+Methodology v0.3.0 does not apply the parent-mode modifier to S2 or S3*. This release is deliberately limited to parent-governed current control, prospective adaptation, and identity/policy paths.
+
 A mailbox, queue, shared task board, graph edge, speaker selector, lifecycle API, or dependency field is not enough for `C` merely because it could participate in a future coordination design. Evidence must tie the primitive to regulation of the identified inter-S1 disturbance.
 
 ## Ownership rules
@@ -54,17 +65,61 @@ When ownership is ambiguous, use the Profile's counterfactual owner test: concep
 
 Hybrid implementation is normal. An `A` function does not require every line of the closure loop to be agentic; it requires the relevant organizational discretion to be agent-owned and operationally closed.
 
-## Parent-governed S5
+`A(P)` and `C(P)` are **multi-mode capability notation**, not simultaneous dual ownership. For example, a self-hosted harness may support an autonomous S3 mode and a separately selectable operator-governed S3 mode. The assessment may record `S3=A(P)` when both are first-party and evidenced, while a concrete deployment still has one reconstructable decisive owner at a time.
 
-`P` is not shorthand for "a human approves something." It requires all of the following:
+A `P` mode may be operationally strong and intentionally retained at the parent recursion. This is not a defect by itself.
+
+## Parent-governed S3 mode
+
+Use `P` or add `(P)` to S3 only when the S3 function is already established at the declared recursion. Evidence must show:
+
+1. a whole-system view of relevant current operations at that recursion;
+2. a real current-control decision over resources, commitments, priorities, constraints, accountability, synergy, or intervention;
+3. a legitimate parent human, institution, higher recursion, or explicitly evidenced distributed parent arrangement owns that decisive right in the parent mode;
+4. supporting machinery is separated from the parent decision owner;
+5. the decision returns to and changes subsequent current operation.
+
+An isolated human edit, approval, merge, emergency stop, or local task correction is not automatically S3 parent governance. The cited decision must actually regulate current operations on behalf of the whole at the declared boundary.
+
+## Parent-governed S4 mode
+
+Use `P` or add `(P)` to S4 only when the S4 function is already established at the declared recursion. Evidence must show:
+
+1. externally or future-relevant distinctions are sensed;
+2. adaptation options are developed from those distinctions;
+3. a legitimate parent human, institution, higher recursion, or explicitly evidenced distributed parent arrangement owns the decisive adaptation judgment or feedback right in the parent mode;
+4. there is a path back into present capability / S3;
+5. subsequent operation or capability can change under the returned decision.
+
+A roadmap, research note, issue, backlog, learning loop, or human idea is not automatically S4. The evidence must reconstruct an outside-and-then adaptation loop.
+
+## Parent-governed S5 mode
+
+Use `P` or add `(P)` to S5 only for an identity/ultimate-policy path. It requires:
 
 1. the disputed/proposed matter is genuinely identity- or ultimate-policy-level at the chosen recursion;
-2. a runtime path transfers that matter to a legitimate parent human, institution, or higher recursion;
-3. the parent makes the authoritative decision;
-4. the decision returns into the harness;
+2. the matter reaches a legitimate parent human, institution, higher recursion, or explicitly evidenced distributed parent arrangement;
+3. the parent makes the authoritative decision in the parent mode;
+4. the decision returns into the harness/system;
 5. subsequent operation is governed by that returned decision.
 
+`S5=A(P)` is valid when the standard distribution genuinely supports both an internally agent-owned S5 closure mode and a distinct parent-governed S5 mode. This does not mean two ultimate authorities act simultaneously; it means the harness exposes two evidenced first-party ownership configurations.
+
 An ordinary task approval, permission prompt, verifier escalation, or accept/retry/abandon choice does not become S5 merely because a human has final say over that operational event.
+
+## Distributed OSS parent arrangements
+
+Open-source harnesses may be operated or developed by multiple independent contributors whose local agent runs, transcripts, credentials, and runtime state are not centrally visible. Lack of shared private execution context does not force all human authority into S5.
+
+A distributed parent arrangement may therefore own S3, S4, or S5 rights when primary evidence establishes the relevant function, legitimate decision holders, and return/closure path at the declared recursion. Examples of evidence may include maintainer decisions, accepted proposals, issue/PR governance, release decisions, public operating constraints, or other repository-visible closure paths.
+
+Do not infer organization-level parent governance from the mere existence of multiple contributors. A contributor's local intervention may establish ownership only at a lower recursion if no organization-level function/closure can be reconstructed.
+
+## Self-hosted and non-human organizations
+
+A self-hosted OSS harness may intentionally expose parent-governed S3/S4/S5 modes to the operator while also supporting autonomous modes. `A(P)` and `C(P)` make that optional parent path visible without collapsing it into the autonomous base state.
+
+Conversely, an intentionally non-human organization such as a swarm may establish `S3=A`, `S4=A`, or `S5=A` without any parent-governed mode. Absence of `(P)` is not evidence that the function is absent; it means no qualifying first-party parent mode is established at the reviewed boundary.
 
 `C` is intentionally narrow. General framework expressiveness is not enough. A generic graph, tool API, hook, callback, or extension point does not receive `C` merely because a developer could build the VSM function with custom code.
 
