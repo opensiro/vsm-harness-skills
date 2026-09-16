@@ -3,6 +3,9 @@ name: validate
 on:
   pull_request:
   push:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
 
 jobs:
   skills-and-profile:
