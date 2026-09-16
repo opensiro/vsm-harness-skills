@@ -24,5 +24,7 @@ jobs:
           python-version: "3.12"
       - run: python scripts/validate_skills.py
         working-directory: vsm-skills
+      - run: python -m unittest discover -s tests -v
+        working-directory: vsm-skills
       - run: python scripts/sync_profile.py --profile-dir ../vsm-harness-profile --check
         working-directory: vsm-skills
