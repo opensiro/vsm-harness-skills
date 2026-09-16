@@ -1,6 +1,6 @@
 # Standalone assessment format
 
-**Procedure version:** 0.2.1
+**Methodology version:** 0.2.2
 
 An assessment is repository-relative and revision-relative. It must not contain cohort-relative signatures, rank positions, or claims that depend on which other harnesses happen to be indexed.
 
@@ -14,9 +14,9 @@ repository: https://github.com/langchain-ai/langgraph
 review_ref: <40-character commit SHA>
 reviewed_at: YYYY-MM-DD
 generated_profile_version: 0.2.0
-generated_assessment_procedure_version: 0.2.1
+generated_assessment_procedure_version: 0.2.2
 profile_version: 0.2.0
-assessment_procedure_version: 0.2.1
+assessment_procedure_version: 0.2.2
 status: included
 autonomy_s1: A
 autonomy_s2: C
@@ -29,9 +29,11 @@ autonomy_s5: —
 
 `generated_profile_version` and `generated_assessment_procedure_version` record the versions that produced the original artifact. They are immutable origin metadata: once written, reassessment or correction must not rewrite them.
 
-`profile_version` records the normative VSM Harness Profile under which the current classification was most recently successfully produced or revalidated. `assessment_procedure_version` records the assessment procedure/autonomy notation used for that current accepted classification. These current-version fields may advance during later reassessment while the `generated_*` pair remains fixed.
+`profile_version` records the normative VSM Harness Profile under which the current classification was most recently successfully produced or revalidated. `assessment_procedure_version` records the VSM Harness Methodology version used for that current accepted classification.
 
-For legacy assessments whose generation versions were never recorded, omit both `generated_*` fields rather than guessing. Generation provenance is optional only for such legacy artifacts; every assessment newly created by procedure v0.2.1 or later must emit the pair.
+The `*_assessment_procedure_version` names are retained as compatibility storage keys. From Methodology v0.2.2 onward they do not imply a separately versioned assessment-only procedure: the same Methodology release also governs synthesis, ranking projection, and validation.
+
+For legacy assessments whose generation versions were never recorded, omit both `generated_*` fields rather than guessing. Generation provenance is optional only for such legacy artifacts; every assessment newly created by Methodology v0.2.1 or later must emit the pair.
 
 Allowed final `status` values for canonical index entries are `included` and `excluded-no-agentic-vsm`. A downstream intake workflow may temporarily use its own pre-admission status outside the canonical assessment contract; do not confuse that lifecycle status with an accepted assessment state. For excluded rows, omit positive autonomy claims and explain the exclusion in the body.
 
@@ -50,9 +52,9 @@ Allowed final `status` values for canonical index entries are `included` and `ex
 - Reviewed revision:
 - Observation date:
 - Generated Profile version:
-- Generated assessment procedure version:
+- Generated Methodology version:
 - Current Profile version:
-- Current assessment procedure version:
+- Current Methodology version:
 
 ## Repository architecture
 

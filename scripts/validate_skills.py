@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate repository-level Agent Skills and release-version consistency."""
+"""Validate repository-level Agent Skills and Methodology release consistency."""
 
 from __future__ import annotations
 
@@ -10,9 +10,9 @@ from pathlib import Path
 
 NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SEMVER = re.compile(r"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$")
-PROCEDURE_VERSION = re.compile(r"^\*\*Procedure version:\*\*\s+([^\s]+)\s*$", re.MULTILINE)
+METHODOLOGY_VERSION = re.compile(r"^\*\*Methodology version:\*\*\s+([^\s]+)\s*$", re.MULTILINE)
 BUNDLED_PROFILE_VERSION = re.compile(
-    r"bundled Profile for this procedure is \*\*v([^*]+)\*\*"
+    r"bundled Profile for this methodology is \*\*v([^*]+)\*\*"
 )
 GENERATED_PROFILE_HEADER = re.compile(
     r"^<!-- Generated from opensiro/vsm-harness-profile v([^\s]+)\. -->$", re.MULTILINE
@@ -30,16 +30,16 @@ def read(path: Path, failures: list[str]) -> str:
     return path.read_text(encoding="utf-8")
 
 
-def require_procedure_version(path: Path, expected: str, failures: list[str]) -> None:
+def require_methodology_version(path: Path, expected: str, failures: list[str]) -> None:
     text = read(path, failures)
     if not text:
         return
-    match = PROCEDURE_VERSION.search(text)
+    match = METHODOLOGY_VERSION.search(text)
     if not match:
-        failures.append(f"{path}: missing Procedure version marker")
+        failures.append(f"{path}: missing Methodology version marker")
     elif match.group(1) != expected:
         failures.append(
-            f"{path}: Procedure version {match.group(1)} differs from VERSION {expected}"
+            f"{path}: Methodology version {match.group(1)} differs from VERSION {expected}"
         )
 
 
@@ -54,6 +54,8 @@ def main() -> int:
     skills = sorted((repo / "skills").glob("*/SKILL.md"))
     if not skills:
         failures.append("no skills found")
+
+    methodology_versions: set[str] = set()
 
     for path in skills:
         text = path.read_text(encoding="utf-8")
@@ -83,14 +85,14 @@ def main() -> int:
         if not SEMVER.fullmatch(version):
             failures.append(f"{version_path}: invalid semantic version {version!r}")
             continue
+        methodology_versions.add(version)
 
-        # Procedure-facing documents must identify the current procedure release,
-        # even when a patch intentionally leaves the underlying autonomy semantics unchanged.
-        require_procedure_version(path, version, failures)
+        # Assessment-facing documents identify the unified Methodology release.
+        require_methodology_version(path, version, failures)
         assessment_format = path.parent / "references" / "assessment-format.md"
         autonomy_states = path.parent / "references" / "autonomy-states.md"
-        require_procedure_version(assessment_format, version, failures)
-        require_procedure_version(autonomy_states, version, failures)
+        require_methodology_version(assessment_format, version, failures)
+        require_methodology_version(autonomy_states, version, failures)
 
         changelog = path.parent / "CHANGELOG.md"
         changelog_text = read(changelog, failures)
@@ -126,8 +128,8 @@ def main() -> int:
                     f"{snapshot}: body version {body_match.group(1)} differs from bundled v{profile_version}"
                 )
 
-        # Generation examples are part of the procedure contract and should track
-        # the current procedure plus its bundled normative Profile.
+        # Generation examples are part of the Methodology contract and should track
+        # the current Methodology plus its bundled normative Profile.
         require_literal(
             path,
             text,
@@ -155,10 +157,27 @@ def main() -> int:
                     failures,
                 )
 
+    # Today the repository intentionally has one Methodology release line.
+    if len(methodology_versions) == 1:
+        methodology_version = next(iter(methodology_versions))
+        require_methodology_version(repo / "SYNTHESIS.md", methodology_version, failures)
+        versioning_text = read(repo / "VERSIONING.md", failures)
+        if versioning_text:
+            require_literal(
+                repo / "VERSIONING.md",
+                versioning_text,
+                f"Methodology: {methodology_version}",
+                failures,
+            )
+    elif len(methodology_versions) > 1:
+        failures.append(
+            "multiple Methodology versions found across skills; repository-level synthesis/ranking requires one release line"
+        )
+
     if failures:
         print("\n".join(failures), file=sys.stderr)
         return 1
-    print(f"Validated {len(skills)} skills and release-version consistency")
+    print(f"Validated {len(skills)} skills and Methodology release consistency")
     return 0
 
 

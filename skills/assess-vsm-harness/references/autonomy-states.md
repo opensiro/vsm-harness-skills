@@ -1,8 +1,8 @@
 # Local autonomy states
 
-**Procedure version:** 0.2.1
+**Methodology version:** 0.2.2
 
-**Autonomy-state semantics:** unchanged from procedure v0.2.0; v0.2.1 is a provenance/schema-only procedure patch.
+**Autonomy-state semantics:** unchanged from Methodology v0.2.0; v0.2.1 added provenance and v0.2.2 clarifies the unified Methodology release boundary.
 
 These states are a publication notation for harness assessments. They are not Stafford Beer concepts and do not redefine S1-S5.
 

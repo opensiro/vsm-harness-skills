@@ -2,7 +2,23 @@
 
 VSM Skills applies the [VSM Harness Profile](https://github.com/opensiro/vsm-harness-profile/blob/main/PROFILE.md) without redefining it.
 
-The repository separates two different workflows:
+The ecosystem deliberately keeps only two semantic release lines:
+
+```text
+VSM Harness Profile version
+        ↓
+VSM Harness Methodology version
+        ↓
+vsm-harness-index @ exact Git revision
+        ↓
+TLDR.md / RANKINGS.md generated views
+```
+
+The Profile answers **what the organizational concepts mean**. This repository's Methodology answers **how repository evidence becomes assessments and corpus views**. The exact Index Git revision identifies the concrete corpus, schema/implementation state, signatures, and generated views.
+
+See [VERSIONING.md](VERSIONING.md) for the release-boundary contract.
+
+The repository separates two workflows inside the same Methodology release:
 
 ```text
 one repository @ pinned revision
@@ -13,9 +29,11 @@ standalone assessment
 
 ordered standalone assessments
         ↓
-SYNTHESIS.md procedure
+SYNTHESIS.md
         ↓
 cohort-relative signatures
+        ↓
+deterministic ranking projection
 ```
 
 ## Skill catalog
@@ -24,9 +42,11 @@ cohort-relative signatures
 | --- | --- |
 | [assess-vsm-harness](skills/assess-vsm-harness/SKILL.md) | Produce a detailed evidence-backed repository assessment with out-of-the-box autonomy states. |
 
-The assessment skill owns repository evidence collection and classification. It does not own cohort-relative signatures or rankings.
+The assessment skill owns repository evidence collection and classification. It does not generate cohort-relative signatures or rankings.
 
-[SYNTHESIS.md](SYNTHESIS.md) defines the separate ordered comparison procedure used by `vsm-harness-index`. Ranking remains a deterministic projection of the assessment states rather than an LLM score.
+[SYNTHESIS.md](SYNTHESIS.md) defines the ordered comparison procedure and deterministic ranking projection consumed by `vsm-harness-index`. Assessment, synthesis, ranking, and their validation contract share the single Methodology version in `skills/assess-vsm-harness/VERSION`; they do not have independent semantic versions.
+
+`TLDR.md` and `RANKINGS.md` are generated Index views, not separately versioned products.
 
 ## Assessment contract
 
@@ -48,7 +68,7 @@ CI checks the profile repository owned by the same GitHub organization and rejec
 
 ## Consumer
 
-[vsm-harness-index](https://github.com/opensiro/vsm-harness-index) stores the published assessment corpus and derives its TLDR signatures and autonomy rankings from those assessments.
+[vsm-harness-index](https://github.com/opensiro/vsm-harness-index) stores the published assessment corpus and materializes its TLDR signatures and autonomy rankings under the Methodology. An exact Index Git revision is the identity of a particular corpus/output state; the Index does not need a second semantic release line merely because its cohort or generated files changed.
 
 ## License
 

@@ -5,15 +5,15 @@ description: Produce a standalone evidence-backed VSM assessment of one autonomo
 
 # Assess a Harness as a Viable System
 
-**Procedure version:** 0.2.1
+**Methodology version:** 0.2.2
 
-Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this procedure is **v0.2.0**. The output is a standalone repository assessment, not a cross-catalog comparison.
+Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this methodology is **v0.2.0**. The output is a standalone repository assessment, not a cross-catalog comparison.
 
-Read [assessment-format.md](references/assessment-format.md) for the required artifact and [autonomy-states.md](references/autonomy-states.md) for local autonomy notation.
+Read [assessment-format.md](references/assessment-format.md) for the required artifact and [autonomy-states.md](references/autonomy-states.md) for local autonomy notation. The same Methodology release also governs cohort synthesis and deterministic ranking through the repository-level [SYNTHESIS.md](../../SYNTHESIS.md).
 
 ## Workflow
 
-1. Pin the repository revision and declare system-in-focus, purpose, environment, standard-distribution boundary, recursion level, review date, Profile version, and procedure version. On first creation, also record the immutable generation-origin pair: `generated_profile_version` and `generated_assessment_procedure_version`.
+1. Pin the repository revision and declare system-in-focus, purpose, environment, standard-distribution boundary, recursion level, review date, Profile version, and Methodology version. On first creation, also record the immutable generation-origin pair: `generated_profile_version` and `generated_assessment_procedure_version`.
 2. Describe repository architecture before VSM mapping: runtime, agent loop, state, tools, delegation, persistence, scheduling, evaluation, human involvement, and external integration when material.
 3. Identify operational outcomes and real S1 units.
 4. For each VSM function, first establish the organizational function from behavior and relationships. State the disturbance or variety being regulated.
@@ -29,14 +29,14 @@ Read [assessment-format.md](references/assessment-format.md) for the required ar
 
 ## Generation provenance
 
-Every assessment newly created by procedure v0.2.1 or later must preserve which semantic/tooling versions produced the original artifact:
+Every assessment newly created by Methodology v0.2.1 or later must preserve which semantic/tooling versions produced the original artifact:
 
 ```yaml
 generated_profile_version: 0.2.0
-generated_assessment_procedure_version: 0.2.1
+generated_assessment_procedure_version: 0.2.2
 ```
 
-These two fields are **immutable origin metadata**. Do not change them during reassessment, same-ref correction, or later procedure upgrades.
+These two fields are **immutable origin metadata**. Do not change them during reassessment, same-ref correction, or later Methodology upgrades.
 
 The separate fields:
 
@@ -46,6 +46,8 @@ assessment_procedure_version: ...
 ```
 
 record the semantics under which the current canonical classification was most recently successfully produced or revalidated. They may therefore advance while the `generated_*` pair remains unchanged.
+
+`assessment_procedure_version` and `generated_assessment_procedure_version` remain the compatibility storage-key names in the assessment schema. Their values identify the VSM Harness **Methodology version as applied to the assessment**; no separate assessment-only release line exists from v0.2.2 onward.
 
 For legacy artifacts whose original generation versions were never recorded, do not guess or backfill them. Absence means generation provenance is unknown.
 

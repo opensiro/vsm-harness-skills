@@ -1,5 +1,15 @@
 # assess-vsm-harness changelog
 
+## 0.2.2 — 2026-09-16
+
+- define the existing `0.2.x` release line as the unified VSM Harness Methodology version;
+- make assessment, cohort-relative synthesis, deterministic ranking projection, and validation part of one procedural release boundary;
+- keep the existing `assessment_procedure_version` and `generated_assessment_procedure_version` field names as compatibility storage keys whose values identify the Methodology version when applied to assessment artifacts;
+- explicitly avoid independent semantic versions for synthesis, ranking, TLDR, or RANKINGS while they are released as one methodology and materialized in a Git-versioned Index state;
+- move the ranking projection rule into the Methodology contract without changing the current ranking output.
+
+This is a release-boundary/provenance clarification. It does not change VSM Profile semantics or any `A/C/P/—/?` classification rule.
+
 ## 0.2.1 — 2026-09-16
 
 - add immutable generation-origin provenance for newly created assessments;
