@@ -1,6 +1,6 @@
 # Standalone assessment format
 
-**Procedure version:** 0.2.0
+**Procedure version:** 0.2.1
 
 An assessment is repository-relative and revision-relative. It must not contain cohort-relative signatures, rank positions, or claims that depend on which other harnesses happen to be indexed.
 
@@ -13,8 +13,10 @@ project_name: LangGraph
 repository: https://github.com/langchain-ai/langgraph
 review_ref: <40-character commit SHA>
 reviewed_at: YYYY-MM-DD
+generated_profile_version: 0.2.0
+generated_assessment_procedure_version: 0.2.1
 profile_version: 0.2.0
-assessment_procedure_version: 0.2.0
+assessment_procedure_version: 0.2.1
 status: included
 autonomy_s1: A
 autonomy_s2: C
@@ -25,7 +27,11 @@ autonomy_s5: —
 ---
 ```
 
-`profile_version` records the normative VSM Harness Profile used for the mapping. `assessment_procedure_version` records the local assessment procedure/autonomy notation used to produce the artifact. These are provenance, not scores.
+`generated_profile_version` and `generated_assessment_procedure_version` record the versions that produced the original artifact. They are immutable origin metadata: once written, reassessment or correction must not rewrite them.
+
+`profile_version` records the normative VSM Harness Profile under which the current classification was most recently successfully produced or revalidated. `assessment_procedure_version` records the assessment procedure/autonomy notation used for that current accepted classification. These current-version fields may advance during later reassessment while the `generated_*` pair remains fixed.
+
+For legacy assessments whose generation versions were never recorded, omit both `generated_*` fields rather than guessing. Generation provenance is optional only for such legacy artifacts; every assessment newly created by procedure v0.2.1 or later must emit the pair.
 
 Allowed final `status` values for canonical index entries are `included` and `excluded-no-agentic-vsm`. A downstream intake workflow may temporarily use its own pre-admission status outside the canonical assessment contract; do not confuse that lifecycle status with an accepted assessment state. For excluded rows, omit positive autonomy claims and explain the exclusion in the body.
 
@@ -43,8 +49,10 @@ Allowed final `status` values for canonical index entries are `included` and `ex
 - Recursion level:
 - Reviewed revision:
 - Observation date:
-- Profile version:
-- Assessment procedure version:
+- Generated Profile version:
+- Generated assessment procedure version:
+- Current Profile version:
+- Current assessment procedure version:
 
 ## Repository architecture
 
