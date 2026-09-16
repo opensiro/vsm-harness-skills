@@ -1,5 +1,18 @@
 # assess-vsm-harness changelog
 
+## 0.3.1 — 2026-09-16
+
+- clarify the intended publication boundary of parent-governed notation without changing the state set introduced in `0.3.0`;
+- keep `P`, `A(P)`, and `C(P)` intentionally limited to S3, S4, and S5 rather than treating parent ownership as a universal modifier for every VSM function;
+- define S5 as the canonical parent-governed case because identity / ultimate-policy authority naturally resides at a legitimate parent recursion when it is not internally agent-owned;
+- define S3 and S4 parent modes as explicit supervisory / adaptation exceptions that are useful for self-hosted, operator-assisted, and distributed OSS systems where current-control or adaptation rights may intentionally remain parent-owned;
+- state that S1 and S2 do not receive `P` in this Methodology: the assessment target is an autonomous AI agent harness, so ordinary operational ownership and inter-S1 coordination are expected to be agent-owned or constructor paths rather than published as human-owned harness modes;
+- keep S3* outside the parent-mode notation in the `0.3.x` line; audit classification remains focused on complementary access, independence, audit judgment, and feedback rather than adding a parent modifier;
+- distinguish descriptive possibility from Methodology scope: human ownership can exist in real organizations outside these publication choices, but the Methodology intentionally records only ownership topologies useful for assessing autonomous agent harnesses;
+- preserve all `0.3.0` ranking, parsing, migration, and provenance semantics.
+
+This is a patch-level Methodology clarification. It does not change VSM Harness Profile semantics, does not add or remove any publication symbol, and does not by itself require a new reassessment outcome for an already correctly reviewed `0.3.0` assessment. R2 should apply the clarified boundary while reviewing S3/S4/S5 ownership modes.
+
 ## 0.3.0 — 2026-09-16
 
 - keep VSM Harness Profile `0.2.1` as the normative semantic dependency; this release does not redefine S1–S5, S3*, recursion, autonomy, or variety;
