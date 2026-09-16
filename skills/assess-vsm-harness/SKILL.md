@@ -5,7 +5,7 @@ description: Produce a standalone evidence-backed VSM assessment of one autonomo
 
 # Assess a Harness as a Viable System
 
-**Procedure version:** 0.2.0
+**Procedure version:** 0.2.1
 
 Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this procedure is **v0.2.0**. The output is a standalone repository assessment, not a cross-catalog comparison.
 
@@ -13,7 +13,7 @@ Read [assessment-format.md](references/assessment-format.md) for the required ar
 
 ## Workflow
 
-1. Pin the repository revision and declare system-in-focus, purpose, environment, standard-distribution boundary, recursion level, review date, Profile version, and procedure version.
+1. Pin the repository revision and declare system-in-focus, purpose, environment, standard-distribution boundary, recursion level, review date, Profile version, and procedure version. On first creation, also record the immutable generation-origin pair: `generated_profile_version` and `generated_assessment_procedure_version`.
 2. Describe repository architecture before VSM mapping: runtime, agent loop, state, tools, delegation, persistence, scheduling, evaluation, human involvement, and external integration when material.
 3. Identify operational outcomes and real S1 units.
 4. For each VSM function, first establish the organizational function from behavior and relationships. State the disturbance or variety being regulated.
@@ -26,6 +26,28 @@ Read [assessment-format.md](references/assessment-format.md) for the required ar
 11. Assign the local autonomy state only after function, decisive right, ownership, support, and closure are separated.
 12. Record recursion, variety, escalation, and unresolved evidence gaps separately from the six-state vector.
 13. Write `assessments/<harness_id>.md` for index work. Do not generate a cohort-relative signature in this skill.
+
+## Generation provenance
+
+Every assessment newly created by procedure v0.2.1 or later must preserve which semantic/tooling versions produced the original artifact:
+
+```yaml
+generated_profile_version: 0.2.0
+generated_assessment_procedure_version: 0.2.1
+```
+
+These two fields are **immutable origin metadata**. Do not change them during reassessment, same-ref correction, or later procedure upgrades.
+
+The separate fields:
+
+```yaml
+profile_version: ...
+assessment_procedure_version: ...
+```
+
+record the semantics under which the current canonical classification was most recently successfully produced or revalidated. They may therefore advance while the `generated_*` pair remains unchanged.
+
+For legacy artifacts whose original generation versions were never recorded, do not guess or backfill them. Absence means generation provenance is unknown.
 
 ## Hard distinctions
 
