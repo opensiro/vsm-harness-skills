@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check Methodology 0.3.3 assessment artifact structural completeness."""
+"""Check Methodology 0.3.3/0.3.4 assessment artifact structural completeness."""
 from __future__ import annotations
 import re
 import sys
@@ -26,7 +26,7 @@ def frontmatter(text):
             k,v=line.split(":",1); out[k.strip()]=v.strip()
     return out
 def sections(text):
-    matches=list(re.finditer(r"^## (S1|S2|S3|S3\*|S4|S5)\b.*$",text,re.MULTILINE)); out={}; rev={v:k for k,v in FUNCTIONS}
+    matches=list(re.finditer(r"^## (S3\*|S1|S2|S3|S4|S5)(?=\s|$).*$",text,re.MULTILINE)); out={}; rev={v:k for k,v in FUNCTIONS}
     for i,m in enumerate(matches):
         end=matches[i+1].start() if i+1<len(matches) else len(text); out[rev[m.group(1)]]=text[m.start():end]
     return out
@@ -38,8 +38,9 @@ def value(section,label):
 def check(path):
     failures=[]; text=path.read_text(encoding="utf-8"); fm=frontmatter(text)
     if not fm: return [f"{path}: missing/malformed frontmatter"]
-    if fm.get("assessment_procedure_version") != "0.3.3":
-        print(f"{path}: skipped (current Methodology {fm.get('assessment_procedure_version','unknown')}, not 0.3.3)"); return []
+    supported = {"0.3.3", "0.3.4"}
+    if fm.get("assessment_procedure_version") not in supported:
+        print(f"{path}: skipped (Methodology {fm.get('assessment_procedure_version','unknown')} not supported by this completion oracle)"); return []
     if fm.get("status") == "excluded-no-agentic-vsm": return []
     if fm.get("status") != "included": return [f"{path}: unsupported/missing canonical status"]
     body=sections(text)
