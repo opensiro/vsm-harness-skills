@@ -28,3 +28,9 @@ jobs:
         working-directory: vsm-skills
       - run: python scripts/sync_profile.py --profile-dir ../vsm-harness-profile --check
         working-directory: vsm-skills
+      - name: Verify published Methodology release tracking
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/check_release_tracking.py
+        working-directory: vsm-skills
