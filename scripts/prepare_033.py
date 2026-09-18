@@ -1,0 +1,525 @@
+from pathlib import Path
+
+root = Path('.')
+
+def read(path):
+    return (root / path).read_text(encoding='utf-8')
+
+def write(path, text):
+    p = root / path
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(text, encoding='utf-8')
+
+def replace_once(path, old, new):
+    text = read(path)
+    if old not in text:
+        raise SystemExit(f'{path}: expected text not found: {old!r}')
+    write(path, text.replace(old, new, 1))
+
+write('skills/assess-vsm-harness/VERSION', '0.3.3\n')
+for path in (
+    'skills/assess-vsm-harness/SKILL.md',
+    'skills/assess-vsm-harness/references/autonomy-states.md',
+    'skills/assess-vsm-harness/references/assessment-format.md',
+    'SYNTHESIS.md',
+):
+    replace_once(path, '**Methodology version:** 0.3.1', '**Methodology version:** 0.3.3')
+
+skill_path = 'skills/assess-vsm-harness/SKILL.md'
+text = read(skill_path)
+text = text.replace('The bundled Profile for this methodology is **v0.2.1**.', 'The bundled Profile for this methodology is **v0.2.2**.', 1)
+text = text.replace('generated_profile_version: 0.2.1', 'generated_profile_version: 0.2.2', 1)
+text = text.replace('generated_assessment_procedure_version: 0.3.1', 'generated_assessment_procedure_version: 0.3.3', 1)
+old = '''11. For every material mapping record primary evidence, basis (`explicit`, `structural`, `inferred`, or `unknown`), confidence, and caveat.
+12. Assign the local state only after function, decisive right, ownership, support, and closure are separated. For S3/S4/S5, encode a separately evidenced first-party parent mode with `(P)` on `A` or `C`, or standalone `P` when no first-party `A`/`C` autonomous mode is established.
+13. Record recursion, variety, escalation, and unresolved evidence gaps separately from the six-state vector.
+14. Write `assessments/<harness_id>.md` for index work. Do not generate a cohort-relative signature in this skill.'''
+new = '''11. For every material mapping record primary evidence, basis (`explicit`, `structural`, `inferred`, or `unknown`), confidence, and caveat.
+12. For every published `—`, record an **absence scope**: the repository surfaces inspected, the plausible first-party paths checked, and why no material first-party path remains within the declared standard-distribution boundary. If the review boundary is not broad enough to support that conclusion, publish `?` instead.
+13. For every `A(P)` or `C(P)`, record the autonomous/constructor base mode and the parent-governed mode separately in the standard mode matrix so a second reviewer can reconstruct each decisive owner and closure path independently.
+14. Assign the local state only after function, decisive right, ownership, support, closure, and any required negative/composite evidence are separated. For S3/S4/S5, encode a separately evidenced first-party parent mode with `(P)` on `A` or `C`, or standalone `P` when no first-party `A`/`C` autonomous mode is established.
+15. Record recursion, variety, escalation, and unresolved evidence gaps separately from the six-state vector.
+16. Write `assessments/<harness_id>.md` for index work. Do not generate a cohort-relative signature in this skill.'''
+if old not in text:
+    raise SystemExit('SKILL workflow block changed unexpectedly')
+text = text.replace(old, new, 1)
+marker = '\n## Generation provenance\n'
+section = '''
+## Methodology 0.3.3 reproducibility patch
+
+Methodology `0.3.3` is a procedural PATCH over `0.3.1`. It does not redefine any VSM Harness Profile function, add or remove an autonomy symbol, change ranking semantics, or require a vector change for an already conforming assessment merely because the patch exists. Version `0.3.2` was not published; the release line advances directly to `0.3.3` by maintainer decision.
+
+### Negative-state proof
+
+`—` is an evidence-backed no-material-path conclusion at the reviewed boundary, not the default result of failing to find a positive witness. Every `—` produced or revalidated under `0.3.3` must record an **Absence scope** with:
+
+- **Surfaces inspected** — the first-party runtime/docs/tests/configuration/governance surfaces actually reviewed;
+- **Plausible first-party paths checked** — the concrete places where the missing function could reasonably have closed;
+- **Why no material first-party path remains** — the boundary-relative reason the reviewed standard distribution supports `—` rather than `?`.
+
+If the evidence boundary is too narrow to support that negative conclusion, use `?`.
+
+### Composite-mode reconstruction
+
+Every `A(P)` or `C(P)` claim must include the standard mode matrix:
+
+| Mode | Decisive owner | Trigger | Closure | Evidence |
+| --- | --- | --- | --- | --- |
+| Base (`A` or `C`) | ... | ... | ... | ... |
+| Parent (`P`) | ... | ... | ... | ... |
+
+The matrix is a reproducibility surface only. It does not alter the meaning of composite notation or imply simultaneous dual ownership.
+
+### Structural completion oracle
+
+Assessments newly produced or successfully revalidated under Methodology `0.3.3` must pass:
+
+```bash
+python scripts/check_assessment_contract.py assessments/<harness_id>.md
+```
+
+The checker validates artifact completeness only: required fields, function-specific witness labels, negative-state absence scope, and composite-mode reconstruction. It deliberately does **not** decide whether cited evidence is true or whether a VSM mapping is semantically correct. Existing assessments that retain an earlier current Methodology version are not required to be reformatted solely because `0.3.3` was released.
+'''
+if marker not in text:
+    raise SystemExit('SKILL generation marker missing')
+text = text.replace(marker, '\n' + section + marker, 1)
+write(skill_path, text)
+
+fmt_path = 'skills/assess-vsm-harness/references/assessment-format.md'
+text = read(fmt_path)
+for oldv, newv in (
+    ('generated_profile_version: 0.2.1', 'generated_profile_version: 0.2.2'),
+    ('generated_assessment_procedure_version: 0.3.1', 'generated_assessment_procedure_version: 0.3.3'),
+    ('profile_version: 0.2.1', 'profile_version: 0.2.2'),
+    ('assessment_procedure_version: 0.3.1', 'assessment_procedure_version: 0.3.3'),
+):
+    if oldv not in text:
+        raise SystemExit(f'assessment-format: missing {oldv}')
+    text = text.replace(oldv, newv, 1)
+req = '\n## Required body\n'
+extra = '''
+## Methodology 0.3.3 structural completion requirements
+
+The following requirements make the existing evidence standard mechanically checkable without turning semantic judgment into a unit test.
+
+For every `State: —`, include:
+
+```markdown
+### Absence scope
+
+- Surfaces inspected:
+- Plausible first-party paths checked:
+- Why no material first-party path remains:
+```
+
+The three lines must describe a boundary broad enough to support a no-material-path conclusion. If that conclusion cannot be defended, use `?`.
+
+For every `A(P)` or `C(P)`, include this table in the corresponding function section:
+
+```markdown
+| Mode | Decisive owner | Trigger | Closure | Evidence |
+| --- | --- | --- | --- | --- |
+| Base (`A` or `C`) | ... | ... | ... | ... |
+| Parent (`P`) | ... | ... | ... | ... |
+```
+
+Use the actual base state in the first row (`A` for `A(P)`, `C` for `C(P)`). The table is evidence organization, not a new ownership state.
+
+A `0.3.3` artifact can be structurally checked with:
+
+```bash
+python scripts/check_assessment_contract.py assessments/<harness_id>.md
+```
+
+The checker is a completion oracle, not a semantic oracle. It cannot establish VSM function, ownership, independence, or evidentiary truth.
+'''
+if req not in text:
+    raise SystemExit('assessment-format Required body marker missing')
+text = text.replace(req, '\n' + extra + req, 1)
+common = '''- Evidence:
+- Basis:
+- Confidence:
+- Caveats:
+'''
+common2 = common + '''
+For `State: —`, additionally include:
+
+### Absence scope
+
+- Surfaces inspected:
+- Plausible first-party paths checked:
+- Why no material first-party path remains:
+'''
+if common not in text:
+    raise SystemExit('assessment-format common fields missing')
+text = text.replace(common, common2, 1)
+blocks = [
+    ('''Use the same fields, and additionally make explicit:
+- distinct S1 operational units at the declared recursion level;
+- specific actual or structurally evidenced inter-S1 interference / conflict / oscillation;
+- coordination relation that attenuates that disturbance;
+- feedback / closure path into subsequent S1 behaviour;
+- why the cited primitive is S2-specific rather than generic communication, routing, sequencing, shared state, or delegation.''',
+     '''Use the same fields. For a positive S2 state, additionally include these exact witness labels:
+
+- Distinct S1 units:
+- Inter-S1 disturbance:
+- Attenuating coordination relation:
+- Feedback into subsequent S1 behaviour:
+- Why this is S2-specific rather than generic communication / routing / sequencing / shared state / delegation:'''),
+    ('Use the same fields. Explicitly distinguish resource/commitment decisions from deterministic budget, scheduler, concurrency, or termination enforcement.',
+     '''Use the same fields. For a positive S3 state, additionally include:
+
+- Whole-system current view:
+- Current-control decision scope:
+
+Explicitly distinguish resource/commitment decisions from deterministic budget, scheduler, concurrency, or termination enforcement.'''),
+    ('''Use the same fields, and make explicit:
+- claim being audited;
+- ordinary reporting path;
+- complementary access path;
+- independence boundary;
+- who acts on findings.''',
+     '''Use the same fields. For a positive S3* state, additionally include:
+
+- Claim being audited:
+- Ordinary reporting path:
+- Complementary access path:
+- Independence boundary:
+- Who acts on findings:'''),
+    ('''Use the same fields, and make explicit:
+- external distinction;
+- future/prospective distinction;
+- adaptation option generated;
+- path back into current capability / S3.''',
+     '''Use the same fields. For a positive S4 state, additionally include:
+
+- External distinction:
+- Future / prospective distinction:
+- Adaptation option generated:
+- Path back into current capability / S3:'''),
+    ('''Use the same fields, and additionally make explicit:
+- identity / ultimate-policy issue;
+- ultimate authority in each claimed mode;
+- return-to-operation path.''',
+     '''Use the same fields. For a positive S5 state, additionally include:
+
+- Identity / ultimate-policy issue:
+- Ultimate authority in each claimed mode:
+- Return-to-operation path:'''),
+]
+for oldb, newb in blocks:
+    if oldb not in text:
+        raise SystemExit(f'assessment-format block missing: {oldb[:40]}')
+    text = text.replace(oldb, newb, 1)
+write(fmt_path, text)
+
+states_path = 'skills/assess-vsm-harness/references/autonomy-states.md'
+text = read(states_path)
+oldrow = '| `—` | Within the reviewed standard-distribution boundary, no material first-party path for the function is supplied. This does not prove that the function can never be built. |'
+newrow = '| `—` | Within the reviewed standard-distribution boundary, no material first-party path for the function is supplied. Under Methodology `0.3.3`, the assessment records the surfaces inspected, plausible first-party paths checked, and why none closes the function. This does not prove that the function can never be built. |'
+if oldrow not in text:
+    raise SystemExit('autonomy states dash row missing')
+text = text.replace(oldrow, newrow, 1)
+needle = '`A`, `C`, and `P` describe ownership arrangements, not maturity levels. `A(P)` and `C(P)` add a supported parent-governed mode; they do not mean partial autonomy and must not be converted to numeric weights.\n'
+add = needle + '''\nUnder Methodology `0.3.3`, `—` is a documented absence conclusion rather than a fallback for incomplete search. If the inspected boundary cannot support the required absence scope, use `?`.\n\nFor `A(P)` and `C(P)`, the assessment also records a two-row mode matrix (base mode and parent mode) with decisive owner, trigger, closure, and evidence. This makes the already-existing multi-mode semantics reconstructable without changing the state meaning.\n'''
+if needle not in text:
+    raise SystemExit('autonomy states ownership paragraph missing')
+text = text.replace(needle, add, 1)
+write(states_path, text)
+
+versioning_path = 'VERSIONING.md'
+text = read(versioning_path)
+needle = 'Methodology `0.3.1` is patch-level clarification of that boundary. Correct `0.3.0` assessments do not require vector changes merely because the patch was released; an assessment advances its current Methodology provenance only after normal successful revalidation.\n'
+add = needle + '''\nMethodology `0.3.3` is a further patch-level reproducibility release. It synchronizes the bundled normative snapshot to compatible Profile `0.2.2`, requires an explicit absence scope for `—`, requires a reconstruction matrix for `A(P)` / `C(P)`, adds a structural assessment completion checker, and restores durable release tracking. None of those changes redefine VSM functions, ownership states, or ranking semantics. Existing assessments keep their current Methodology provenance until they are normally revalidated. Version `0.3.2` was not published; the release line advances directly from `0.3.1` to `0.3.3` by maintainer decision.\n'''
+if needle not in text:
+    raise SystemExit('VERSIONING 0.3.1 note missing')
+text = text.replace(needle, add, 1)
+text = text.replace('Profile:     0.2.1\nMethodology: 0.3.1', 'Profile:     0.2.2\nMethodology: 0.3.3', 1)
+text = text.replace('The bundled Profile is synchronized to exact upstream revision `e1aaff7d2cd50d5d5ed9ab76c3606a6ef39d1976`.', 'The bundled Profile is synchronized to exact upstream revision `f7b5e2fd05f31b8b89775a0f77acea31186fe4de`.', 1)
+release_para = '''
+## Release tracking
+
+Every explicitly versioned Methodology release from `0.2.0` onward must have both an immutable lightweight Git tag `v<version>` and a GitHub Release pointing to the same target commit. A deliberately skipped version such as `0.3.2` has no changelog release heading and therefore creates no release obligation. The release body is generated from the corresponding `CHANGELOG.md` section plus the exact release target; it is not a separately maintained semantic source.
+
+`.github/workflows/publish-methodology.yml` is the persistent publisher. A change to `skills/assess-vsm-harness/VERSION` on `main` publishes the new version after merge. The workflow is idempotent: an existing tag must already point to the requested target, and an existing release is reused rather than rewritten. Manual dispatch exists only for repair/backfill with an explicit version and target SHA.
+
+The first persistent-publisher run also repairs historical release-tracking gaps for Methodology `0.2.0`, `0.3.0`, and `0.3.1`, whose canonical targets are `2ecff4bf70a4deaac64240b8838d5123ed3ca61f`, `9dd5a7be254912aae2a51fb4b118fb492d7f44ba`, and `01e13e595c101bd526fd1913863bfd8170f08116` respectively. Those versions existed in the Methodology contract but did not all receive durable public release surfaces after the earlier one-shot publisher lifecycle.
+
+Scheduled CI runs `scripts/check_release_tracking.py` so a future changelog version cannot remain silently present without both public release surfaces.
+'''
+current_marker = '\n## Current contract\n'
+if current_marker not in text:
+    raise SystemExit('VERSIONING current contract marker missing')
+text = text.replace(current_marker, '\n' + release_para + current_marker, 1)
+write(versioning_path, text)
+
+changelog_path = 'skills/assess-vsm-harness/CHANGELOG.md'
+text = read(changelog_path)
+heading = '# assess-vsm-harness changelog\n'
+entry = '''# assess-vsm-harness changelog
+
+## 0.3.3 — 2026-09-18
+
+- sync the bundled normative dependency to compatible VSM Harness Profile `0.2.2`, whose release declares `assessment_impact: none` and does not change S1–S5 semantics or evidence thresholds;
+- require every newly produced or revalidated `—` to record an explicit absence scope: surfaces inspected, plausible first-party paths checked, and why no material first-party path remains at the declared boundary; use `?` when that negative conclusion cannot be defended;
+- require `A(P)` and `C(P)` assessments to include a compact base-mode / parent-mode reconstruction matrix with decisive owner, trigger, closure and evidence for each mode;
+- add `scripts/check_assessment_contract.py` as a structural completion oracle for `0.3.3` assessment artifacts; it checks required evidence surfaces but does not attempt to decide semantic correctness;
+- replace temporary one-shot release publishers with a persistent changelog-driven publisher triggered by Methodology version changes;
+- backfill missing public release tracking for Methodology `0.2.0`, `0.3.0`, and `0.3.1`, and add scheduled release-tracking validation so future versions cannot silently remain untagged/unreleased;
+- preserve the existing ownership symbols, function-first classification, parent-mode semantics, ranking projection, and generation-provenance rules.
+
+This is a patch-level Methodology reproducibility/release-hygiene change. It does not by itself require vector changes for already conforming assessments. Existing assessments advance their current Methodology provenance only after normal successful revalidation. Version `0.3.2` was not published; `0.3.3` is the next maintainer-selected patch version.
+'''
+if not text.startswith(heading):
+    raise SystemExit('changelog heading changed')
+text = entry + text[len(heading):]
+write(changelog_path, text)
+
+write('scripts/check_assessment_contract.py', r'''#!/usr/bin/env python3
+"""Check Methodology 0.3.3 assessment artifact structural completeness."""
+from __future__ import annotations
+import re
+import sys
+from pathlib import Path
+FUNCTIONS = (("s1","S1"),("s2","S2"),("s3","S3"),("s3_star","S3*"),("s4","S4"),("s5","S5"))
+COMMON = ("State","Function","Disturbance / variety regulated","Decisive decision or feedback right","Decision owner","Supporting / enforcement mechanisms","Closure path","Why this is / is not agent-owned","Evidence","Basis","Confidence","Caveats")
+POSITIVE = {"A","A(P)","C","C(P)","P"}
+COMPOSITE = {"A(P)","C(P)"}
+EXTRA = {
+ "s2": ("Distinct S1 units","Inter-S1 disturbance","Attenuating coordination relation","Feedback into subsequent S1 behaviour","Why this is S2-specific rather than generic communication / routing / sequencing / shared state / delegation"),
+ "s3": ("Whole-system current view","Current-control decision scope"),
+ "s3_star": ("Claim being audited","Ordinary reporting path","Complementary access path","Independence boundary","Who acts on findings"),
+ "s4": ("External distinction","Future / prospective distinction","Adaptation option generated","Path back into current capability / S3"),
+ "s5": ("Identity / ultimate-policy issue","Ultimate authority in each claimed mode","Return-to-operation path"),
+}
+ABSENCE = ("Surfaces inspected","Plausible first-party paths checked","Why no material first-party path remains")
+def frontmatter(text):
+    if not text.startswith("---\n"): return {}
+    try: raw = text.split("---\n",2)[1]
+    except IndexError: return {}
+    out={}
+    for line in raw.splitlines():
+        if ":" in line:
+            k,v=line.split(":",1); out[k.strip()]=v.strip()
+    return out
+def sections(text):
+    matches=list(re.finditer(r"^## (S1|S2|S3|S3\*|S4|S5)\b.*$",text,re.MULTILINE)); out={}; rev={v:k for k,v in FUNCTIONS}
+    for i,m in enumerate(matches):
+        end=matches[i+1].start() if i+1<len(matches) else len(text); out[rev[m.group(1)]]=text[m.start():end]
+    return out
+def value(section,label):
+    m=re.search(rf"^- {re.escape(label)}:\s*(.+?)\s*$",section,re.MULTILINE)
+    if not m: return None
+    v=m.group(1).strip()
+    return None if not v or v in {"...","TBD","TODO"} else v
+def check(path):
+    failures=[]; text=path.read_text(encoding="utf-8"); fm=frontmatter(text)
+    if not fm: return [f"{path}: missing/malformed frontmatter"]
+    if fm.get("assessment_procedure_version") != "0.3.3":
+        print(f"{path}: skipped (current Methodology {fm.get('assessment_procedure_version','unknown')}, not 0.3.3)"); return []
+    if fm.get("status") == "excluded-no-agentic-vsm": return []
+    if fm.get("status") != "included": return [f"{path}: unsupported/missing canonical status"]
+    body=sections(text)
+    for key,title in FUNCTIONS:
+        section=body.get(key)
+        if section is None: failures.append(f"{path}: missing ## {title} section"); continue
+        state=fm.get(f"autonomy_{key}")
+        if state is None: failures.append(f"{path}: missing autonomy_{key} frontmatter"); continue
+        if value(section,"State") != state: failures.append(f"{path}: {title} State differs from frontmatter {state!r}")
+        for label in COMMON:
+            if value(section,label) is None: failures.append(f"{path}: {title} missing/non-substantive '{label}:'")
+        if state == "—":
+            if "### Absence scope" not in section: failures.append(f"{path}: {title}=— missing '### Absence scope'")
+            for label in ABSENCE:
+                if value(section,label) is None: failures.append(f"{path}: {title}=— missing/non-substantive '{label}:'")
+        elif state in POSITIVE:
+            for label in EXTRA.get(key,()):
+                if value(section,label) is None: failures.append(f"{path}: positive {title} missing/non-substantive '{label}:'")
+        elif state != "?": failures.append(f"{path}: {title} has unsupported state {state!r}")
+        if state in COMPOSITE:
+            if "| Mode | Decisive owner | Trigger | Closure | Evidence |" not in section: failures.append(f"{path}: {title}={state} missing mode matrix header")
+            base="A" if state=="A(P)" else "C"
+            if f"| Base (`{base}`) |" not in section: failures.append(f"{path}: {title}={state} missing Base (`{base}`) row")
+            if "| Parent (`P`) |" not in section: failures.append(f"{path}: {title}={state} missing Parent (`P`) row")
+    return failures
+def main():
+    if len(sys.argv)<2: print("usage: check_assessment_contract.py <assessment.md> [...]",file=sys.stderr); return 2
+    failures=[]
+    for arg in sys.argv[1:]:
+        p=Path(arg)
+        if not p.is_file(): failures.append(f"{p}: not a file")
+        else: failures.extend(check(p))
+    if failures: print("\n".join(failures),file=sys.stderr); return 1
+    print("Assessment structural contract check passed"); return 0
+if __name__ == "__main__": raise SystemExit(main())
+''')
+
+write('scripts/publish_methodology_release.py', r'''#!/usr/bin/env python3
+"""Publish or verify one immutable VSM Harness Methodology release."""
+from __future__ import annotations
+import argparse,json,os,re,subprocess,tempfile
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+VERSION_FILE="skills/assess-vsm-harness/VERSION"
+CHANGELOG=ROOT/"skills"/"assess-vsm-harness"/"CHANGELOG.md"
+SEMVER=re.compile(r"^\d+\.\d+\.\d+$"); SHA=re.compile(r"^[0-9a-f]{40}$")
+def run(*args,check=True): return subprocess.run(args,cwd=ROOT,text=True,capture_output=True,check=check)
+def notes(version):
+    text=CHANGELOG.read_text(encoding="utf-8"); m=re.search(rf"^## {re.escape(version)} — .*?$\n(?P<body>.*?)(?=^## |\Z)",text,re.MULTILINE|re.DOTALL)
+    if not m or not m.group("body").strip(): raise SystemExit(f"CHANGELOG missing/empty release section for {version}")
+    return m.group("body").strip()
+def tag_sha(repo,tag):
+    r=run("gh","api",f"repos/{repo}/git/ref/tags/{tag}",check=False)
+    if r.returncode!=0: return None
+    d=json.loads(r.stdout); kind,sha=d["object"]["type"],d["object"]["sha"]
+    if kind=="commit": return sha
+    if kind=="tag": return json.loads(run("gh","api",f"repos/{repo}/git/tags/{sha}").stdout)["object"]["sha"]
+    raise SystemExit(f"unsupported tag object type: {kind}")
+def main():
+    p=argparse.ArgumentParser(); p.add_argument("--version"); p.add_argument("--target-sha"); a=p.parse_args()
+    version=a.version or (ROOT/VERSION_FILE).read_text(encoding="utf-8").strip(); target=a.target_sha or run("git","rev-parse","HEAD").stdout.strip()
+    if not SEMVER.fullmatch(version): raise SystemExit(f"invalid Methodology version: {version!r}")
+    if not SHA.fullmatch(target): raise SystemExit(f"invalid release target SHA: {target!r}")
+    repo=os.environ.get("GITHUB_REPOSITORY")
+    if not repo or not os.environ.get("GH_TOKEN"): raise SystemExit("GITHUB_REPOSITORY and GH_TOKEN are required")
+    target_version=run("git","show",f"{target}:{VERSION_FILE}").stdout.strip()
+    if target_version!=version: raise SystemExit(f"target {target} contains Methodology {target_version}, expected {version}")
+    if run("git","merge-base","--is-ancestor",target,"HEAD",check=False).returncode!=0: raise SystemExit(f"release target {target} is not an ancestor of HEAD")
+    tag=f"v{version}"; existing=tag_sha(repo,tag)
+    if existing is None: run("gh","api","--method","POST",f"repos/{repo}/git/refs","-f",f"ref=refs/tags/{tag}","-f",f"sha={target}")
+    elif existing!=target: raise SystemExit(f"immutable tag {tag} points to {existing}, expected {target}")
+    if run("gh","release","view",tag,"--repo",repo,check=False).returncode==0:
+        print(f"Release {tag} already exists and tag target is correct"); return 0
+    body=notes(version)+f"\n\nRelease target: `{target}`.\n"
+    with tempfile.NamedTemporaryFile("w",encoding="utf-8",delete=False) as h: h.write(body); path=h.name
+    run("gh","release","create",tag,"--repo",repo,"--title",f"VSM Harness Methodology {tag}","--notes-file",path)
+    print(f"Published {tag} at {target}"); return 0
+if __name__ == "__main__": raise SystemExit(main())
+''')
+
+write('scripts/check_release_tracking.py', r'''#!/usr/bin/env python3
+"""Verify that every explicitly versioned Methodology release has a tag and GitHub Release."""
+from __future__ import annotations
+import json,os,re,subprocess,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+CHANGELOG=ROOT/"skills"/"assess-vsm-harness"/"CHANGELOG.md"; VERSION_FILE="skills/assess-vsm-harness/VERSION"; TRACK_FROM=(0,2,0)
+def run(*args,check=True): return subprocess.run(args,cwd=ROOT,text=True,capture_output=True,check=check)
+def versions():
+    found=re.findall(r"^## (\d+\.\d+\.\d+) —",CHANGELOG.read_text(encoding="utf-8"),re.MULTILINE)
+    return [v for v in found if tuple(map(int,v.split('.')))>=TRACK_FROM]
+def tag_sha(repo,tag):
+    r=run("gh","api",f"repos/{repo}/git/ref/tags/{tag}",check=False)
+    if r.returncode!=0: return None
+    d=json.loads(r.stdout); kind,sha=d["object"]["type"],d["object"]["sha"]
+    if kind=="commit": return sha
+    if kind=="tag": return json.loads(run("gh","api",f"repos/{repo}/git/tags/{sha}").stdout)["object"]["sha"]
+    return None
+def main():
+    repo=os.environ.get("GITHUB_REPOSITORY")
+    if not repo or not os.environ.get("GH_TOKEN"): print("GITHUB_REPOSITORY and GH_TOKEN are required",file=sys.stderr); return 2
+    failures=[]
+    for version in versions():
+        tag=f"v{version}"; sha=tag_sha(repo,tag)
+        if sha is None: failures.append(f"{tag}: missing Git tag"); continue
+        r=run("git","show",f"{sha}:{VERSION_FILE}",check=False)
+        if r.returncode!=0 or r.stdout.strip()!=version: failures.append(f"{tag}: target {sha} does not contain VERSION {version}")
+        if run("gh","release","view",tag,"--repo",repo,check=False).returncode!=0: failures.append(f"{tag}: missing GitHub Release")
+    if failures: print("\n".join(failures),file=sys.stderr); return 1
+    print(f"Release tracking complete for {len(versions())} Methodology versions"); return 0
+if __name__ == "__main__": raise SystemExit(main())
+''')
+
+write('.github/workflows/publish-methodology.yml', '''name: publish-methodology
+on:
+  push:
+    branches: [main]
+    paths:
+      - skills/assess-vsm-harness/VERSION
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Methodology version to repair/backfill
+        required: false
+        type: string
+      target_sha:
+        description: Exact release target SHA; required when version is supplied
+        required: false
+        type: string
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Backfill historical release gaps
+        run: |
+          python scripts/publish_methodology_release.py --version 0.2.0 --target-sha 2ecff4bf70a4deaac64240b8838d5123ed3ca61f
+          python scripts/publish_methodology_release.py --version 0.3.0 --target-sha 9dd5a7be254912aae2a51fb4b118fb492d7f44ba
+          python scripts/publish_methodology_release.py --version 0.3.1 --target-sha 01e13e595c101bd526fd1913863bfd8170f08116
+      - name: Publish requested or current Methodology release
+        env:
+          REQUESTED_VERSION: ${{ inputs.version }}
+          REQUESTED_SHA: ${{ inputs.target_sha }}
+        run: |
+          set -euo pipefail
+          if [[ -n "${REQUESTED_VERSION:-}" || -n "${REQUESTED_SHA:-}" ]]; then
+            test -n "${REQUESTED_VERSION:-}"
+            test -n "${REQUESTED_SHA:-}"
+            python scripts/publish_methodology_release.py --version "$REQUESTED_VERSION" --target-sha "$REQUESTED_SHA"
+          else
+            python scripts/publish_methodology_release.py --target-sha "$GITHUB_SHA"
+          fi
+      - name: Verify release tracking
+        run: python scripts/check_release_tracking.py
+''')
+
+validate_path='.github/workflows/validate.yml'; text=read(validate_path)
+needle='''      - run: python scripts/sync_profile.py --profile-dir ../vsm-harness-profile --check
+        working-directory: vsm-skills
+'''
+addition=needle+'''      - name: Verify published Methodology release tracking
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/check_release_tracking.py
+        working-directory: vsm-skills
+'''
+if needle not in text: raise SystemExit('validate workflow insertion point missing')
+write(validate_path,text.replace(needle,addition,1))
+
+test_path='tests/test_methodology_contract.py'; text=read(test_path)
+text=text.replace('self.assertEqual(version, "0.3.1")','self.assertEqual(version, "0.3.3")',1)
+insert='''
+    def test_033_reproducibility_surfaces_are_explicit(self):
+        skill = self.text("skills/assess-vsm-harness/SKILL.md")
+        fmt = self.text("skills/assess-vsm-harness/references/assessment-format.md")
+        self.assertIn("bundled Profile for this methodology is **v0.2.2**", skill)
+        self.assertIn("### Absence scope", fmt)
+        self.assertIn("Plausible first-party paths checked", fmt)
+        self.assertIn("| Mode | Decisive owner | Trigger | Closure | Evidence |", fmt)
+        self.assertIn("check_assessment_contract.py", skill)
+
+    def test_release_tracking_is_persistent_and_changelog_driven(self):
+        workflow = self.text(".github/workflows/publish-methodology.yml")
+        publisher = self.text("scripts/publish_methodology_release.py")
+        versioning = self.text("VERSIONING.md")
+        for version in ("0.2.0", "0.3.0", "0.3.1"):
+            self.assertIn(version, workflow)
+        self.assertIn("skills/assess-vsm-harness/VERSION", workflow)
+        self.assertIn("workflow_dispatch:", workflow)
+        self.assertIn("CHANGELOG", publisher)
+        self.assertIn("## Release tracking", versioning)
+'''
+marker='\n\nif __name__ == "__main__":\n'
+if marker not in text: raise SystemExit('test end marker missing')
+write(test_path,text.replace(marker,insert+marker,1))
