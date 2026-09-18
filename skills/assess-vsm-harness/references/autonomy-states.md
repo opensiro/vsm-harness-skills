@@ -1,6 +1,6 @@
 # Local autonomy states
 
-**Methodology version:** 0.3.1
+**Methodology version:** 0.3.3
 
 Methodology `0.3.x` adds a parent-governed mode modifier for S3, S4, and S5. This is a classification/publication procedure layered on unchanged VSM Harness Profile semantics.
 
@@ -13,10 +13,14 @@ These symbols are publication notation for autonomous AI agent harness assessmen
 | `C` | The VSM function is established and a first-party primitive specifically exposes the relevant decisive decision or feedback path, but the developer must still compose the autonomous actor, authority, independence, or closure loop. |
 | `C(P)` | The `C` condition is established **and** the same function also has a distinct first-party parent-governed mode that is operationally closed. |
 | `P` | **S3, S4, or S5 only.** The function is established and an operationally closed parent-governed mode exists, but no first-party `A` or `C` autonomous mode is established at the reviewed boundary. |
-| `—` | Within the reviewed standard-distribution boundary, no material first-party path for the function is supplied. This does not prove that the function can never be built. |
+| `—` | Within the reviewed standard-distribution boundary, no material first-party path for the function is supplied. Under Methodology `0.3.3`, the assessment records the surfaces inspected, plausible first-party paths checked, and why none closes the function. This does not prove that the function can never be built. |
 | `?` | The reviewed primary evidence is insufficient to establish either a positive path or a defensible no-path conclusion. |
 
 `A`, `C`, and `P` describe ownership arrangements, not maturity levels. `A(P)` and `C(P)` add a supported parent-governed mode; they do not mean partial autonomy and must not be converted to numeric weights.
+
+Under Methodology `0.3.3`, `—` is a documented absence conclusion rather than a fallback for incomplete search. If the inspected boundary cannot support the required absence scope, use `?`.
+
+For `A(P)` and `C(P)`, the assessment also records a two-row mode matrix (base mode and parent mode) with decisive owner, trigger, closure, and evidence. This makes the already-existing multi-mode semantics reconstructable without changing the state meaning.
 
 A parent-governed mode is not established merely because a human can edit configuration, stop a process, approve a PR, or invoke an extension point. The relevant S3/S4/S5 function must first be established, and the parent path must itself contain a legitimate decisive right plus a return/closure path into subsequent operation.
 

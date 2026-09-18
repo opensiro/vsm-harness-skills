@@ -1,0 +1,53 @@
+name: publish-methodology
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - skills/assess-vsm-harness/VERSION
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Methodology version to repair/backfill
+        required: false
+        type: string
+      target_sha:
+        description: Exact release target SHA; required when version is supplied
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Backfill historical release gaps
+        run: |
+          python scripts/publish_methodology_release.py --version 0.2.0 --target-sha 2ecff4bf70a4deaac64240b8838d5123ed3ca61f
+          python scripts/publish_methodology_release.py --version 0.3.0 --target-sha 9dd5a7be254912aae2a51fb4b118fb492d7f44ba
+          python scripts/publish_methodology_release.py --version 0.3.1 --target-sha 01e13e595c101bd526fd1913863bfd8170f08116
+      - name: Publish requested or current Methodology release
+        env:
+          REQUESTED_VERSION: ${{ inputs.version }}
+          REQUESTED_SHA: ${{ inputs.target_sha }}
+        run: |
+          set -euo pipefail
+          if [[ -n "${REQUESTED_VERSION:-}" || -n "${REQUESTED_SHA:-}" ]]; then
+            test -n "${REQUESTED_VERSION:-}"
+            test -n "${REQUESTED_SHA:-}"
+            python scripts/publish_methodology_release.py --version "$REQUESTED_VERSION" --target-sha "$REQUESTED_SHA"
+          else
+            python scripts/publish_methodology_release.py --target-sha "$GITHUB_SHA"
+          fi
+      - name: Verify release tracking
+        run: python scripts/check_release_tracking.py

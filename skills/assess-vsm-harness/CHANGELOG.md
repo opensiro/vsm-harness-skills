@@ -1,5 +1,17 @@
 # assess-vsm-harness changelog
 
+## 0.3.3 — 2026-09-18
+
+- sync the bundled normative dependency to compatible VSM Harness Profile `0.2.2`, whose release declares `assessment_impact: none` and does not change S1–S5 semantics or evidence thresholds;
+- require every newly produced or revalidated `—` to record an explicit absence scope: surfaces inspected, plausible first-party paths checked, and why no material first-party path remains at the declared boundary; use `?` when that negative conclusion cannot be defended;
+- require `A(P)` and `C(P)` assessments to include a compact base-mode / parent-mode reconstruction matrix with decisive owner, trigger, closure and evidence for each mode;
+- add `scripts/check_assessment_contract.py` as a structural completion oracle for `0.3.3` assessment artifacts; it checks required evidence surfaces but does not attempt to decide semantic correctness;
+- replace temporary one-shot release publishers with a persistent changelog-driven publisher triggered by Methodology version changes;
+- backfill missing public release tracking for Methodology `0.2.0`, `0.3.0`, and `0.3.1`, and add scheduled release-tracking validation so future versions cannot silently remain untagged/unreleased;
+- preserve the existing ownership symbols, function-first classification, parent-mode semantics, ranking projection, and generation-provenance rules.
+
+This is a patch-level Methodology reproducibility/release-hygiene change. It does not by itself require vector changes for already conforming assessments. Existing assessments advance their current Methodology provenance only after normal successful revalidation. Version `0.3.2` was not published; `0.3.3` is the next maintainer-selected patch version.
+
 ## 0.3.1 — 2026-09-16
 
 - clarify the intended publication boundary of parent-governed notation without changing the state set introduced in `0.3.0`;

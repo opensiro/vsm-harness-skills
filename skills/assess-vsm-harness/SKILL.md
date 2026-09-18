@@ -5,9 +5,9 @@ description: Produce a standalone evidence-backed VSM assessment of one autonomo
 
 # Assess a Harness as a Viable System
 
-**Methodology version:** 0.3.1
+**Methodology version:** 0.3.3
 
-Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this methodology is **v0.2.1**. The output is a standalone repository assessment, not a cross-catalog comparison.
+Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this methodology is **v0.2.2**. The output is a standalone repository assessment, not a cross-catalog comparison.
 
 Read [assessment-format.md](references/assessment-format.md) for the required artifact and [autonomy-states.md](references/autonomy-states.md) for local ownership notation. The same Methodology release also governs cohort synthesis and deterministic ranking through the repository-level [SYNTHESIS.md](../../SYNTHESIS.md).
 
@@ -24,17 +24,55 @@ Read [assessment-format.md](references/assessment-format.md) for the required ar
 9. Record the closure path where the result must affect subsequent regulation or operation. For parent-governed S3/S4/S5 modes, show the relevant matter reaching legitimate parent authority and the returned decision/feedback changing subsequent operation.
 10. When ownership is ambiguous, apply the Profile's counterfactual owner test: remove the candidate owner conceptually while leaving supporting machinery in place and ask whether materially the same discretionary organizational decision still occurs.
 11. For every material mapping record primary evidence, basis (`explicit`, `structural`, `inferred`, or `unknown`), confidence, and caveat.
-12. Assign the local state only after function, decisive right, ownership, support, and closure are separated. For S3/S4/S5, encode a separately evidenced first-party parent mode with `(P)` on `A` or `C`, or standalone `P` when no first-party `A`/`C` autonomous mode is established.
-13. Record recursion, variety, escalation, and unresolved evidence gaps separately from the six-state vector.
-14. Write `assessments/<harness_id>.md` for index work. Do not generate a cohort-relative signature in this skill.
+12. For every published `—`, record an **absence scope**: the repository surfaces inspected, the plausible first-party paths checked, and why no material first-party path remains within the declared standard-distribution boundary. If the review boundary is not broad enough to support that conclusion, publish `?` instead.
+13. For every `A(P)` or `C(P)`, record the autonomous/constructor base mode and the parent-governed mode separately in the standard mode matrix so a second reviewer can reconstruct each decisive owner and closure path independently.
+14. Assign the local state only after function, decisive right, ownership, support, closure, and any required negative/composite evidence are separated. For S3/S4/S5, encode a separately evidenced first-party parent mode with `(P)` on `A` or `C`, or standalone `P` when no first-party `A`/`C` autonomous mode is established.
+15. Record recursion, variety, escalation, and unresolved evidence gaps separately from the six-state vector.
+16. Write `assessments/<harness_id>.md` for index work. Do not generate a cohort-relative signature in this skill.
+
+
+## Methodology 0.3.3 reproducibility patch
+
+Methodology `0.3.3` is a procedural PATCH over `0.3.1`. It does not redefine any VSM Harness Profile function, add or remove an autonomy symbol, change ranking semantics, or require a vector change for an already conforming assessment merely because the patch exists. Version `0.3.2` was not published; the release line advances directly to `0.3.3` by maintainer decision.
+
+### Negative-state proof
+
+`—` is an evidence-backed no-material-path conclusion at the reviewed boundary, not the default result of failing to find a positive witness. Every `—` produced or revalidated under `0.3.3` must record an **Absence scope** with:
+
+- **Surfaces inspected** — the first-party runtime/docs/tests/configuration/governance surfaces actually reviewed;
+- **Plausible first-party paths checked** — the concrete places where the missing function could reasonably have closed;
+- **Why no material first-party path remains** — the boundary-relative reason the reviewed standard distribution supports `—` rather than `?`.
+
+If the evidence boundary is too narrow to support that negative conclusion, use `?`.
+
+### Composite-mode reconstruction
+
+Every `A(P)` or `C(P)` claim must include the standard mode matrix:
+
+| Mode | Decisive owner | Trigger | Closure | Evidence |
+| --- | --- | --- | --- | --- |
+| Base (`A` or `C`) | ... | ... | ... | ... |
+| Parent (`P`) | ... | ... | ... | ... |
+
+The matrix is a reproducibility surface only. It does not alter the meaning of composite notation or imply simultaneous dual ownership.
+
+### Structural completion oracle
+
+Assessments newly produced or successfully revalidated under Methodology `0.3.3` must pass:
+
+```bash
+python scripts/check_assessment_contract.py assessments/<harness_id>.md
+```
+
+The checker validates artifact completeness only: required fields, function-specific witness labels, negative-state absence scope, and composite-mode reconstruction. It deliberately does **not** decide whether cited evidence is true or whether a VSM mapping is semantically correct. Existing assessments that retain an earlier current Methodology version are not required to be reformatted solely because `0.3.3` was released.
 
 ## Generation provenance
 
 Every assessment newly created by Methodology v0.2.1 or later must preserve which semantic/tooling versions produced the original artifact:
 
 ```yaml
-generated_profile_version: 0.2.1
-generated_assessment_procedure_version: 0.3.1
+generated_profile_version: 0.2.2
+generated_assessment_procedure_version: 0.3.3
 ```
 
 These two fields are **immutable origin metadata**. Do not change them during reassessment, same-ref correction, methodology migration, or later Methodology upgrades.
