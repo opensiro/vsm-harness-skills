@@ -70,6 +70,12 @@ CI checks the profile repository owned by the same GitHub organization and rejec
 
 [vsm-harness-index](https://github.com/opensiro/vsm-harness-index) stores the published assessment corpus and materializes its TLDR signatures and autonomy rankings under the Methodology. An exact Index Git revision is the identity of a particular corpus/output state; the Index does not need a second semantic release line merely because its cohort or generated files changed.
 
+## Contributing and organization
+
+Contribute assessment procedure, skills, references, synchronization/provenance tooling, validators, and repository-local Methodology maintenance here.
+
+For questions or proposals about **the organization that coordinates the OpenSiro VSM Harness OSS repositories** — contributor roles, authority boundaries, cross-repository control, escalation, milestone sequencing, or shared contribution workflow — use [`opensiro/vsm-oss-organization`](https://github.com/opensiro/vsm-oss-organization). Organization-wide policy should not be duplicated into this Methodology repository.
+
 ## License
 
 Repository code and original documentation are licensed under [Apache License 2.0](LICENSE). The generated profile snapshot at `skills/assess-vsm-harness/references/profile/PROFILE.md` is licensed under [CC BY 4.0](LICENSES/CC-BY-4.0.txt), matching its source repository.
