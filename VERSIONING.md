@@ -142,7 +142,7 @@ Methodology: 0.3.5
 Index:       exact Git revision
 ```
 
-The bundled Profile is synchronized to Profile `0.2.3` from upstream PR #21; the exact generated snapshot records its source commit and blob and will be refreshed against `main` after that Profile PR merges.
+The bundled Profile is synchronized to exact upstream revision `06246a1e5bd95f237b88ecc7d23f0fa7e8a995cd` (Profile `0.2.3`; `PROFILE.md` blob `bd9e63a2d25ce1dd424bfcea33849ba45c2fa93f`).
 
 The Profile and Methodology are versioned contracts. The Index commit is the immutable identity of a particular corpus/output state.
 
