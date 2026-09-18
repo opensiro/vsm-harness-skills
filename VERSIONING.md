@@ -84,6 +84,8 @@ Because the `0.3.0` change can alter canonical assessment vectors without any up
 
 Methodology `0.3.1` is patch-level clarification of that boundary. Correct `0.3.0` assessments do not require vector changes merely because the patch was released; an assessment advances its current Methodology provenance only after normal successful revalidation.
 
+Methodology `0.3.3` is a further patch-level reproducibility release. It synchronizes the bundled normative snapshot to compatible Profile `0.2.2`, requires an explicit absence scope for `—`, requires a reconstruction matrix for `A(P)` / `C(P)`, adds a structural assessment completion checker, and restores durable release tracking. None of those changes redefine VSM functions, ownership states, or ranking semantics. Existing assessments keep their current Methodology provenance until they are normally revalidated. Version `0.3.2` was not published; the release line advances directly from `0.3.1` to `0.3.3` by maintainer decision.
+
 Downstream Index tooling must support `A(P)` and `C(P)` parsing, validation, rendering, and ranking projection before canonical assessments using those symbols are admitted.
 
 ## Index revision
@@ -114,17 +116,28 @@ Under Methodology `0.3.x`, ranking still measures agent-owned mode coverage: `A(
 
 A change to Profile semantics may require reassessment. A change to Methodology semantics may require reassessment, re-synthesis, re-ranking, or regeneration depending on the affected procedure. In every case the resulting exact state is captured by a new Index Git revision.
 
+
+## Release tracking
+
+Every explicitly versioned Methodology release from `0.2.0` onward must have both an immutable lightweight Git tag `v<version>` and a GitHub Release pointing to the same target commit. A deliberately skipped version such as `0.3.2` has no changelog release heading and therefore creates no release obligation. The release body is generated from the corresponding `CHANGELOG.md` section plus the exact release target; it is not a separately maintained semantic source.
+
+`.github/workflows/publish-methodology.yml` is the persistent publisher. A change to `skills/assess-vsm-harness/VERSION` on `main` publishes the new version after merge. The workflow is idempotent: an existing tag must already point to the requested target, and an existing release is reused rather than rewritten. Manual dispatch exists only for repair/backfill with an explicit version and target SHA.
+
+The first persistent-publisher run also repairs historical release-tracking gaps for Methodology `0.2.0`, `0.3.0`, and `0.3.1`, whose canonical targets are `2ecff4bf70a4deaac64240b8838d5123ed3ca61f`, `9dd5a7be254912aae2a51fb4b118fb492d7f44ba`, and `01e13e595c101bd526fd1913863bfd8170f08116` respectively. Those versions existed in the Methodology contract but did not all receive durable public release surfaces after the earlier one-shot publisher lifecycle.
+
+Scheduled CI runs `scripts/check_release_tracking.py` so a future changelog version cannot remain silently present without both public release surfaces.
+
 ## Current contract
 
 At this release boundary:
 
 ```text
-Profile:     0.2.1
-Methodology: 0.3.1
+Profile:     0.2.2
+Methodology: 0.3.3
 Index:       exact Git revision
 ```
 
-The bundled Profile is synchronized to exact upstream revision `e1aaff7d2cd50d5d5ed9ab76c3606a6ef39d1976`.
+The bundled Profile is synchronized to exact upstream revision `f7b5e2fd05f31b8b89775a0f77acea31186fe4de`.
 
 The Profile and Methodology are versioned contracts. The Index commit is the immutable identity of a particular corpus/output state.
 

@@ -1,6 +1,6 @@
 # Standalone assessment format
 
-**Methodology version:** 0.3.1
+**Methodology version:** 0.3.3
 
 An assessment is repository-relative and revision-relative. It must not contain cohort-relative signatures, rank positions, or claims that depend on which other harnesses happen to be indexed.
 
@@ -13,10 +13,10 @@ project_name: Example Harness
 repository: https://github.com/example/harness
 review_ref: <40-character commit SHA>
 reviewed_at: YYYY-MM-DD
-generated_profile_version: 0.2.1
-generated_assessment_procedure_version: 0.3.1
-profile_version: 0.2.1
-assessment_procedure_version: 0.3.1
+generated_profile_version: 0.2.2
+generated_assessment_procedure_version: 0.3.3
+profile_version: 0.2.2
+assessment_procedure_version: 0.3.3
 status: included
 autonomy_s1: A
 autonomy_s2: C
@@ -62,6 +62,42 @@ The parent-mode boundary is intentional:
 
 This is a publication choice, not a claim that human-owned S1/S2/S3* cannot exist outside the assessed autonomous-harness boundary.
 
+
+## Methodology 0.3.3 structural completion requirements
+
+The following requirements make the existing evidence standard mechanically checkable without turning semantic judgment into a unit test.
+
+For every `State: —`, include:
+
+```markdown
+### Absence scope
+
+- Surfaces inspected:
+- Plausible first-party paths checked:
+- Why no material first-party path remains:
+```
+
+The three lines must describe a boundary broad enough to support a no-material-path conclusion. If that conclusion cannot be defended, use `?`.
+
+For every `A(P)` or `C(P)`, include this table in the corresponding function section:
+
+```markdown
+| Mode | Decisive owner | Trigger | Closure | Evidence |
+| --- | --- | --- | --- | --- |
+| Base (`A` or `C`) | ... | ... | ... | ... |
+| Parent (`P`) | ... | ... | ... | ... |
+```
+
+Use the actual base state in the first row (`A` for `A(P)`, `C` for `C(P)`). The table is evidence organization, not a new ownership state.
+
+A `0.3.3` artifact can be structurally checked with:
+
+```bash
+python scripts/check_assessment_contract.py assessments/<harness_id>.md
+```
+
+The checker is a completion oracle, not a semantic oracle. It cannot establish VSM function, ownership, independence, or evidentiary truth.
+
 ## Required body
 
 ```markdown
@@ -105,20 +141,34 @@ Identify the actual operational outcomes and S1 units. Separate agent decision r
 - Confidence:
 - Caveats:
 
+For `State: —`, additionally include:
+
+### Absence scope
+
+- Surfaces inspected:
+- Plausible first-party paths checked:
+- Why no material first-party path remains:
+
 ## S2 — Coordination
 
-Use the same fields, and additionally make explicit:
-- distinct S1 operational units at the declared recursion level;
-- specific actual or structurally evidenced inter-S1 interference / conflict / oscillation;
-- coordination relation that attenuates that disturbance;
-- feedback / closure path into subsequent S1 behaviour;
-- why the cited primitive is S2-specific rather than generic communication, routing, sequencing, shared state, or delegation.
+Use the same fields. For a positive S2 state, additionally include these exact witness labels:
+
+- Distinct S1 units:
+- Inter-S1 disturbance:
+- Attenuating coordination relation:
+- Feedback into subsequent S1 behaviour:
+- Why this is S2-specific rather than generic communication / routing / sequencing / shared state / delegation:
 
 For `S2=C`, the S2 function itself must already be established. `C` means a first-party S2-specific decision/feedback path exists but the autonomous actor, authority, or closure still requires composition; it does not mean a generic framework could be programmed into S2. Methodology `0.3.x` does not apply `(P)` or standalone `P` to S2.
 
 ## S3 — Inside-and-now control
 
-Use the same fields. Explicitly distinguish resource/commitment decisions from deterministic budget, scheduler, concurrency, or termination enforcement.
+Use the same fields. For a positive S3 state, additionally include:
+
+- Whole-system current view:
+- Current-control decision scope:
+
+Explicitly distinguish resource/commitment decisions from deterministic budget, scheduler, concurrency, or termination enforcement.
 
 For `S3=P`, `S3=A(P)`, or `S3=C(P)`, additionally establish the parent mode:
 - whole-system current view at the declared recursion;
@@ -132,22 +182,24 @@ A local human intervention, generic operator UI, or merge approval alone is not 
 
 ## S3* — Complementary audit
 
-Use the same fields, and make explicit:
-- claim being audited;
-- ordinary reporting path;
-- complementary access path;
-- independence boundary;
-- who acts on findings.
+Use the same fields. For a positive S3* state, additionally include:
+
+- Claim being audited:
+- Ordinary reporting path:
+- Complementary access path:
+- Independence boundary:
+- Who acts on findings:
 
 Methodology `0.3.x` does not apply the parent-mode modifier to S3*.
 
 ## S4 — Outside-and-then intelligence
 
-Use the same fields, and make explicit:
-- external distinction;
-- future/prospective distinction;
-- adaptation option generated;
-- path back into current capability / S3.
+Use the same fields. For a positive S4 state, additionally include:
+
+- External distinction:
+- Future / prospective distinction:
+- Adaptation option generated:
+- Path back into current capability / S3:
 
 For `S4=P`, `S4=A(P)`, or `S4=C(P)`, additionally establish the parent mode:
 - parent ownership of the decisive adaptation judgment/feedback right;
@@ -160,10 +212,11 @@ A roadmap, research issue, backlog, or human idea alone is not sufficient for th
 
 ## S5 — Policy and identity
 
-Use the same fields, and additionally make explicit:
-- identity / ultimate-policy issue;
-- ultimate authority in each claimed mode;
-- return-to-operation path.
+Use the same fields. For a positive S5 state, additionally include:
+
+- Identity / ultimate-policy issue:
+- Ultimate authority in each claimed mode:
+- Return-to-operation path:
 
 For `S5=P`, `S5=A(P)`, or `S5=C(P)`, show the complete parent mode: identity/policy issue → legitimate parent authority → authoritative decision → decision returned → subsequent operation governed by it.
 

@@ -12,7 +12,7 @@ class MethodologyContractTests(unittest.TestCase):
 
     def test_version_surfaces_match_methodology_version(self):
         version = (SKILL / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "0.3.1")
+        self.assertEqual(version, "0.3.3")
         for relative in (
             "skills/assess-vsm-harness/SKILL.md",
             "skills/assess-vsm-harness/references/autonomy-states.md",
@@ -70,6 +70,26 @@ class MethodologyContractTests(unittest.TestCase):
         self.assertIn("**S3:** parent mode is an explicit supervisory/current-control exception.", text)
         self.assertIn("**S4:** parent mode is an explicit adaptation exception.", text)
         self.assertIn("**S5:** parent governance is the canonical `P` case", text)
+
+    def test_033_reproducibility_surfaces_are_explicit(self):
+        skill = self.text("skills/assess-vsm-harness/SKILL.md")
+        fmt = self.text("skills/assess-vsm-harness/references/assessment-format.md")
+        self.assertIn("bundled Profile for this methodology is **v0.2.2**", skill)
+        self.assertIn("### Absence scope", fmt)
+        self.assertIn("Plausible first-party paths checked", fmt)
+        self.assertIn("| Mode | Decisive owner | Trigger | Closure | Evidence |", fmt)
+        self.assertIn("check_assessment_contract.py", skill)
+
+    def test_release_tracking_is_persistent_and_changelog_driven(self):
+        workflow = self.text(".github/workflows/publish-methodology.yml")
+        publisher = self.text("scripts/publish_methodology_release.py")
+        versioning = self.text("VERSIONING.md")
+        for version in ("0.2.0", "0.3.0", "0.3.1"):
+            self.assertIn(version, workflow)
+        self.assertIn("skills/assess-vsm-harness/VERSION", workflow)
+        self.assertIn("workflow_dispatch:", workflow)
+        self.assertIn("CHANGELOG", publisher)
+        self.assertIn("## Release tracking", versioning)
 
 
 if __name__ == "__main__":
