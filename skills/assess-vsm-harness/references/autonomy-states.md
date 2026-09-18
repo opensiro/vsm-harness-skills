@@ -1,6 +1,6 @@
 # Local autonomy states
 
-**Methodology version:** 0.3.4
+**Methodology version:** 0.3.5
 
 Methodology `0.3.x` adds a parent-governed mode modifier for S3, S4, and S5. This is a classification/publication procedure layered on unchanged VSM Harness Profile semantics.
 
@@ -51,6 +51,13 @@ Do not choose a state from component names or feature lists. Use this order:
 8. for S3/S4/S5, add `(P)` only when a distinct parent-governed mode is independently established; use standalone `P` when the parent mode is the only positive ownership mode established.
 
 The notation does not relax the function-first rule. A human, maintainer, approval gate, roadmap, or issue tracker does not establish S3, S4, or S5 merely because it is present.
+
+
+## Boundary reachability
+
+A positive ownership state is boundary-relative. The actor or construction path used to justify `A`, `A(P)`, `C`, `C(P)`, or `P` must be reachable in the declared first-party operating/deployment mode. A development-only, dogfood, test/eval, CI/release, contributor, or governance actor in the same repository does not become part of the assessed harness merely by co-location.
+
+For `A`, the autonomous decisive actor and closure must be available in the supported assessed mode. For `C`, a function-specific first-party construction path must be intentionally exposed to that boundary, while actor, authority, independence, or closure may still require composition. A concrete dogfood implementation can strengthen evidence that the constructor is real without changing the target boundary's ownership state.
 
 ## S2 constructor threshold
 

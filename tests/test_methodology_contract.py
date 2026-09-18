@@ -13,7 +13,7 @@ class MethodologyContractTests(unittest.TestCase):
 
     def test_version_surfaces_match_methodology_version(self):
         version = (SKILL / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "0.3.4")
+        self.assertEqual(version, "0.3.5")
         for relative in (
             "skills/assess-vsm-harness/SKILL.md",
             "skills/assess-vsm-harness/references/autonomy-states.md",
@@ -75,11 +75,28 @@ class MethodologyContractTests(unittest.TestCase):
     def test_033_reproducibility_surfaces_are_explicit(self):
         skill = self.text("skills/assess-vsm-harness/SKILL.md")
         fmt = self.text("skills/assess-vsm-harness/references/assessment-format.md")
-        self.assertIn("bundled Profile for this methodology is **v0.2.2**", skill)
+        self.assertIn("bundled Profile for this methodology is **v0.2.3**", skill)
         self.assertIn("### Absence scope", fmt)
         self.assertIn("Plausible first-party paths checked", fmt)
         self.assertIn("| Mode | Decisive owner | Trigger | Closure | Evidence |", fmt)
         self.assertIn("check_assessment_contract.py", skill)
+
+
+    def test_035_boundary_reachability_contract_is_explicit(self):
+        skill = self.text("skills/assess-vsm-harness/SKILL.md")
+        fmt = self.text("skills/assess-vsm-harness/references/assessment-format.md")
+        checker_path = ROOT / "scripts" / "check_assessment_contract.py"
+        spec = importlib.util.spec_from_file_location("assessment_contract_checker_035", checker_path)
+        self.assertIsNotNone(spec)
+        checker = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(checker)
+        self.assertIn("Repository co-location is not enough", skill)
+        self.assertIn("Credited operating / distribution surfaces", fmt)
+        self.assertIn("Adjacent first-party surfaces excluded from ownership", fmt)
+        self.assertIn("Boundary reachability", fmt)
+        self.assertIn("0.3.5", checker.SUPPORTED)
+        self.assertEqual(len(checker.BOUNDARY_035), 2)
 
     def test_034_oracle_parses_s3star_separately(self):
         checker_path = ROOT / "scripts" / "check_assessment_contract.py"

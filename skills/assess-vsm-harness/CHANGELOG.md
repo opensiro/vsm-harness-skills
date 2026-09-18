@@ -1,5 +1,15 @@
 # assess-vsm-harness changelog
 
+## 0.3.5 — 2026-09-19
+
+- sync the bundled normative dependency to compatible VSM Harness Profile `0.2.3`;
+- make boundary provenance reconstructable by separating credited operating/distribution surfaces from adjacent first-party development/dogfood/test/eval/governance surfaces;
+- require every positive function state to record `Boundary reachability`;
+- clarify that same-repository dogfood can corroborate a constructor path but cannot supply ownership/closure to another system-in-focus merely by co-location;
+- extend the structural completion oracle and regression contract for `0.3.5` while preserving historical `0.3.3`/`0.3.4` validation.
+
+This is a patch-level procedural clarification. It does not redefine VSM functions, ownership symbols, parent-mode semantics or ranking projection, and it does not itself require corpus-wide reassessment. Weak historical mappings exposed by the clarified boundary are same-ref corrections under their frozen contracts.
+
 ## 0.3.4 — 2026-09-18
 
 - fix `scripts/check_assessment_contract.py` so `## S3*` is parsed as the complementary-audit section rather than as a second `S3` section;

@@ -1,6 +1,6 @@
 # Standalone assessment format
 
-**Methodology version:** 0.3.4
+**Methodology version:** 0.3.5
 
 An assessment is repository-relative and revision-relative. It must not contain cohort-relative signatures, rank positions, or claims that depend on which other harnesses happen to be indexed.
 
@@ -13,10 +13,10 @@ project_name: Example Harness
 repository: https://github.com/example/harness
 review_ref: <40-character commit SHA>
 reviewed_at: YYYY-MM-DD
-generated_profile_version: 0.2.2
-generated_assessment_procedure_version: 0.3.4
-profile_version: 0.2.2
-assessment_procedure_version: 0.3.4
+generated_profile_version: 0.2.3
+generated_assessment_procedure_version: 0.3.5
+profile_version: 0.2.3
+assessment_procedure_version: 0.3.5
 status: included
 autonomy_s1: A
 autonomy_s2: C
@@ -62,6 +62,26 @@ The parent-mode boundary is intentional:
 
 This is a publication choice, not a claim that human-owned S1/S2/S3* cannot exist outside the assessed autonomous-harness boundary.
 
+
+
+## Methodology 0.3.5 boundary-provenance requirements
+
+For every newly produced or successfully revalidated `0.3.5` artifact, the `Review boundary` section must include:
+
+```markdown
+- Credited operating / distribution surfaces:
+- Adjacent first-party surfaces excluded from ownership:
+```
+
+The first field names the shipped/runtime/installed surfaces that may supply credited owners and closure. The second records nearby first-party development/dogfood, contributor, CI/release, benchmark/evaluation, test/example or governance surfaces that were inspected but are outside the ownership boundary. Use `none identified` when the review found no material adjacent surface; do not omit the field.
+
+Every positive function state (`A`, `A(P)`, `C`, `C(P)`, or `P`) must additionally include:
+
+```markdown
+- Boundary reachability:
+```
+
+This explains why the decisive actor or function-specific constructor path is reachable in the declared assessed mode without borrowing ownership or closure from an adjacent system. Same-repository location alone is not a reachability argument.
 
 ## Methodology 0.3.3 structural completion requirements
 
@@ -109,6 +129,8 @@ The checker is a completion oracle, not a semantic oracle. It cannot establish V
 - Purpose and identity:
 - Relevant environment:
 - Standard-distribution boundary:
+- Credited operating / distribution surfaces:
+- Adjacent first-party surfaces excluded from ownership:
 - First-party operating / deployment modes considered:
 - Recursion level:
 - Reviewed revision:
@@ -135,6 +157,7 @@ Identify the actual operational outcomes and S1 units. Separate agent decision r
 - Decision owner:
 - Supporting / enforcement mechanisms:
 - Closure path:
+- Boundary reachability:
 - Why this is / is not agent-owned:
 - Evidence:
 - Basis:
