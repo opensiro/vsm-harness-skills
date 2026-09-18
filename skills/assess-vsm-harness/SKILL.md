@@ -5,9 +5,9 @@ description: Produce a standalone evidence-backed VSM assessment of one autonomo
 
 # Assess a Harness as a Viable System
 
-**Methodology version:** 0.3.4
+**Methodology version:** 0.3.5
 
-Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this methodology is **v0.2.2**. The output is a standalone repository assessment, not a cross-catalog comparison.
+Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this methodology is **v0.2.3**. The output is a standalone repository assessment, not a cross-catalog comparison.
 
 Read [assessment-format.md](references/assessment-format.md) for the required artifact and [autonomy-states.md](references/autonomy-states.md) for local ownership notation. The same Methodology release also governs cohort synthesis and deterministic ranking through the repository-level [SYNTHESIS.md](../../SYNTHESIS.md).
 
@@ -29,6 +29,22 @@ Read [assessment-format.md](references/assessment-format.md) for the required ar
 14. Assign the local state only after function, decisive right, ownership, support, closure, and any required negative/composite evidence are separated. For S3/S4/S5, encode a separately evidenced first-party parent mode with `(P)` on `A` or `C`, or standalone `P` when no first-party `A`/`C` autonomous mode is established.
 15. Record recursion, variety, escalation, and unresolved evidence gaps separately from the six-state vector.
 16. Write `assessments/<harness_id>.md` for index work. Do not generate a cohort-relative signature in this skill.
+
+
+## Methodology 0.3.5 boundary-provenance patch
+
+Methodology `0.3.5` makes the already-required system boundary reconstructable in the assessment artifact. It does not redefine any VSM function or ownership state.
+
+Before crediting a positive state, partition first-party evidence into the supported assessed mode versus adjacent systems. Repository co-location is not enough. In particular, development/dogfood agents, contributor workflows, CI/release machinery, benchmark/evaluation infrastructure, tests/examples and governance surfaces may inform interpretation without owning a function in the assessed distribution.
+
+For every new or revalidated `0.3.5` assessment:
+
+- `Review boundary` records **Credited operating / distribution surfaces** and **Adjacent first-party surfaces excluded from ownership**;
+- every positive state records **Boundary reachability**, explaining why the decisive owner/path used for that state is reachable in the declared supported mode;
+- same-repository dogfood may corroborate a constructor path but does not upgrade `C` to `A` for another system-in-focus;
+- if a positive path depends on an adjacent actor that is not packaged/wired into the assessed mode, classify ownership without borrowing that actor.
+
+The structural completion oracle checks only that these surfaces are recorded. It still does not decide whether the boundary claim is semantically true.
 
 
 ## Methodology 0.3.3 reproducibility patch
@@ -71,8 +87,8 @@ The checker validates artifact completeness only: required fields, function-spec
 Every assessment newly created by Methodology v0.2.1 or later must preserve which semantic/tooling versions produced the original artifact:
 
 ```yaml
-generated_profile_version: 0.2.2
-generated_assessment_procedure_version: 0.3.4
+generated_profile_version: 0.2.3
+generated_assessment_procedure_version: 0.3.5
 ```
 
 These two fields are **immutable origin metadata**. Do not change them during reassessment, same-ref correction, methodology migration, or later Methodology upgrades.

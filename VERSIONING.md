@@ -120,6 +120,8 @@ A change to Profile semantics may require reassessment. A change to Methodology 
 
 Methodology `0.3.4` is a patch-level validator correction over `0.3.3`. It fixes the structural completion oracle so `S3*` headings are parsed as `S3*` rather than being consumed by the `S3` heading matcher. The assessment format, VSM mappings, ownership states, evidence thresholds, ranking projection, bundled Profile `0.2.2`, and `0.3.3` reproducibility requirements are unchanged. `0.3.4`'s checker also accepts `0.3.3` artifacts because the structural contract is identical; current assessments should still record the current Methodology version when newly produced or revalidated.
 
+Methodology `0.3.5` is a patch-level boundary-provenance clarification aligned with Profile `0.2.3`. It requires new/revalidated assessments to distinguish credited operating/distribution surfaces from adjacent first-party surfaces and to record boundary reachability for every positive state. It does not change VSM semantics or the ownership state set; historical false positives exposed by the rule are same-ref corrections rather than migration impact caused by the release.
+
 ## Release tracking
 
 Every explicitly versioned Methodology release from `0.2.0` onward must have both an immutable lightweight Git tag `v<version>` and a GitHub Release pointing to the same target commit. A deliberately skipped version such as `0.3.2` has no changelog release heading and therefore creates no release obligation. The release body is generated from the corresponding `CHANGELOG.md` section plus the exact release target; it is not a separately maintained semantic source.
@@ -135,12 +137,12 @@ Scheduled CI runs `scripts/check_release_tracking.py` so a future changelog vers
 At this release boundary:
 
 ```text
-Profile:     0.2.2
-Methodology: 0.3.4
+Profile:     0.2.3
+Methodology: 0.3.5
 Index:       exact Git revision
 ```
 
-The bundled Profile is synchronized to exact upstream revision `f7b5e2fd05f31b8b89775a0f77acea31186fe4de`.
+The bundled Profile is synchronized to exact upstream revision `06246a1e5bd95f237b88ecc7d23f0fa7e8a995cd` (Profile `0.2.3`; `PROFILE.md` blob `bd9e63a2d25ce1dd424bfcea33849ba45c2fa93f`).
 
 The Profile and Methodology are versioned contracts. The Index commit is the immutable identity of a particular corpus/output state.
 
