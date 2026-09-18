@@ -5,7 +5,7 @@ description: Produce a standalone evidence-backed VSM assessment of one autonomo
 
 # Assess a Harness as a Viable System
 
-**Methodology version:** 0.3.3
+**Methodology version:** 0.3.4
 
 Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this methodology is **v0.2.2**. The output is a standalone repository assessment, not a cross-catalog comparison.
 
@@ -72,7 +72,7 @@ Every assessment newly created by Methodology v0.2.1 or later must preserve whic
 
 ```yaml
 generated_profile_version: 0.2.2
-generated_assessment_procedure_version: 0.3.3
+generated_assessment_procedure_version: 0.3.4
 ```
 
 These two fields are **immutable origin metadata**. Do not change them during reassessment, same-ref correction, methodology migration, or later Methodology upgrades.

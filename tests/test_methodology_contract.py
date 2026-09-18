@@ -1,4 +1,5 @@
 from pathlib import Path
+import importlib.util
 import unittest
 
 
@@ -12,7 +13,7 @@ class MethodologyContractTests(unittest.TestCase):
 
     def test_version_surfaces_match_methodology_version(self):
         version = (SKILL / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "0.3.3")
+        self.assertEqual(version, "0.3.4")
         for relative in (
             "skills/assess-vsm-harness/SKILL.md",
             "skills/assess-vsm-harness/references/autonomy-states.md",
@@ -79,6 +80,26 @@ class MethodologyContractTests(unittest.TestCase):
         self.assertIn("Plausible first-party paths checked", fmt)
         self.assertIn("| Mode | Decisive owner | Trigger | Closure | Evidence |", fmt)
         self.assertIn("check_assessment_contract.py", skill)
+
+    def test_034_oracle_parses_s3star_separately(self):
+        checker_path = ROOT / "scripts" / "check_assessment_contract.py"
+        spec = importlib.util.spec_from_file_location("assessment_contract_checker", checker_path)
+        self.assertIsNotNone(spec)
+        checker = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(checker)
+        text = "\n".join((
+            "## S1 — Operations",
+            "## S2 — Coordination",
+            "## S3 — Inside-and-now control",
+            "## S3* — Complementary audit",
+            "## S4 — Outside-and-then intelligence",
+            "## S5 — Policy and identity",
+        ))
+        self.assertEqual(
+            set(checker.sections(text)),
+            {"s1", "s2", "s3", "s3_star", "s4", "s5"},
+        )
 
     def test_release_tracking_is_persistent_and_changelog_driven(self):
         workflow = self.text(".github/workflows/publish-methodology.yml")

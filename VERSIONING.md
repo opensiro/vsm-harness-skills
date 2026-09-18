@@ -117,6 +117,9 @@ Under Methodology `0.3.x`, ranking still measures agent-owned mode coverage: `A(
 A change to Profile semantics may require reassessment. A change to Methodology semantics may require reassessment, re-synthesis, re-ranking, or regeneration depending on the affected procedure. In every case the resulting exact state is captured by a new Index Git revision.
 
 
+
+Methodology `0.3.4` is a patch-level validator correction over `0.3.3`. It fixes the structural completion oracle so `S3*` headings are parsed as `S3*` rather than being consumed by the `S3` heading matcher. The assessment format, VSM mappings, ownership states, evidence thresholds, ranking projection, bundled Profile `0.2.2`, and `0.3.3` reproducibility requirements are unchanged. `0.3.4`'s checker also accepts `0.3.3` artifacts because the structural contract is identical; current assessments should still record the current Methodology version when newly produced or revalidated.
+
 ## Release tracking
 
 Every explicitly versioned Methodology release from `0.2.0` onward must have both an immutable lightweight Git tag `v<version>` and a GitHub Release pointing to the same target commit. A deliberately skipped version such as `0.3.2` has no changelog release heading and therefore creates no release obligation. The release body is generated from the corresponding `CHANGELOG.md` section plus the exact release target; it is not a separately maintained semantic source.
@@ -133,7 +136,7 @@ At this release boundary:
 
 ```text
 Profile:     0.2.2
-Methodology: 0.3.3
+Methodology: 0.3.4
 Index:       exact Git revision
 ```
 

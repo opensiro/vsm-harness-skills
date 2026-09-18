@@ -1,5 +1,13 @@
 # assess-vsm-harness changelog
 
+## 0.3.4 — 2026-09-18
+
+- fix `scripts/check_assessment_contract.py` so `## S3*` is parsed as the complementary-audit section rather than as a second `S3` section;
+- replace the word-boundary section matcher with an explicit heading-boundary lookahead that works for the non-word `*` suffix;
+- add a regression test covering all six function headings and distinct `S3` / `S3*` keys;
+- allow the corrected oracle to validate `0.3.3` artifacts because `0.3.4` changes validator implementation only, not the `0.3.3` structural assessment contract;
+- preserve Profile `0.2.2`, autonomy notation, evidence requirements and ranking semantics unchanged.
+
 ## 0.3.3 — 2026-09-18
 
 - sync the bundled normative dependency to compatible VSM Harness Profile `0.2.2`, whose release declares `assessment_impact: none` and does not change S1–S5 semantics or evidence thresholds;
