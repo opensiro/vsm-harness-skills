@@ -29,7 +29,7 @@ jobs:
           python -m unittest discover -s tests -v
       - name: Verify bundled Profile remains synchronized
         run: |
-          git clone --depth 1 https://github.com/opensiro/vsm-harness-profile.git .tmp-profile
+          git clone https://github.com/opensiro/vsm-harness-profile.git .tmp-profile
           python scripts/sync_profile.py --profile-dir .tmp-profile --check
           rm -rf .tmp-profile
       - name: Commit ordinary patch files
