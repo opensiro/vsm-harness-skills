@@ -35,13 +35,13 @@ jobs:
         run: |
           python scripts/validate_skills.py
           python -m unittest discover -s tests -v
-      - name: Commit prepared patch
+      - name: Commit non-workflow patch
         run: |
           rm -rf .tmp-profile
-          rm scripts/prepare_033.py
-          rm .github/workflows/prepare-methodology-0.3.3.yml
+          git checkout -- .github/workflows/validate.yml .github/workflows/prepare-methodology-0.3.3.yml
+          rm -f .github/workflows/publish-methodology.yml
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add -A
-          git commit -m 'Methodology 0.3.3: harden assessment and release reproducibility'
+          git commit -m 'Methodology 0.3.3: harden assessment reproducibility'
           git push
