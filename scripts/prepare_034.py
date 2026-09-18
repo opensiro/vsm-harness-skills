@@ -69,8 +69,9 @@ entry = """## 0.3.4 — 2026-09-18
 """
 if "## 0.3.4 —" in changelog:
     raise SystemExit("CHANGELOG already contains 0.3.4")
-if changelog.startswith("# Changelog\n\n"):
-    changelog = changelog.replace("# Changelog\n\n", "# Changelog\n\n" + entry, 1)
+header = "# assess-vsm-harness changelog\n\n"
+if changelog.startswith(header):
+    changelog = changelog.replace(header, header + entry, 1)
 else:
     raise SystemExit("unexpected changelog header")
 write(changelog_path, changelog)
