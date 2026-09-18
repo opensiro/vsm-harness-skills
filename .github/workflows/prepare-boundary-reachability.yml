@@ -1,0 +1,152 @@
+name: prepare-boundary-reachability
+
+on:
+  push:
+    branches:
+      - methodology-boundary-reachability-20
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/vsm-harness-profile
+          ref: clarify-boundary-provenance-20
+          path: profile-src
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply Methodology 0.3.5 boundary contract
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path, old, new):
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              if text.count(old) != 1:
+                  raise SystemExit(f'{path}: expected one anchor, found {text.count(old)}')
+              p.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          def replace_all(path, old, new):
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              if old not in text:
+                  raise SystemExit(f'{path}: missing {old!r}')
+              p.write_text(text.replace(old, new), encoding='utf-8')
+
+          version = Path('skills/assess-vsm-harness/VERSION')
+          version.write_text('0.3.5\n', encoding='utf-8')
+
+          for path in (
+              'skills/assess-vsm-harness/SKILL.md',
+              'skills/assess-vsm-harness/references/autonomy-states.md',
+              'skills/assess-vsm-harness/references/assessment-format.md',
+              'SYNTHESIS.md',
+          ):
+              replace_all(path, '**Methodology version:** 0.3.4', '**Methodology version:** 0.3.5')
+
+          replace_all('skills/assess-vsm-harness/SKILL.md', 'bundled Profile for this methodology is **v0.2.2**', 'bundled Profile for this methodology is **v0.2.3**')
+          replace_all('skills/assess-vsm-harness/SKILL.md', 'generated_profile_version: 0.2.2', 'generated_profile_version: 0.2.3')
+          replace_all('skills/assess-vsm-harness/SKILL.md', 'generated_assessment_procedure_version: 0.3.4', 'generated_assessment_procedure_version: 0.3.5')
+
+          skill_anchor = '\n\n## Methodology 0.3.3 reproducibility patch\n'
+          skill_section = '''\n\n## Methodology 0.3.5 boundary-provenance patch\n\nMethodology `0.3.5` makes the already-required system boundary reconstructable in the assessment artifact. It does not redefine any VSM function or ownership state.\n\nBefore crediting a positive state, partition first-party evidence into the supported assessed mode versus adjacent systems. Repository co-location is not enough. In particular, development/dogfood agents, contributor workflows, CI/release machinery, benchmark/evaluation infrastructure, tests/examples and governance surfaces may inform interpretation without owning a function in the assessed distribution.\n\nFor every new or revalidated `0.3.5` assessment:\n\n- `Review boundary` records **Credited operating / distribution surfaces** and **Adjacent first-party surfaces excluded from ownership**;\n- every positive state records **Boundary reachability**, explaining why the decisive owner/path used for that state is reachable in the declared supported mode;\n- same-repository dogfood may corroborate a constructor path but does not upgrade `C` to `A` for another system-in-focus;\n- if a positive path depends on an adjacent actor that is not packaged/wired into the assessed mode, classify ownership without borrowing that actor.\n\nThe structural completion oracle checks only that these surfaces are recorded. It still does not decide whether the boundary claim is semantically true.\n'''
+          replace_once('skills/assess-vsm-harness/SKILL.md', skill_anchor, skill_section + skill_anchor)
+
+          auto_anchor = '\n## S2 constructor threshold\n'
+          auto_section = '''\n## Boundary reachability\n\nA positive ownership state is boundary-relative. The actor or construction path used to justify `A`, `A(P)`, `C`, `C(P)`, or `P` must be reachable in the declared first-party operating/deployment mode. A development-only, dogfood, test/eval, CI/release, contributor, or governance actor in the same repository does not become part of the assessed harness merely by co-location.\n\nFor `A`, the autonomous decisive actor and closure must be available in the supported assessed mode. For `C`, a function-specific first-party construction path must be intentionally exposed to that boundary, while actor, authority, independence, or closure may still require composition. A concrete dogfood implementation can strengthen evidence that the constructor is real without changing the target boundary's ownership state.\n\n'''
+          replace_once('skills/assess-vsm-harness/references/autonomy-states.md', auto_anchor, '\n' + auto_section + '## S2 constructor threshold\n')
+
+          fmt = 'skills/assess-vsm-harness/references/assessment-format.md'
+          replace_all(fmt, 'generated_profile_version: 0.2.2', 'generated_profile_version: 0.2.3')
+          replace_all(fmt, 'generated_assessment_procedure_version: 0.3.4', 'generated_assessment_procedure_version: 0.3.5')
+          replace_all(fmt, 'profile_version: 0.2.2', 'profile_version: 0.2.3')
+          replace_all(fmt, 'assessment_procedure_version: 0.3.4', 'assessment_procedure_version: 0.3.5')
+
+          fmt_anchor = '\n## Methodology 0.3.3 structural completion requirements\n'
+          fmt_section = '''\n## Methodology 0.3.5 boundary-provenance requirements\n\nFor every newly produced or successfully revalidated `0.3.5` artifact, the `Review boundary` section must include:\n\n```markdown\n- Credited operating / distribution surfaces:\n- Adjacent first-party surfaces excluded from ownership:\n```\n\nThe first field names the shipped/runtime/installed surfaces that may supply credited owners and closure. The second records nearby first-party development/dogfood, contributor, CI/release, benchmark/evaluation, test/example or governance surfaces that were inspected but are outside the ownership boundary. Use `none identified` when the review found no material adjacent surface; do not omit the field.\n\nEvery positive function state (`A`, `A(P)`, `C`, `C(P)`, or `P`) must additionally include:\n\n```markdown\n- Boundary reachability:\n```\n\nThis explains why the decisive actor or function-specific constructor path is reachable in the declared assessed mode without borrowing ownership or closure from an adjacent system. Same-repository location alone is not a reachability argument.\n\n'''
+          replace_once(fmt, fmt_anchor, '\n' + fmt_section + '## Methodology 0.3.3 structural completion requirements\n')
+
+          boundary_fields_anchor = '- Standard-distribution boundary:\n- First-party operating / deployment modes considered:\n'
+          boundary_fields_new = '- Standard-distribution boundary:\n- Credited operating / distribution surfaces:\n- Adjacent first-party surfaces excluded from ownership:\n- First-party operating / deployment modes considered:\n'
+          replace_once(fmt, boundary_fields_anchor, boundary_fields_new)
+
+          function_anchor = '- Closure path:\n- Why this is / is not agent-owned:\n'
+          function_new = '- Closure path:\n- Boundary reachability:\n- Why this is / is not agent-owned:\n'
+          replace_once(fmt, function_anchor, function_new)
+
+          checker = Path('scripts/check_assessment_contract.py')
+          text = checker.read_text(encoding='utf-8')
+          text = text.replace('Check Methodology 0.3.3/0.3.4 assessment artifact structural completeness.', 'Check Methodology 0.3.3-0.3.5 assessment artifact structural completeness.')
+          text = text.replace('COMPOSITE = {"A(P)","C(P)"}\n', 'COMPOSITE = {"A(P)","C(P)"}\nSUPPORTED = {"0.3.3", "0.3.4", "0.3.5"}\nBOUNDARY_035 = ("Credited operating / distribution surfaces", "Adjacent first-party surfaces excluded from ownership")\n')
+          text = text.replace('def sections(text):\n', 'def review_boundary(text):\n    m=re.search(r"^## Review boundary\\s*$",text,re.MULTILINE)\n    if not m: return None\n    nxt=re.search(r"^## ",text[m.end():],re.MULTILINE)\n    end=m.end()+nxt.start() if nxt else len(text)\n    return text[m.start():end]\ndef sections(text):\n')
+          text = text.replace('    supported = {"0.3.3", "0.3.4"}\n    if fm.get("assessment_procedure_version") not in supported:\n', '    methodology = fm.get("assessment_procedure_version")\n    if methodology not in SUPPORTED:\n')
+          text = text.replace("        print(f\"{path}: skipped (Methodology {fm.get('assessment_procedure_version','unknown')} not supported by this completion oracle)\"); return []\n", "        print(f\"{path}: skipped (Methodology {methodology or 'unknown'} not supported by this completion oracle)\"); return []\n")
+          marker = '    if fm.get("status") == "excluded-no-agentic-vsm": return []\n    if fm.get("status") != "included": return [f"{path}: unsupported/missing canonical status"]\n    body=sections(text)\n'
+          replacement = '    if fm.get("status") == "excluded-no-agentic-vsm": return []\n    if fm.get("status") != "included": return [f"{path}: unsupported/missing canonical status"]\n    if methodology == "0.3.5":\n        boundary = review_boundary(text)\n        if boundary is None:\n            failures.append(f"{path}: Methodology 0.3.5 missing ## Review boundary section")\n        else:\n            for label in BOUNDARY_035:\n                if value(boundary,label) is None: failures.append(f"{path}: Methodology 0.3.5 missing/non-substantive \'{label}:\'")\n    body=sections(text)\n'
+          if marker not in text:
+              raise SystemExit('checker boundary insertion anchor mismatch')
+          text = text.replace(marker, replacement, 1)
+          positive_marker = '        elif state in POSITIVE:\n            for label in EXTRA.get(key,()):\n                if value(section,label) is None: failures.append(f"{path}: positive {title} missing/non-substantive \'{label}:\'")\n'
+          positive_replacement = '        elif state in POSITIVE:\n            for label in EXTRA.get(key,()):\n                if value(section,label) is None: failures.append(f"{path}: positive {title} missing/non-substantive \'{label}:\'")\n            if methodology == "0.3.5" and value(section,"Boundary reachability") is None:\n                failures.append(f"{path}: positive {title} missing/non-substantive \'Boundary reachability:\'")\n'
+          if positive_marker not in text:
+              raise SystemExit('checker positive anchor mismatch')
+          checker.write_text(text.replace(positive_marker, positive_replacement, 1), encoding='utf-8')
+
+          tests = Path('tests/test_methodology_contract.py')
+          text = tests.read_text(encoding='utf-8')
+          text = text.replace('self.assertEqual(version, "0.3.4")', 'self.assertEqual(version, "0.3.5")')
+          text = text.replace('bundled Profile for this methodology is **v0.2.2**', 'bundled Profile for this methodology is **v0.2.3**')
+          insertion = '''\n    def test_035_boundary_reachability_contract_is_explicit(self):\n        skill = self.text("skills/assess-vsm-harness/SKILL.md")\n        fmt = self.text("skills/assess-vsm-harness/references/assessment-format.md")\n        checker_path = ROOT / "scripts" / "check_assessment_contract.py"\n        spec = importlib.util.spec_from_file_location("assessment_contract_checker_035", checker_path)\n        self.assertIsNotNone(spec)\n        checker = importlib.util.module_from_spec(spec)\n        assert spec.loader is not None\n        spec.loader.exec_module(checker)\n        self.assertIn("Repository co-location is not enough", skill)\n        self.assertIn("Credited operating / distribution surfaces", fmt)\n        self.assertIn("Adjacent first-party surfaces excluded from ownership", fmt)\n        self.assertIn("Boundary reachability", fmt)\n        self.assertIn("0.3.5", checker.SUPPORTED)\n        self.assertEqual(len(checker.BOUNDARY_035), 2)\n\n'''
+          anchor = '    def test_034_oracle_parses_s3star_separately(self):\n'
+          if text.count(anchor) != 1:
+              raise SystemExit('tests insertion anchor mismatch')
+          tests.write_text(text.replace(anchor, insertion + anchor, 1), encoding='utf-8')
+
+          changelog = Path('skills/assess-vsm-harness/CHANGELOG.md')
+          text = changelog.read_text(encoding='utf-8')
+          anchor = '# assess-vsm-harness changelog\n\n'
+          entry = anchor + '''## 0.3.5 — 2026-09-19\n\n- sync the bundled normative dependency to compatible VSM Harness Profile `0.2.3`;\n- make boundary provenance reconstructable by separating credited operating/distribution surfaces from adjacent first-party development/dogfood/test/eval/governance surfaces;\n- require every positive function state to record `Boundary reachability`;\n- clarify that same-repository dogfood can corroborate a constructor path but cannot supply ownership/closure to another system-in-focus merely by co-location;\n- extend the structural completion oracle and regression contract for `0.3.5` while preserving historical `0.3.3`/`0.3.4` validation.\n\nThis is a patch-level procedural clarification. It does not redefine VSM functions, ownership symbols, parent-mode semantics or ranking projection, and it does not itself require corpus-wide reassessment. Weak historical mappings exposed by the clarified boundary are same-ref corrections under their frozen contracts.\n\n'''
+          replace_once('skills/assess-vsm-harness/CHANGELOG.md', anchor, entry)
+
+          versioning = Path('VERSIONING.md')
+          text = versioning.read_text(encoding='utf-8')
+          current_old = '''Profile:     0.2.2\nMethodology: 0.3.4\nIndex:       exact Git revision\n'''
+          current_new = '''Profile:     0.2.3\nMethodology: 0.3.5\nIndex:       exact Git revision\n'''
+          if text.count(current_old) != 1:
+              raise SystemExit('VERSIONING current-contract anchor mismatch')
+          text = text.replace(current_old, current_new, 1)
+          paragraph = 'Methodology `0.3.4` is a patch-level validator correction over `0.3.3`. It fixes the structural completion oracle so `S3*` headings are parsed as `S3*` rather than being consumed by the `S3` heading matcher. The assessment format, VSM mappings, ownership states, evidence thresholds, ranking projection, bundled Profile `0.2.2`, and `0.3.3` reproducibility requirements are unchanged. `0.3.4`\'s checker also accepts `0.3.3` artifacts because the structural contract is identical; current assessments should still record the current Methodology version when newly produced or revalidated.\n'
+          addition = paragraph + '\nMethodology `0.3.5` is a patch-level boundary-provenance clarification aligned with Profile `0.2.3`. It requires new/revalidated assessments to distinguish credited operating/distribution surfaces from adjacent first-party surfaces and to record boundary reachability for every positive state. It does not change VSM semantics or the ownership state set; historical false positives exposed by the rule are same-ref corrections rather than migration impact caused by the release.\n'
+          if text.count(paragraph) != 1:
+              raise SystemExit('VERSIONING 0.3.4 paragraph anchor mismatch')
+          text = text.replace(paragraph, addition, 1)
+          old_source = 'The bundled Profile is synchronized to exact upstream revision `f7b5e2fd05f31b8b89775a0f77acea31186fe4de`.'
+          new_source = 'The bundled Profile is synchronized to Profile `0.2.3` from upstream PR #21; the exact generated snapshot records its source commit and blob and will be refreshed against `main` after that Profile PR merges.'
+          if text.count(old_source) != 1:
+              raise SystemExit('VERSIONING source anchor mismatch')
+          versioning.write_text(text.replace(old_source, new_source, 1), encoding='utf-8')
+          PY
+      - name: Sync Profile 0.2.3 candidate
+        run: python scripts/sync_profile.py --profile-dir profile-src
+      - name: Validate Methodology candidate
+        run: |
+          python scripts/validate_skills.py
+          python -m unittest discover -s tests -v
+          python scripts/sync_profile.py --profile-dir profile-src --check
+      - name: Remove preparation workflow and commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/prepare-boundary-reachability.yml
+          git add skills/assess-vsm-harness/VERSION skills/assess-vsm-harness/SKILL.md skills/assess-vsm-harness/CHANGELOG.md skills/assess-vsm-harness/references/autonomy-states.md skills/assess-vsm-harness/references/assessment-format.md skills/assess-vsm-harness/references/profile/PROFILE.md scripts/check_assessment_contract.py tests/test_methodology_contract.py SYNTHESIS.md VERSIONING.md
+          git commit -m 'Make boundary reachability explicit in Methodology 0.3.5'
+          git push
