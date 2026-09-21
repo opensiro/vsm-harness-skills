@@ -83,6 +83,18 @@ For each released positive function (`S1`, `S2`, `S3`, `S3*`, `S4`, `S5` as appl
 - `no-candidate-witness` — inspected primary evidence positively establishes that the proposed behavior stays within the existing repertoire or otherwise fails a required `S` condition;
 - `insufficient-evidence` — the pinned evidence does not reconstruct a qualifying transition either way.
 
+### Released-`A` eligibility gate
+
+`candidate-witness` is available only when the released baseline already satisfies the `A` prerequisite from `SPEC.md §3.1` in the reviewed operating mode.
+
+- `A` is eligible for the candidate test.
+- `A(P)` is eligible only for its autonomous base mode; the experiment does not infer `S(P)`.
+- `C`, `C(P)` and `P` fail the released-`A` prerequisite and therefore cannot receive `candidate-witness` unless a separate canonical reassessment first changes the released baseline. When the non-`A` baseline is established, record `no-candidate-witness` for the `S` screen and keep the constructor/parent path as the released interpretation.
+- `—` fails the function/ownership prerequisite and cannot receive `candidate-witness`.
+- `?` remains `insufficient-evidence`; resolve the ordinary assessment uncertainty before testing `S`.
+
+An experimental fixture MUST NOT use `S` to jump directly from `C`, `P`, `—`, or `?` to a stronger-looking state. If experimental inspection exposes evidence that the released baseline is wrong, route that evidence into the normal reassessment process and keep the experimental review frozen to its declared baseline.
+
 For each row record the candidate disturbance/variety, prior repertoire, claimed reconstructed repertoire if any, insufficiency/recognition evidence, authority boundary, integration/closure evidence, external-constructor check, primary evidence and caveats.
 
 A `candidate-witness` is not a positive `S` finding. It only advances that function to the complete candidate test.
