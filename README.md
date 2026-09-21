@@ -54,6 +54,12 @@ The assessment workflow first maps the organizational function and only then cla
 
 The detailed artifact format lives in [assessment-format.md](skills/assess-vsm-harness/references/assessment-format.md), and the local `A/C/P/—/?` notation lives in [autonomy-states.md](skills/assess-vsm-harness/references/autonomy-states.md).
 
+## Methodology experiments
+
+Non-normative experiments for possible future classification/publication distinctions live under [`experiments/`](experiments/README.md).
+
+These experiments do not change the released Methodology or canonical Index assessments. A distinction becomes publishable only through an explicit Methodology release and downstream migration contract. If an experiment requires new organizational semantics rather than only a classification distinction, the semantic change must be made separately in `vsm-harness-profile` first.
+
 ## Profile tracking
 
 The assessment skill packages a generated `references/profile/PROFILE.md` snapshot for portability. The source remains [`vsm-harness-profile/PROFILE.md`](https://github.com/opensiro/vsm-harness-profile/blob/main/PROFILE.md).
