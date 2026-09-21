@@ -73,6 +73,29 @@ Primary evidence
 Caveats
 ```
 
+## Per-function screening for real-system fixtures
+
+`S` is tested per VSM function. A real-system fixture with more than one released positive function MUST explicitly screen every such function before producing its overall experimental finding. Reviewers must not restrict the search to the function suggested by feature names such as evolution, review, delegation, management, or policy.
+
+For each released positive function (`S1`, `S2`, `S3`, `S3*`, `S4`, `S5` as applicable), record exactly one screening result:
+
+- `candidate-witness` — primary evidence is sufficient to run the complete candidate `S` test in `SPEC.md` for that function;
+- `no-candidate-witness` — inspected primary evidence positively establishes that the proposed behavior stays within the existing repertoire or otherwise fails a required `S` condition;
+- `insufficient-evidence` — the pinned evidence does not reconstruct a qualifying transition either way.
+
+For each row record the candidate disturbance/variety, prior repertoire, claimed reconstructed repertoire if any, insufficiency/recognition evidence, authority boundary, integration/closure evidence, external-constructor check, primary evidence and caveats.
+
+A `candidate-witness` is not a positive `S` finding. It only advances that function to the complete candidate test.
+
+Evidence is non-transitive across functions. In particular:
+
+- using the existing S4 evolution/adaptation repertoire to modify another function does not by itself establish `S4=S`;
+- spawning, nesting, adding or reconfiguring operational units does not by itself establish `S2=S` or `S3=S`;
+- changing audit/reviewer configuration does not establish `S3*=S` unless the reconstructed audit function retains complementary independence and closes corrective feedback;
+- changing identity, constitution, prompts, settings or policy does not establish `S5=S` unless legitimate ultimate-policy reconstruction and later governance closure are established.
+
+The overall fixture finding MUST identify which function-specific witness, if any, supports it. A positive per-function witness remains separate from the strong recursive witness.
+
 ## Independent review protocol
 
 A stability-grade fixture needs two independent judgments.
@@ -95,6 +118,8 @@ Agreement does not require identical prose. It is sufficient when both reviewers
 5. whether post-change operation absorbs the target variety;
 6. the experimental finding;
 7. whether a strong recursive witness exists.
+
+For a multi-function real-system fixture, reproducibility also requires materially compatible per-function screening: disagreements about which function contains a `candidate-witness`, `no-candidate-witness`, or `insufficient-evidence` row must remain visible and be adjudicated rather than collapsed into the overall finding.
 
 Disagreements must remain visible in the fixture record; they are evidence about reproducibility.
 
