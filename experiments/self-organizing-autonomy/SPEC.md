@@ -2,6 +2,7 @@
 
 **Status:** experimental draft  
 **Methodology work item:** [#22](https://github.com/opensiro/vsm-harness-skills/issues/22)  
+**Clarification work item:** [#26](https://github.com/opensiro/vsm-harness-skills/issues/26)  
 **Conceptual source:** [`vsm-harness-profile#13`](https://github.com/opensiro/vsm-harness-profile/issues/13)  
 **Normative effect:** none
 
@@ -24,11 +25,16 @@ C — the established function exposes a first-party function-specific construct
 A — an autonomous agent owns the decisive organizational decision/feedback right
     and closes the function using the available organizational/regulatory repertoire.
 
-S — A-level closure is established, and when that existing repertoire is materially
-    insufficient for in-domain variety, the system can endogenously reconstruct or
-    extend the relevant repertoire, integrate the change under legitimate authority,
-    and then close the function through the reconstructed repertoire.
+S — A-level closure is established, and the system can endogenously improve the
+    relevant function's own decision/feedback repertoire from in-domain operating
+    experience or adaptation pressure, integrate the change under legitimate authority,
+    and later absorb relevant variety through the materially changed repertoire without
+    an external constructor supplying the missing functional logic.
 ```
+
+The central distinction is **functional self-improvement inside the declared system boundary**. `S` does not require a function to rewrite itself in isolation. Other internal VSM functions may contribute sensing, learning, regulation, authorization, or integration, provided the missing functional logic is generated endogenously inside the same assessed system rather than supplied by an external constructor.
+
+A recursive reorganization or newly viable lower recursion is one possible realization of this property, not its definition and not a prerequisite for per-function `S`.
 
 `S` is experimental publication notation, not a Stafford Beer concept and not an active Methodology state.
 
@@ -58,52 +64,88 @@ The function already satisfies the released Methodology's `A` condition: an auto
 
 `S` is not a substitute for proving the function or its ordinary autonomous ownership.
 
-### 3.2 Material repertoire insufficiency
+### 3.2 Material adaptation pressure / repertoire inadequacy
 
-Evidence identifies a material disturbance that remains inside the declared operating domain but cannot be adequately absorbed by the currently available organizational/regulatory repertoire.
+Evidence identifies a material in-domain condition showing that the currently available functional repertoire is inadequate for some recurring, important, or newly encountered variety.
 
-Distinguish repertoire insufficiency from:
+The inadequacy does not have to appear as catastrophic failure. It may be evidenced by, for example:
 
-- an ordinary hard task;
+- repeated escalation to S3, a parent, or another authority for a disturbance class that the function cannot yet absorb locally;
+- recurring external intervention or repeated manual correction;
+- persistent performance, quality, cost, latency, safety, or variety mismatch attributable to the function's current decision/feedback repertoire;
+- repeated failure/recovery cycles showing the existing regulator has reached a stable limit;
+- a new in-domain disturbance class that remains within purpose but exceeds the current local regulator.
+
+Distinguish repertoire inadequacy from:
+
+- an ordinary hard task already supported by the existing repertoire;
 - transient failure;
-- missing data or compute;
-- retry/recovery inside an existing mechanism;
+- missing data or compute alone;
+- retry/recovery inside an unchanged mechanism;
 - a case already supported by another pre-authored operating branch.
 
-### 3.3 Endogenous reconstruction
+### 3.3 Endogenous functional improvement
 
-The system itself recognizes the insufficiency and forms a materially new or altered organizational/regulatory response without an external constructor supplying the missing organizational logic.
+The system itself recognizes or learns from the adaptation pressure and forms a materially new or altered functional response without an external constructor supplying the missing logic.
 
-The change must alter the repertoire relevant to the mapped function, not merely choose another existing template or route.
+The change must alter the decision/feedback repertoire relevant to the mapped function, not merely choose another existing template or route.
+
+The improvement may be produced with support from other functions inside the same declared system. For example, S4 may contribute sensing or learning that changes S1's local operating repertoire. Record those internal contributions explicitly; they do not count as an external constructor merely because more than one VSM function participated.
+
+A per-function `S` claim attaches to the function whose future regulatory repertoire materially changes and whose subsequent closure demonstrates the new capability. Internal assistance does not automatically transfer `S` to the assisting function.
 
 ### 3.4 Legitimate authorization
 
-The reconstruction occurs within the legitimate authority available at the declared recursion.
+The improvement occurs within the legitimate authority available at the declared recursion.
 
-If a parent or higher recursion must supply the decisive authorization or design choice, record that boundary explicitly. Permission to execute a parent-designed change is not autonomous reconstruction of the missing organizational logic.
+If a parent or higher recursion must supply the decisive design choice, missing logic, or constitutive authorization, record that boundary explicitly. Permission to execute a parent-designed change is not endogenous improvement of the missing functional logic.
+
+A parent may still define a legitimate envelope within which lower-level endogenous improvement is allowed. The existence of that envelope does not by itself negate the lower-level witness.
 
 ### 3.5 Integration
 
-The reconstructed repertoire is integrated into the operating organization. A generated patch, workflow, prompt, agent, configuration, or proposal that never becomes part of subsequent operation does not close the witness.
+The improved repertoire is integrated into the operating organization. A generated patch, workflow, prompt, policy, learned rule, agent, configuration, or proposal that never becomes part of subsequent operation does not close the witness.
+
+Integration may be technical, procedural, learned, organizational, or constitutional depending on the mapped function. Code mutation is neither required nor sufficient.
 
 ### 3.6 Post-change closure
 
-After integration, the function actually absorbs the target variety through the reconstructed repertoire and returns to subsequent operation.
+After integration, the function actually absorbs relevant variety through the changed repertoire and returns to subsequent operation.
 
-A capability to self-modify without evidence that the modification closes the original organizational insufficiency is insufficient.
+A particularly strong per-function witness is an **escalation-boundary shift**:
+
+```text
+before:
+function encounters disturbance class
+→ local repertoire cannot absorb it
+→ disturbance escalates to another function / parent
+
+after endogenous improvement:
+same or materially equivalent disturbance class
+→ changed local repertoire absorbs it
+→ escalation is no longer required for that class
+```
+
+For example, `S1=S` may be supported when an S1 unit learns or constructs a durable local regulator that closes a class of operational disturbances that previously required S3 intervention. This does **not** mean S3 disappears or becomes unnecessary as a VSM function; it means the S1/S3 variety boundary changed because S1 increased its own requisite variety.
+
+A capability to self-modify without evidence that the modification changes later functional closure is insufficient.
 
 ### 3.7 External-constructor check
 
-The review must test whether a maintainer, developer, parent, external agent, pre-authored template, or other actor supplied the material missing organizational logic.
+The review must test whether a maintainer, developer, parent, external agent, pre-authored template, or other actor **outside the declared assessed system** supplied the material missing functional logic.
 
 If so, the positive `S` witness fails even if the system autonomously applies or executes the supplied construction.
 
-## 4. Strong recursive witness
+Other internal functions at the same declared system boundary are not external constructors merely because they contribute to the improvement. Their roles must still be mapped function-first and must not be used to infer `S` transitively.
 
-The strongest system-level witness is recursive self-organization. It shows that the organization can:
+## 4. Recursive realization
 
-1. recognize that current organizational variety is insufficient;
-2. define a new bounded operational purpose/domain for the unresolved variety;
+Recursive self-organization is an important **optional realization and diagnostic dimension**, not a prerequisite for per-function `S` and not the definition of system-level self-improvement.
+
+A strong recursive witness shows that the organization can:
+
+1. recognize that current organizational variety is inadequate;
+2. define a new bounded operational purpose/domain for unresolved variety;
 3. create or reorganize an operational unit for that domain;
 4. establish enough local coordination, control, complementary audit, adaptation, and policy relations for that unit to remain viable for the delegated purpose;
 5. grant the unit bounded autonomy;
@@ -112,26 +154,30 @@ The strongest system-level witness is recursive self-organization. It shows that
 
 Literal components named S1-S5 are not required. Functional viability is.
 
-The experiment does not yet decide whether this strong recursive witness is required for every per-function `S`, only for a future system-level `S`, or neither. The fixture corpus must resolve that question before stability.
+A recursive witness may support one or more per-function `S` findings when the relevant function-specific candidate tests are independently satisfied. Conversely, a valid per-function `S` witness may be entirely non-recursive: a function can improve its own regulator, change an escalation boundary, or learn a new durable decision/feedback mechanism without creating another viable system.
+
+The experiment records `strong_recursive_witness` separately so that recursion remains observable without being confused with the `S` criterion itself.
 
 ## 5. Per-function interpretation
 
-Each function needs its own reconstruction witness.
+Each function needs its own functional-improvement witness.
 
-- **S1:** reconstruct the operational process, tooling, or local organization when the existing operational repertoire is insufficient.
-- **S2:** reconstruct the coordination regime when the existing interference/oscillation attenuation repertoire is insufficient.
-- **S3:** reconstruct current-control, resource-allocation, accountability, or escalation organization when the existing regulatory repertoire lacks requisite variety.
-- **S3\*:** reconstruct audit strategy, probes, sampling, evidence access, or auditor composition while preserving complementary independence.
-- **S4:** reconstruct how external/future distinctions are sensed, modeled, experimented with, or translated into adaptation options when the existing adaptation repertoire is insufficient.
-- **S5:** reconstruct identity/ultimate-policy machinery or legitimate rules for self-revision. This is the hardest case because apparent self-revision may reveal that ultimate authority actually resides at a higher recursion.
+- **S1:** improve the operational process, tooling, learned policy, local control law, or local organization so later operational variety is absorbed differently or more locally; a reduced need for S3 escalation can be a strong witness.
+- **S2:** improve the coordination regime so a class of inter-S1 interference/oscillation that previously exceeded the coordination repertoire is attenuated through a newly learned or constructed relation.
+- **S3:** improve current-control, resource-allocation, accountability, intervention, or escalation regulation so the metasystem can absorb a class of present-time whole-system variety that previously exceeded its repertoire.
+- **S3\*:** improve audit strategy, probes, sampling, evidence access, or auditor composition while preserving complementary independence and corrective return.
+- **S4:** improve how external/future distinctions are sensed, modeled, experimented with, learned from, or translated into adaptation options. `S4=S` means the adaptation/intelligence machinery itself improves; ordinary use of an unchanged S4 process to improve another function is not enough.
+- **S5:** improve identity/ultimate-policy machinery or legitimate rules for self-revision. This is the hardest case because apparent self-revision may reveal that ultimate authority actually resides at a higher recursion.
 
 A positive witness for one function does not imply `S` for another.
+
+Cross-function participation is allowed. Example: S4 may detect a recurring environmental pattern and help produce a new S1 regulator; this can support `S1=S` if the S1 repertoire changes and later closes the operational variety. It does not automatically establish `S4=S` unless S4's own intelligence/adaptation repertoire was itself improved.
 
 ## 6. Parent-governed modes
 
 `P` answers a different question: where legitimate decisive authority resides.
 
-This experiment does not yet add `S(P)` or any other composite notation. Lower-level self-organization may in principle occur inside a parent-governed constitutional envelope, but any eventual composition rule must be defined and fixture-tested before normative adoption.
+This experiment does not yet add `S(P)` or any other composite notation. Lower-level functional self-improvement may occur inside a parent-governed constitutional envelope, but any eventual composition rule must be defined and fixture-tested before normative adoption.
 
 A future `S5=S`, if meaningful, would be a constitutional capability; it would not transitively prove `S` for S1-S4 or S3*.
 
@@ -146,12 +192,13 @@ None of the following establishes `S` by itself:
 - spawning or nesting agents/subagents;
 - choosing among pre-authored organizational templates;
 - ordinary retry/recovery;
-- ordinary S4 learning/adaptation;
+- ordinary S4 learning/adaptation using an unchanged S4 repertoire;
 - ordinary `A` discretion over a case already supported by the existing repertoire;
-- human approval of a generated organizational change;
+- parameter adaptation that does not materially change functional closure;
+- human approval of a generated change when the human supplies the missing functional logic;
 - repository-development or dogfood behavior outside the assessed operating boundary.
 
-The experiment specifically tests **endogenous reconstruction or increase of regulatory variety with organizational closure**.
+The experiment specifically tests **endogenous increase or reconstruction of functional regulatory variety with later operational closure**.
 
 ## 8. Experimental findings
 
@@ -159,7 +206,7 @@ Fixture reviews MUST NOT write `S` into canonical Index assessment vectors.
 
 Use only:
 
-- `supports-S-hypothesis` — all candidate-test conditions are positively reconstructed;
+- `supports-S-hypothesis` — all candidate-test conditions are positively reconstructed for at least one eligible function;
 - `does-not-support-S` — evidence establishes that the candidate remains within released distinctions or fails a required `S` condition;
 - `inconclusive` — the evidence boundary is insufficient to decide.
 
@@ -175,15 +222,17 @@ A fixture report should record at least:
 - review date and reviewer/context declaration;
 - system-in-focus, recursion, purpose, environment, and operating/deployment mode;
 - baseline VSM function and released Methodology state;
-- target in-domain disturbance;
-- prior organizational/regulatory repertoire;
-- evidence of repertoire insufficiency;
-- recognition owner;
-- reconstructed repertoire;
+- target in-domain disturbance / adaptation pressure;
+- prior functional repertoire;
+- evidence of repertoire inadequacy;
+- recognition/learning owner;
+- changed or newly constructed repertoire;
+- internal contributing functions, if any;
 - authorization owner and authority boundary;
 - support/enforcement mechanisms separately;
 - integration path;
 - post-change closure evidence;
+- escalation boundary before/after, when relevant;
 - external-constructor check;
 - strong recursive witness finding;
 - alternative interpretation under released Profile/Methodology;
@@ -194,14 +243,15 @@ A fixture report should record at least:
 This experiment may be marked `stable` only when:
 
 1. the required fixture classes in [`FIXTURES.md`](FIXTURES.md) are represented;
-2. at least one strong positive witness exists, or the experiment explicitly records that the strong form is not empirically supported;
-3. self-modification-without-self-organization and repertoire-change-without-viable-recursion counterexamples are demonstrated;
-4. S3* independence and S5 legitimate-authority counterexamples are demonstrated;
-5. two independent reviewers can apply the candidate test with materially reproducible results;
-6. the distinction provides information not already captured by released autonomy, recursion, S4, ownership, and closure concepts;
-7. per-function versus system-level semantics are resolved;
-8. composition with parent-governed modes is resolved or explicitly excluded;
-9. an adoption and downstream migration plan is ready.
+2. at least one strong real-system positive **per-function functional self-improvement** witness exists, or the experiment explicitly records that the candidate distinction is not empirically supported;
+3. self-modification-without-functional-self-improvement and repertoire-change-without-viable-recursion counterexamples are demonstrated;
+4. an escalation-boundary-shift case is represented so the corpus tests local increase of requisite variety directly;
+5. S3* independence and S5 legitimate-authority counterexamples are demonstrated;
+6. two independent reviewers can apply the candidate test with materially reproducible results;
+7. the distinction provides information not already captured by released autonomy, recursion, S4, ownership, and closure concepts;
+8. per-function semantics are primary and recursion is recorded as a separate diagnostic dimension rather than an `S` prerequisite;
+9. composition with parent-governed modes is resolved or explicitly excluded;
+10. an adoption and downstream migration plan is ready.
 
 `stable` freezes the experiment for adoption work. It does not itself alter the released Methodology.
 
