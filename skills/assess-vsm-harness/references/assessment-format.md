@@ -1,6 +1,6 @@
 # Standalone assessment format
 
-**Methodology version:** 0.3.5
+**Methodology version:** 0.3.6
 
 An assessment is repository-relative and revision-relative. It must not contain cohort-relative signatures, rank positions, or claims that depend on which other harnesses happen to be indexed.
 
@@ -13,10 +13,10 @@ project_name: Example Harness
 repository: https://github.com/example/harness
 review_ref: <40-character commit SHA>
 reviewed_at: YYYY-MM-DD
-generated_profile_version: 0.2.3
-generated_assessment_procedure_version: 0.3.5
-profile_version: 0.2.3
-assessment_procedure_version: 0.3.5
+generated_profile_version: 0.2.4
+generated_assessment_procedure_version: 0.3.6
+profile_version: 0.2.4
+assessment_procedure_version: 0.3.6
 status: included
 autonomy_s1: A
 autonomy_s2: C
@@ -62,11 +62,15 @@ The parent-mode boundary is intentional:
 
 This is a publication choice, not a claim that human-owned S1/S2/S3* cannot exist outside the assessed autonomous-harness boundary.
 
+## Methodology 0.3.6 Profile-sync note
 
+Methodology `0.3.6` synchronizes the bundled normative dependency to compatible Profile `0.2.4`. It introduces **no new assessment fields, ownership states, evidence thresholds, synthesis rules, or ranking semantics**. The boundary-provenance requirements introduced in `0.3.5` remain the current structural contract for newly produced or revalidated `0.3.6` assessments.
+
+Existing assessments do not advance their current Methodology/Profile provenance merely because `0.3.6` exists; they advance only after normal successful revalidation. Immutable `generated_*` provenance is never rewritten.
 
 ## Methodology 0.3.5 boundary-provenance requirements
 
-For every newly produced or successfully revalidated `0.3.5` artifact, the `Review boundary` section must include:
+For every newly produced or successfully revalidated `0.3.5` or later compatible artifact, the `Review boundary` section must include:
 
 ```markdown
 - Credited operating / distribution surfaces:
@@ -110,7 +114,7 @@ For every `A(P)` or `C(P)`, include this table in the corresponding function sec
 
 Use the actual base state in the first row (`A` for `A(P)`, `C` for `C(P)`). The table is evidence organization, not a new ownership state.
 
-A `0.3.3` artifact can be structurally checked with:
+A `0.3.3` or later compatible artifact can be structurally checked with:
 
 ```bash
 python scripts/check_assessment_contract.py assessments/<harness_id>.md
