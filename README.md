@@ -70,7 +70,9 @@ python scripts/sync_profile.py --check
 python scripts/validate_skills.py
 ```
 
-CI checks the profile repository owned by the same GitHub organization and rejects drift. Do not edit the generated snapshot by hand outside a synchronized profile update.
+The bundled snapshot is part of the Methodology's recorded dependency, not an implicit alias for the latest Profile `main`. CI resolves the Profile version declared by `SKILL.md`, checks out the matching immutable `v<version>` Profile tag, and validates the snapshot against that release. A newer compatible/no-impact Profile release therefore does not make an unchanged historical Methodology release stale; downstream compatibility is evaluated through the Profile release-impact contract.
+
+Do not edit the generated snapshot by hand outside an explicit synchronized Methodology dependency update.
 
 ## Consumer
 
