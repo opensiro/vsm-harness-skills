@@ -42,11 +42,25 @@ class MetricsTests(unittest.TestCase):
                 "| [alpha](a) | A |\n| [beta](b) | B |\n",
                 encoding="utf-8",
             )
-            result = metrics.compute_core_metrics(repo)
+            result = metrics.compute_core_metrics(repo, allow_missing_version=True)
             self.assertEqual(result["methodology_version"], "9.9.9")
             self.assertEqual(result["skill_catalog_entries"], 2)
             self.assertEqual(result["skill_ids"], ["alpha", "beta"])
             self.assertFalse((repo / "data" / "metrics.json").exists())
+
+    def test_historical_query_preserves_count_before_version_instrumentation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            (repo / "README.md").write_text(
+                "# X\n\n## Skill catalog\n\n| Skill | Purpose |\n| --- | --- |\n"
+                "| [alpha](a) | A |\n",
+                encoding="utf-8",
+            )
+            result = metrics.compute_core_metrics(repo, allow_missing_version=True)
+            self.assertIsNone(result["methodology_version"])
+            self.assertEqual(result["skill_catalog_entries"], 1)
+            with self.assertRaises(ValueError):
+                metrics.compute_core_metrics(repo)
 
 
 if __name__ == "__main__":
