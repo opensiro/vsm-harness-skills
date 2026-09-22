@@ -5,9 +5,9 @@ description: Produce a standalone evidence-backed VSM assessment of one autonomo
 
 # Assess a Harness as a Viable System
 
-**Methodology version:** 0.3.5
+**Methodology version:** 0.3.6
 
-Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this methodology is **v0.2.3**. The output is a standalone repository assessment, not a cross-catalog comparison.
+Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this methodology is **v0.2.4**. The output is a standalone repository assessment, not a cross-catalog comparison.
 
 Read [assessment-format.md](references/assessment-format.md) for the required artifact and [autonomy-states.md](references/autonomy-states.md) for local ownership notation. The same Methodology release also governs cohort synthesis and deterministic ranking through the repository-level [SYNTHESIS.md](../../SYNTHESIS.md).
 
@@ -30,6 +30,11 @@ Read [assessment-format.md](references/assessment-format.md) for the required ar
 15. Record recursion, variety, escalation, and unresolved evidence gaps separately from the six-state vector.
 16. Write `assessments/<harness_id>.md` for index work. Do not generate a cohort-relative signature in this skill.
 
+## Methodology 0.3.6 Profile-sync patch
+
+Methodology `0.3.6` synchronizes the bundled normative Profile to compatible Profile `0.2.4`, whose release declares `assessment_impact: none`. The Profile clarification makes the algedonic signal/channel boundary explicit: an exceptional signal path is not an additional S-function, and a queue/status/current-work surface is not itself positive S3/S4/S5 evidence.
+
+This Methodology patch introduces **no new assessment field, ownership symbol, function threshold, synthesis rule, or ranking rule**. The structural requirements introduced in `0.3.5` remain in force unchanged. Existing assessments do not advance their current Profile/Methodology provenance merely because this patch exists; normal successful revalidation is still required, and immutable generation provenance is never rewritten.
 
 ## Methodology 0.3.5 boundary-provenance patch
 
@@ -37,7 +42,7 @@ Methodology `0.3.5` makes the already-required system boundary reconstructable i
 
 Before crediting a positive state, partition first-party evidence into the supported assessed mode versus adjacent systems. Repository co-location is not enough. In particular, development/dogfood agents, contributor workflows, CI/release machinery, benchmark/evaluation infrastructure, tests/examples and governance surfaces may inform interpretation without owning a function in the assessed distribution.
 
-For every new or revalidated `0.3.5` assessment:
+For every new or revalidated `0.3.5` or later compatible assessment:
 
 - `Review boundary` records **Credited operating / distribution surfaces** and **Adjacent first-party surfaces excluded from ownership**;
 - every positive state records **Boundary reachability**, explaining why the decisive owner/path used for that state is reachable in the declared supported mode;
@@ -45,7 +50,6 @@ For every new or revalidated `0.3.5` assessment:
 - if a positive path depends on an adjacent actor that is not packaged/wired into the assessed mode, classify ownership without borrowing that actor.
 
 The structural completion oracle checks only that these surfaces are recorded. It still does not decide whether the boundary claim is semantically true.
-
 
 ## Methodology 0.3.3 reproducibility patch
 
@@ -74,21 +78,21 @@ The matrix is a reproducibility surface only. It does not alter the meaning of c
 
 ### Structural completion oracle
 
-Assessments newly produced or successfully revalidated under Methodology `0.3.3` must pass:
+Assessments newly produced or successfully revalidated under Methodology `0.3.3` or a later compatible patch must pass:
 
 ```bash
 python scripts/check_assessment_contract.py assessments/<harness_id>.md
 ```
 
-The checker validates artifact completeness only: required fields, function-specific witness labels, negative-state absence scope, and composite-mode reconstruction. It deliberately does **not** decide whether cited evidence is true or whether a VSM mapping is semantically correct. Existing assessments that retain an earlier current Methodology version are not required to be reformatted solely because `0.3.3` was released.
+The checker validates artifact completeness only: required fields, function-specific witness labels, negative-state absence scope, composite-mode reconstruction, and boundary-reachability fields where applicable. It deliberately does **not** decide whether cited evidence is true or whether a VSM mapping is semantically correct. Existing assessments that retain an earlier current Methodology version are not required to be reformatted solely because a later compatible patch was released.
 
 ## Generation provenance
 
 Every assessment newly created by Methodology v0.2.1 or later must preserve which semantic/tooling versions produced the original artifact:
 
 ```yaml
-generated_profile_version: 0.2.3
-generated_assessment_procedure_version: 0.3.5
+generated_profile_version: 0.2.4
+generated_assessment_procedure_version: 0.3.6
 ```
 
 These two fields are **immutable origin metadata**. Do not change them during reassessment, same-ref correction, methodology migration, or later Methodology upgrades.

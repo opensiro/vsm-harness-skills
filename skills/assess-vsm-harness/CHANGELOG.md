@@ -1,5 +1,14 @@
 # assess-vsm-harness changelog
 
+## 0.3.6 — 2026-09-22
+
+- sync the bundled normative dependency to compatible VSM Harness Profile `0.2.4`;
+- carry the Profile clarification that algedonic signalling is an exceptional signal/channel path rather than an additional S-function or a scheduler/status state;
+- preserve the assessment schema, ownership notation, evidence thresholds, synthesis procedure, and ranking projection unchanged;
+- extend the structural completion oracle so `0.3.6` artifacts retain the same boundary-reachability contract introduced in `0.3.5`.
+
+This is a patch-only normative-dependency/provenance update. Profile `0.2.4` declares `compatibility: compatible` and `assessment_impact: none`. No corpus-wide reassessment or vector migration follows solely from this release. Existing assessments advance current Profile/Methodology provenance only after normal successful revalidation, and immutable generation provenance is never rewritten.
+
 ## 0.3.5 — 2026-09-19
 
 - sync the bundled normative dependency to compatible VSM Harness Profile `0.2.3`;

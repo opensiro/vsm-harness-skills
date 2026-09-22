@@ -13,7 +13,7 @@ class MethodologyContractTests(unittest.TestCase):
 
     def test_version_surfaces_match_methodology_version(self):
         version = (SKILL / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "0.3.5")
+        self.assertEqual(version, "0.3.6")
         for relative in (
             "skills/assess-vsm-harness/SKILL.md",
             "skills/assess-vsm-harness/references/autonomy-states.md",
@@ -75,7 +75,7 @@ class MethodologyContractTests(unittest.TestCase):
     def test_033_reproducibility_surfaces_are_explicit(self):
         skill = self.text("skills/assess-vsm-harness/SKILL.md")
         fmt = self.text("skills/assess-vsm-harness/references/assessment-format.md")
-        self.assertIn("bundled Profile for this methodology is **v0.2.3**", skill)
+        self.assertIn("bundled Profile for this methodology is **v0.2.4**", skill)
         self.assertIn("### Absence scope", fmt)
         self.assertIn("Plausible first-party paths checked", fmt)
         self.assertIn("| Mode | Decisive owner | Trigger | Closure | Evidence |", fmt)
@@ -96,6 +96,8 @@ class MethodologyContractTests(unittest.TestCase):
         self.assertIn("Adjacent first-party surfaces excluded from ownership", fmt)
         self.assertIn("Boundary reachability", fmt)
         self.assertIn("0.3.5", checker.SUPPORTED)
+        self.assertIn("0.3.6", checker.SUPPORTED)
+        self.assertIn("0.3.6", checker.BOUNDARY_METHODS)
         self.assertEqual(len(checker.BOUNDARY_035), 2)
 
     def test_034_oracle_parses_s3star_separately(self):
