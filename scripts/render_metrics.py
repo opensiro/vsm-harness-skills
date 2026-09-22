@@ -34,12 +34,19 @@ def parse_skill_ids(text: str) -> list[str]:
     return identities
 
 
-def compute_core_metrics(repo: Path) -> dict[str, object]:
-    version = (repo / "skills" / "assess-vsm-harness" / "VERSION").read_text(
-        encoding="utf-8"
-    ).strip()
-    if not version:
-        raise ValueError("Methodology VERSION must not be empty")
+def compute_core_metrics(
+    repo: Path, *, allow_missing_version: bool = False
+) -> dict[str, object]:
+    version_path = repo / "skills" / "assess-vsm-harness" / "VERSION"
+    if version_path.is_file():
+        version: str | None = version_path.read_text(encoding="utf-8").strip()
+        if not version:
+            raise ValueError("Methodology VERSION must not be empty")
+    elif allow_missing_version:
+        version = None
+    else:
+        raise ValueError("Methodology VERSION is required for current metrics generation")
+
     identities = parse_skill_ids((repo / "README.md").read_text(encoding="utf-8"))
     return {
         "methodology_version": version,
@@ -65,7 +72,12 @@ def main() -> int:
 
     repo = (args.source_root or Path(__file__).resolve().parents[1]).resolve()
     if args.stdout_core_json:
-        print(json.dumps(compute_core_metrics(repo), sort_keys=True))
+        print(
+            json.dumps(
+                compute_core_metrics(repo, allow_missing_version=True),
+                sort_keys=True,
+            )
+        )
         return 0
 
     output = repo / "data" / "metrics.json"
