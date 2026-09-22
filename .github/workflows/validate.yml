@@ -47,6 +47,9 @@ jobs:
       - run: python scripts/validate_skills.py
         working-directory: vsm-skills
 
+      - run: python scripts/render_metrics.py --check
+        working-directory: vsm-skills
+
       - run: python -m unittest discover -s tests -v
         working-directory: vsm-skills
 
