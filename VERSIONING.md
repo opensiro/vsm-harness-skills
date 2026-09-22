@@ -116,11 +116,11 @@ Under Methodology `0.3.x`, ranking still measures agent-owned mode coverage: `A(
 
 A change to Profile semantics may require reassessment. A change to Methodology semantics may require reassessment, re-synthesis, re-ranking, or regeneration depending on the affected procedure. In every case the resulting exact state is captured by a new Index Git revision.
 
-
-
 Methodology `0.3.4` is a patch-level validator correction over `0.3.3`. It fixes the structural completion oracle so `S3*` headings are parsed as `S3*` rather than being consumed by the `S3` heading matcher. The assessment format, VSM mappings, ownership states, evidence thresholds, ranking projection, bundled Profile `0.2.2`, and `0.3.3` reproducibility requirements are unchanged. `0.3.4`'s checker also accepts `0.3.3` artifacts because the structural contract is identical; current assessments should still record the current Methodology version when newly produced or revalidated.
 
 Methodology `0.3.5` is a patch-level boundary-provenance clarification aligned with Profile `0.2.3`. It requires new/revalidated assessments to distinguish credited operating/distribution surfaces from adjacent first-party surfaces and to record boundary reachability for every positive state. It does not change VSM semantics or the ownership state set; historical false positives exposed by the rule are same-ref corrections rather than migration impact caused by the release.
+
+Methodology `0.3.6` is a patch-only normative-dependency/provenance update aligned with Profile `0.2.4`. Profile `0.2.4` clarifies the existing algedonic signalling concept by separating exceptional signal/channel transport from scheduler/status state and from the S3/S4/S5 authority that may receive and close the matter. The Profile release declares `compatibility: compatible` and `assessment_impact: none`. Methodology `0.3.6` therefore preserves the `0.3.5` assessment schema, ownership notation, evidence thresholds, boundary-reachability requirements, synthesis procedure, and ranking projection unchanged. Existing canonical assessments do not migrate or change vectors solely because this release exists; current provenance advances only through normal successful revalidation, while `generated_*` provenance remains immutable.
 
 ## Release tracking
 
@@ -137,12 +137,12 @@ Scheduled CI runs `scripts/check_release_tracking.py` so a future changelog vers
 At this release boundary:
 
 ```text
-Profile:     0.2.3
-Methodology: 0.3.5
+Profile:     0.2.4
+Methodology: 0.3.6
 Index:       exact Git revision
 ```
 
-The bundled Profile is synchronized to exact upstream revision `06246a1e5bd95f237b88ecc7d23f0fa7e8a995cd` (Profile `0.2.3`; `PROFILE.md` blob `bd9e63a2d25ce1dd424bfcea33849ba45c2fa93f`).
+The bundled Profile is synchronized to exact upstream release target `d5f2f8027b37eea3257192b8d0a5c9056c0c2837` (Profile `0.2.4`; `PROFILE.md` blob `e32b02e89332205fdf57691272a1babea6693754`).
 
 The Profile and Methodology are versioned contracts. The Index commit is the immutable identity of a particular corpus/output state.
 
