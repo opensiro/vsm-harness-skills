@@ -80,7 +80,7 @@ CI checks the profile repository owned by the same GitHub organization and rejec
 
 Contribute assessment procedure, skills, references, synchronization/provenance tooling, validators, and repository-local Methodology maintenance here.
 
-For **currently tracked work across the bounded VSM Harness OSS group**, start with the [`OpenSiro VSM OSS Project`](https://github.com/orgs/opensiro/projects/1), then return here when the selected task is Skills-owned. The Project selects/orders work; this repository remains authoritative for Methodology/skill task scope, evidence and acceptance.
+For **currently tracked work across the bounded VSM Harness OSS group**, start with the shared [`OpenSiro VSM OSS TODO`](https://github.com/opensiro/vsm-oss-organization/blob/main/TODO.md), then return here when the selected task is Skills-owned. `TODO.md` owns current selection/order only; this repository remains authoritative for Methodology/skill task scope, evidence and acceptance.
 
 For questions or proposals about **the organization that coordinates the OpenSiro VSM Harness OSS repositories** — contributor roles, authority boundaries, cross-repository control, escalation, milestone sequencing, or shared contribution workflow — use [`opensiro/vsm-oss-organization`](https://github.com/opensiro/vsm-oss-organization). Organization-wide policy should not be duplicated into this Methodology repository.
 
