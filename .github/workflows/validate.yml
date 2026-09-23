@@ -56,8 +56,13 @@ jobs:
       - run: python scripts/sync_profile.py --profile-dir ../vsm-harness-profile --check
         working-directory: vsm-skills
 
+      - name: Fetch Methodology release history
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        working-directory: vsm-skills
+        run: git fetch --tags --force --prune --unshallow origin
+
       - name: Verify published Methodology release tracking
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         env:
           GH_TOKEN: ${{ github.token }}
         run: python scripts/check_release_tracking.py
