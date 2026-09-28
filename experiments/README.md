@@ -62,3 +62,4 @@ Canonical Index migration begins only against a released adopting Profile/Method
 ## Current experiments
 
 - [`self-organizing-autonomy/`](self-organizing-autonomy/) — candidate `S` publication state for endogenous reconstruction of organizational/regulatory repertoire; Methodology work item: [#22](https://github.com/opensiro/vsm-harness-skills/issues/22); conceptual source discussion: [`vsm-harness-profile#13`](https://github.com/opensiro/vsm-harness-profile/issues/13).
+- [`closed-source-assessments/`](closed-source-assessments/) — observational VSM assessment track for proprietary agent harnesses that expose first-party architecture/product evidence but no reviewable repository revision. These artifacts are explicitly non-canonical; implementation opacity remains `?` rather than being converted into negative evidence. Initial fixture: Manus 2.0 / Cascade.
