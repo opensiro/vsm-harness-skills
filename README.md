@@ -1,8 +1,8 @@
 # VSM Skills
 
-VSM Skills applies the [VSM Harness Profile](https://github.com/opensiro/vsm-harness-profile/blob/main/PROFILE.md) without redefining it.
+> **New to the OpenSiro VSM Harness ecosystem?** Start with the shared [`START_HERE.md`](https://github.com/opensiro/vsm-oss-organization/blob/main/START_HERE.md). For already tracked work use the shared [`TODO.md`](https://github.com/opensiro/vsm-oss-organization/blob/main/TODO.md); for new, unclassified, or cross-repository work use [`CONTRIBUTOR_START.md`](https://github.com/opensiro/vsm-oss-organization/blob/main/CONTRIBUTOR_START.md). Repository-local Methodology work remains authoritative here.
 
-> **Looking for current work?** Start with the shared [`OpenSiro VSM OSS TODO`](https://github.com/opensiro/vsm-oss-organization/blob/main/TODO.md), then follow the selected issue back to its owning repository. For new, unclassified, or cross-repository work, use the [`OpenSiro VSM OSS contributor entry`](https://github.com/opensiro/vsm-oss-organization/blob/main/CONTRIBUTOR_START.md). The owning issue/repository remains authoritative for task scope, evidence, validation, and acceptance.
+VSM Skills applies the [VSM Harness Profile](https://github.com/opensiro/vsm-harness-profile/blob/main/PROFILE.md) without redefining it.
 
 The ecosystem deliberately keeps only two semantic release lines:
 
@@ -84,7 +84,7 @@ Do not edit the generated snapshot by hand outside an explicit synchronized Meth
 
 Contribute assessment procedure, skills, references, synchronization/provenance tooling, validators, and repository-local Methodology maintenance here.
 
-For **currently tracked work across the bounded VSM Harness OSS group**, start with the shared [`OpenSiro VSM OSS TODO`](https://github.com/opensiro/vsm-oss-organization/blob/main/TODO.md), then return here when the selected task is Skills-owned. `TODO.md` owns current selection/order only; this repository remains authoritative for Methodology/skill task scope, evidence and acceptance.
+The shared bootstrap/current-work/routing links are kept near the top of this README so they remain directly discoverable without duplicating Organization policy here. `TODO.md` owns current selection/order only; this repository remains authoritative for Methodology/skill task scope, evidence and acceptance.
 
 For questions or proposals about **the organization that coordinates the OpenSiro VSM Harness OSS repositories** — contributor roles, authority boundaries, cross-repository control, escalation, milestone sequencing, or shared contribution workflow — use [`opensiro/vsm-oss-organization`](https://github.com/opensiro/vsm-oss-organization). Organization-wide policy should not be duplicated into this Methodology repository.
 
