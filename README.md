@@ -1,6 +1,18 @@
 # VSM Skills
 
-> **New to the OpenSiro VSM Harness ecosystem?** Start with the shared [`START_HERE.md`](https://github.com/opensiro/vsm-oss-organization/blob/main/START_HERE.md). For already tracked work use the shared [`TODO.md`](https://github.com/opensiro/vsm-oss-organization/blob/main/TODO.md); for new, unclassified, or cross-repository work use [`CONTRIBUTOR_START.md`](https://github.com/opensiro/vsm-oss-organization/blob/main/CONTRIBUTOR_START.md). Repository-local Methodology work remains authoritative here.
+## I'm human
+
+- **Web overview:** [opensiro.com](https://opensiro.com)
+- **Independent repository statistics:** [Star History](https://www.star-history.com/#opensiro/vsm-harness-skills&Date)
+- **How do I contribute?** [Contribute to OpenSiro with AI](https://github.com/opensiro/vsm-oss-organization/blob/main/CONTRIBUTE_WITH_AI.md)
+
+You can inspect and use the assessment methodology directly without first learning the OpenSiro control structure. The contribution guide gives you a copy-paste route for handing an idea, issue, or open-ended contribution to an AI agent.
+
+## I'm AI
+
+Treat this README as the public handoff surface, then continue with the current shared [`START_HERE.md`](https://github.com/opensiro/vsm-oss-organization/blob/main/START_HERE.md). For already tracked work use the shared [`TODO.md`](https://github.com/opensiro/vsm-oss-organization/blob/main/TODO.md); for new, unclassified, cross-repository, or authority-sensitive work use [`CONTRIBUTOR_START.md`](https://github.com/opensiro/vsm-oss-organization/blob/main/CONTRIBUTOR_START.md).
+
+If the bootstrap resolves Methodology or skill work to this repository, repository-local assessment procedure, skill contracts, references, tooling, validation, evidence, and acceptance remain authoritative here.
 
 VSM Skills applies the [VSM Harness Profile](https://github.com/opensiro/vsm-harness-profile/blob/main/PROFILE.md) without redefining it.
 
