@@ -59,6 +59,8 @@ The assessment skill owns repository evidence collection and classification. It 
 
 [SYNTHESIS.md](SYNTHESIS.md) defines the ordered comparison procedure and deterministic ranking projection consumed by `vsm-harness-index`. Assessment, synthesis, ranking, and their validation contract share the single Methodology version in `skills/assess-vsm-harness/VERSION`; they do not have independent semantic versions.
 
+`TLDR.md` and `RANKINGS.md` are generated Index views, not separately versioned products.
+
 ## Assessment families
 
 `assess-vsm-harness` is the **canonical general OpenSiro assessment specification**, not the only assessment specification that may consume the Profile.
