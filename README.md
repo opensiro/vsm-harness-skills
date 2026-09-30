@@ -3,7 +3,6 @@
 ## I'm human
 
 - **Web overview:** [opensiro.com](https://opensiro.com)
-- **Independent repository statistics:** [Star History](https://www.star-history.com/#opensiro/vsm-harness-skills&Date)
 - **How do I contribute?** [Contribute to OpenSiro with AI](https://github.com/opensiro/vsm-oss-organization/blob/main/CONTRIBUTE_WITH_AI.md)
 
 You can inspect and use the assessment methodology directly without first learning the OpenSiro control structure. The contribution guide gives you a copy-paste route for handing an idea, issue, or open-ended contribution to an AI agent.
