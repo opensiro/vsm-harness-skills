@@ -59,7 +59,21 @@ The assessment skill owns repository evidence collection and classification. It 
 
 [SYNTHESIS.md](SYNTHESIS.md) defines the ordered comparison procedure and deterministic ranking projection consumed by `vsm-harness-index`. Assessment, synthesis, ranking, and their validation contract share the single Methodology version in `skills/assess-vsm-harness/VERSION`; they do not have independent semantic versions.
 
-`TLDR.md` and `RANKINGS.md` are generated Index views, not separately versioned products.
+## Assessment families
+
+`assess-vsm-harness` is the **canonical general OpenSiro assessment specification**, not the only assessment specification that may consume the Profile.
+
+This repository may also host reviewable domain-specific or community assessment skills with their own system boundary, evidence requirements, domain capability requirements, permitted ownership arrangements, and output contracts. Such skills may narrow or strengthen an assessment purpose, but they must not silently redefine Profile semantics.
+
+The same Profile vocabulary may therefore be used to inspect:
+
+- an intentional VSM realization;
+- an arbitrary harness in which VSM functions emerge;
+- a system formally specified under a non-VSM architecture.
+
+A Profile release remains semantic provenance. Each assessment specification decides whether and how its own artifacts or corpus require migration or revalidation under a newer Profile version.
+
+See [ASSESSMENT_FAMILIES.md](ASSESSMENT_FAMILIES.md) for the repository-level boundary and extension model.
 
 ## Assessment contract
 
@@ -89,7 +103,9 @@ Do not edit the generated snapshot by hand outside an explicit synchronized Meth
 
 ## Consumer
 
-[vsm-harness-index](https://github.com/opensiro/vsm-harness-index) stores the published assessment corpus and materializes its TLDR signatures and autonomy rankings under the Methodology. An exact Index Git revision is the identity of a particular corpus/output state; the Index does not need a second semantic release line merely because its cohort or generated files changed.
+[vsm-harness-index](https://github.com/opensiro/vsm-harness-index) stores the published **general assessment corpus** and materializes its TLDR signatures and autonomy rankings under the canonical general Methodology. An exact Index Git revision is the identity of a particular corpus/output state; the Index does not need a second semantic release line merely because its cohort or generated files changed.
+
+A domain-specific assessment may instead publish to a separate domain-specific index or other assessment-owned corpus. That corpus is a fresh assessment system, not a filtered view of the general Index.
 
 ## Contributing and organization
 
