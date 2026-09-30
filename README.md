@@ -91,13 +91,9 @@ Do not edit the generated snapshot by hand outside an explicit synchronized Meth
 
 [vsm-harness-index](https://github.com/opensiro/vsm-harness-index) stores the published assessment corpus and materializes its TLDR signatures and autonomy rankings under the Methodology. An exact Index Git revision is the identity of a particular corpus/output state; the Index does not need a second semantic release line merely because its cohort or generated files changed.
 
-## Contributing and organization
+## Contributing
 
-Contribute assessment procedure, skills, references, synchronization/provenance tooling, validators, and repository-local Methodology maintenance here.
-
-The shared bootstrap/current-work/routing links are kept near the top of this README so they remain directly discoverable without duplicating Organization policy here. `TODO.md` owns current selection/order only; this repository remains authoritative for Methodology/skill task scope, evidence and acceptance.
-
-For questions or proposals about **the organization that coordinates the OpenSiro VSM Harness OSS repositories** — contributor roles, authority boundaries, cross-repository control, escalation, milestone sequencing, or shared contribution workflow — use [`opensiro/vsm-oss-organization`](https://github.com/opensiro/vsm-oss-organization). Organization-wide policy should not be duplicated into this Methodology repository.
+Contribute assessment procedure, skills, references, synchronization/provenance tooling, validators, and repository-local Methodology maintenance here. The entry routes at the top of this README own shared bootstrap and cross-repository routing; this repository remains authoritative for Methodology/skill task scope, evidence, validation, and acceptance.
 
 ## License
 
