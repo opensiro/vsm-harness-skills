@@ -98,7 +98,7 @@ Every assessment newly created by Methodology v0.2.1 or later must preserve whic
 
 ```yaml
 generated_profile_version: 0.2.4
-generated_assessment_procedure_version: 0.3.6
+generated_assessment_procedure_version: 0.3.7
 ```
 
 These two fields are **immutable origin metadata**. Do not change them during reassessment, same-ref correction, methodology migration, or later Methodology upgrades.
