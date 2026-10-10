@@ -5,11 +5,11 @@ description: Produce a standalone evidence-backed VSM assessment of one autonomo
 
 # Assess a Harness as a Viable System
 
-**Methodology version:** 0.3.6
+**Methodology version:** 0.3.7
 
 Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this methodology is **v0.2.4**. The output is a standalone repository assessment, not a cross-catalog comparison.
 
-Read [assessment-format.md](references/assessment-format.md) for the required artifact and [autonomy-states.md](references/autonomy-states.md) for local ownership notation. The same Methodology release also governs cohort synthesis and deterministic ranking through the repository-level [SYNTHESIS.md](../../SYNTHESIS.md).
+Read [assessment-format.md](references/assessment-format.md) for the required artifact and [autonomy-states.md](references/autonomy-states.md) for local ownership notation. For `—`/`?` adjudication also read [negative-state-calibration.md](references/negative-state-calibration.md). The same Methodology release also governs cohort synthesis and deterministic ranking through the repository-level [SYNTHESIS.md](../../SYNTHESIS.md).
 
 ## Workflow
 
@@ -24,11 +24,17 @@ Read [assessment-format.md](references/assessment-format.md) for the required ar
 9. Record the closure path where the result must affect subsequent regulation or operation. For parent-governed S3/S4/S5 modes, show the relevant matter reaching legitimate parent authority and the returned decision/feedback changing subsequent operation.
 10. When ownership is ambiguous, apply the Profile's counterfactual owner test: remove the candidate owner conceptually while leaving supporting machinery in place and ask whether materially the same discretionary organizational decision still occurs.
 11. For every material mapping record primary evidence, basis (`explicit`, `structural`, `inferred`, or `unknown`), confidence, and caveat.
-12. For every published `—`, record an **absence scope**: the repository surfaces inspected, the plausible first-party paths checked, and why no material first-party path remains within the declared standard-distribution boundary. If the review boundary is not broad enough to support that conclusion, publish `?` instead.
+12. For negative/unknown candidates, perform **negative-state adjudication**: first test positive and eligible parent-governed modes, then trace plausible first-party function-specific paths within the declared supported operating boundary. Publish `—` only with the existing defensible three-part **Absence scope**; use `?` when a specific plausible in-boundary path or material coverage gap prevents either positive or bounded absence judgment, and record the uncertainty. An abstract hypothetical future extension alone does not require `?`. See [negative-state-calibration.md](references/negative-state-calibration.md).
 13. For every `A(P)` or `C(P)`, record the autonomous/constructor base mode and the parent-governed mode separately in the standard mode matrix so a second reviewer can reconstruct each decisive owner and closure path independently.
 14. Assign the local state only after function, decisive right, ownership, support, closure, and any required negative/composite evidence are separated. For S3/S4/S5, encode a separately evidenced first-party parent mode with `(P)` on `A` or `C`, or standalone `P` when no first-party `A`/`C` autonomous mode is established.
 15. Record recursion, variety, escalation, and unresolved evidence gaps separately from the six-state vector.
 16. Write `assessments/<harness_id>.md` for index work. Do not generate a cohort-relative signature in this skill.
+
+## Methodology 0.3.7 negative-state calibration patch
+
+This is a clarification of the existing `—`/`?` evidence distinction, not a change to state meanings or proof thresholds. A documented absence is **bounded by the assessed first-party standard distribution**; it does not require universal impossibility. A specific unresolved shipped function path or materially incomplete review can still justify `?`. Consult [negative-state-calibration.md](references/negative-state-calibration.md) and record any concrete uncertainty under existing Evidence gaps.
+
+No Profile semantics, state set, required artifact field, parent mode, positive threshold, synthesis/ranking rule, or immutable provenance field changes. Do not alter historical Index vectors automatically: corrections require separate same-ref source review and Index gates.
 
 ## Methodology 0.3.6 Profile-sync patch
 
@@ -92,7 +98,7 @@ Every assessment newly created by Methodology v0.2.1 or later must preserve whic
 
 ```yaml
 generated_profile_version: 0.2.4
-generated_assessment_procedure_version: 0.3.6
+generated_assessment_procedure_version: 0.3.7
 ```
 
 These two fields are **immutable origin metadata**. Do not change them during reassessment, same-ref correction, methodology migration, or later Methodology upgrades.

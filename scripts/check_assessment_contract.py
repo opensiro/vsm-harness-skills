@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check Methodology 0.3.3-0.3.6 assessment artifact structural completeness."""
+"""Check Methodology 0.3.3-0.3.7 assessment artifact structural completeness."""
 from __future__ import annotations
 import re
 import sys
@@ -8,9 +8,9 @@ FUNCTIONS = (("s1","S1"),("s2","S2"),("s3","S3"),("s3_star","S3*"),("s4","S4"),(
 COMMON = ("State","Function","Disturbance / variety regulated","Decisive decision or feedback right","Decision owner","Supporting / enforcement mechanisms","Closure path","Why this is / is not agent-owned","Evidence","Basis","Confidence","Caveats")
 POSITIVE = {"A","A(P)","C","C(P)","P"}
 COMPOSITE = {"A(P)","C(P)"}
-SUPPORTED = {"0.3.3", "0.3.4", "0.3.5", "0.3.6"}
+SUPPORTED = {"0.3.3", "0.3.4", "0.3.5", "0.3.6", "0.3.7"}
 BOUNDARY_035 = ("Credited operating / distribution surfaces", "Adjacent first-party surfaces excluded from ownership")
-BOUNDARY_METHODS = {"0.3.5", "0.3.6"}
+BOUNDARY_METHODS = {"0.3.5", "0.3.6", "0.3.7"}
 EXTRA = {
  "s2": ("Distinct S1 units","Inter-S1 disturbance","Attenuating coordination relation","Feedback into subsequent S1 behaviour","Why this is S2-specific rather than generic communication / routing / sequencing / shared state / delegation"),
  "s3": ("Whole-system current view","Current-control decision scope"),

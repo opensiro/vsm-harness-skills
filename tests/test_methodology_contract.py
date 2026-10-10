@@ -13,7 +13,7 @@ class MethodologyContractTests(unittest.TestCase):
 
     def test_version_surfaces_match_methodology_version(self):
         version = (SKILL / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "0.3.6")
+        self.assertEqual(version, "0.3.7")
         for relative in (
             "skills/assess-vsm-harness/SKILL.md",
             "skills/assess-vsm-harness/references/autonomy-states.md",
@@ -23,6 +23,27 @@ class MethodologyContractTests(unittest.TestCase):
             self.assertIn(f"**Methodology version:** {version}", self.text(relative), relative)
         self.assertIn(f"Methodology: {version}", self.text("VERSIONING.md"))
         self.assertIn(f"## {version} —", self.text("skills/assess-vsm-harness/CHANGELOG.md"))
+
+    def test_negative_state_calibration_clarifies_without_changing_threshold(self):
+        states = self.text("skills/assess-vsm-harness/references/autonomy-states.md")
+        skill = self.text("skills/assess-vsm-harness/SKILL.md")
+        fmt = self.text("skills/assess-vsm-harness/references/assessment-format.md")
+        guide = self.text("skills/assess-vsm-harness/references/negative-state-calibration.md")
+        self.assertIn("bounded", states)
+        self.assertIn("Hypothetical", states)
+        self.assertIn("negative-state adjudication", skill)
+        self.assertIn("No additional mandatory artifact field", fmt)
+        self.assertIn("plausible first-party paths checked", guide)
+        self.assertIn("same-ref", guide)
+        for name in ("ndx.md", "maki.md", "sharpcoder.md", "plank.md", "ghostycode.md", "pi-rs.md"):
+            self.assertIn(name, guide)
+
+    def test_negative_state_calibration_retains_three_part_absence_scope(self):
+        fmt = self.text("skills/assess-vsm-harness/references/assessment-format.md")
+        for part in ("### Absence scope", "- Surfaces inspected:", "- Plausible first-party paths checked:", "- Why no material first-party path remains:"):
+            self.assertIn(part, fmt)
+        guide = self.text("skills/assess-vsm-harness/references/negative-state-calibration.md")
+        self.assertIn("Profile 0.2.4", guide)
 
     def test_parent_mode_publication_boundary_is_explicit(self):
         text = self.text("skills/assess-vsm-harness/references/autonomy-states.md")
@@ -98,6 +119,8 @@ class MethodologyContractTests(unittest.TestCase):
         self.assertIn("0.3.5", checker.SUPPORTED)
         self.assertIn("0.3.6", checker.SUPPORTED)
         self.assertIn("0.3.6", checker.BOUNDARY_METHODS)
+        self.assertIn("0.3.7", checker.SUPPORTED)
+        self.assertIn("0.3.7", checker.BOUNDARY_METHODS)
         self.assertEqual(len(checker.BOUNDARY_035), 2)
 
     def test_034_oracle_parses_s3star_separately(self):

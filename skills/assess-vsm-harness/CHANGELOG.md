@@ -1,5 +1,16 @@
 # assess-vsm-harness changelog
 
+## 0.3.7 — 2026-10-10
+
+- clarify bounded negative-state adjudication without weakening the existing three-part absence-scope requirement;
+- add an explicitly non-normative calibration guide with six immutable canonical Index comparison anchors;
+- distinguish *unresolved plausible shipped paths* from hypothetical extensions, and require reviewers to check positive/parent modes first;
+- extend Methodology structural checker version compatibility and add contract-regression tests while retaining exactly the same schema/evidence fields and thresholds;
+- preserve Profile `0.2.4`, autonomy symbols, parent modes, synthesis and ranking semantics.
+
+This is a patch-level clarification, not an automatic migration or a presumption that any published `?` is incorrect. Separate evidence-backed same-ref Index corrections retain immutable generation provenance.
+
+
 ## 0.3.6 — 2026-09-22
 
 - sync the bundled normative dependency to compatible VSM Harness Profile `0.2.4`;

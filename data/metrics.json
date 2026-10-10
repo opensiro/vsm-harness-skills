@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "methodology_version": "0.3.6",
+  "methodology_version": "0.3.7",
   "skill_catalog_entries": 1,
   "skill_ids": [
     "assess-vsm-harness"

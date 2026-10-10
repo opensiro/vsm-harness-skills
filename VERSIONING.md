@@ -122,6 +122,8 @@ Methodology `0.3.5` is a patch-level boundary-provenance clarification aligned w
 
 Methodology `0.3.6` is a patch-only normative-dependency/provenance update aligned with Profile `0.2.4`. Profile `0.2.4` clarifies the existing algedonic signalling concept by separating exceptional signal/channel transport from scheduler/status state and from the S3/S4/S5 authority that may receive and close the matter. The Profile release declares `compatibility: compatible` and `assessment_impact: none`. Methodology `0.3.6` therefore preserves the `0.3.5` assessment schema, ownership notation, evidence thresholds, boundary-reachability requirements, synthesis procedure, and ranking projection unchanged. Existing canonical assessments do not migrate or change vectors solely because this release exists; current provenance advances only through normal successful revalidation, while `generated_*` provenance remains immutable.
 
+Methodology `0.3.7` is a **calibration-only procedural patch**. It explains how the existing `—` bounded no-material-first-party-path conclusion differs from `?` when material in-boundary evidence is unresolved. It introduces a non-normative comparison guide, no new threshold, required artifact field, ownership state, Profile dependency, synthesis/ranking behavior, or automatic corpus migration. Reassessment/correction is separate under Index provenance and publication controls; immutable generation origin is not modified.
+
 ## Release tracking
 
 Every explicitly versioned Methodology release from `0.2.0` onward must have both an immutable lightweight Git tag `v<version>` and a GitHub Release pointing to the same target commit. A deliberately skipped version such as `0.3.2` has no changelog release heading and therefore creates no release obligation. The release body is generated from the corresponding `CHANGELOG.md` section plus the exact release target; it is not a separately maintained semantic source.
@@ -138,7 +140,7 @@ At this release boundary:
 
 ```text
 Profile:     0.2.4
-Methodology: 0.3.6
+Methodology: 0.3.7
 Index:       exact Git revision
 ```
 

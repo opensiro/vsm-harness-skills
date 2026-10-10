@@ -1,6 +1,6 @@
 # Local autonomy states
 
-**Methodology version:** 0.3.6
+**Methodology version:** 0.3.7
 
 Methodology `0.3.x` adds a parent-governed mode modifier for S3, S4, and S5. This is a classification/publication procedure layered on unchanged VSM Harness Profile semantics.
 
@@ -19,6 +19,8 @@ These symbols are publication notation for autonomous AI agent harness assessmen
 `A`, `C`, and `P` describe ownership arrangements, not maturity levels. `A(P)` and `C(P)` add a supported parent-governed mode; they do not mean partial autonomy and must not be converted to numeric weights.
 
 Under Methodology `0.3.3`, `—` is a documented absence conclusion rather than a fallback for incomplete search. If the inspected boundary cannot support the required absence scope, use `?`.
+
+**Methodology `0.3.7` calibration (unchanged threshold):** `—` is a defensible *bounded* no-material-first-party-path conclusion after the plausible shipped paths are checked; it is not proof of impossibility after exhaustive inspection of every imaginable extension. Hypothetical future code alone is not grounds for `?`. However an unexamined plausible currently shipped path, an unresolved supported mode, or materially incomplete boundary coverage warrants `?` when no positive claim can be established. Name the unresolved evidence wherever identifiable, and always consider supported positive and parent-governed modes first. See [negative-state-calibration.md](negative-state-calibration.md). Never choose symbols to achieve target corpus frequencies.
 
 For `A(P)` and `C(P)`, the assessment also records a two-row mode matrix (base mode and parent mode) with decisive owner, trigger, closure, and evidence. This makes the already-existing multi-mode semantics reconstructable without changing the state meaning.
 
