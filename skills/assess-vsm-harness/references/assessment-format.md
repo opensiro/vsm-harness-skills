@@ -1,6 +1,6 @@
 # Standalone assessment format
 
-**Methodology version:** 0.3.6
+**Methodology version:** 0.3.7
 
 An assessment is repository-relative and revision-relative. It must not contain cohort-relative signatures, rank positions, or claims that depend on which other harnesses happen to be indexed.
 
@@ -14,9 +14,9 @@ repository: https://github.com/example/harness
 review_ref: <40-character commit SHA>
 reviewed_at: YYYY-MM-DD
 generated_profile_version: 0.2.4
-generated_assessment_procedure_version: 0.3.6
+generated_assessment_procedure_version: 0.3.7
 profile_version: 0.2.4
-assessment_procedure_version: 0.3.6
+assessment_procedure_version: 0.3.7
 status: included
 autonomy_s1: A
 autonomy_s2: C
@@ -61,6 +61,10 @@ The parent-mode boundary is intentional:
 - S5 is the canonical parent-governed case for identity / ultimate-policy authority.
 
 This is a publication choice, not a claim that human-owned S1/S2/S3* cannot exist outside the assessed autonomous-harness boundary.
+
+## Methodology 0.3.7 negative-state calibration note
+
+Before `—` or `?`, check plausible function-specific first-party paths in the supported mode, including positive and parent-governed closure options. The existing three-part `Absence scope` may support a **bounded** conclusion that no material path is shipped (`—`); it is not a claim of universal impossibility. Use `?` when an unresolved plausible *shipped* path or inadequate inspection coverage prevents a defensible positive or negative assessment. Identify the actual gap under the existing `Evidence gaps` section when possible. No additional mandatory artifact field is introduced. See [negative-state-calibration.md](negative-state-calibration.md).
 
 ## Methodology 0.3.6 Profile-sync note
 
