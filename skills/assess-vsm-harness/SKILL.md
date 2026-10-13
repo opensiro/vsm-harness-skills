@@ -9,7 +9,7 @@ description: Produce a standalone evidence-backed VSM assessment of one autonomo
 
 Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this methodology is **v0.2.4**. The output is a standalone repository assessment, not a cross-catalog comparison.
 
-Read [assessment-format.md](references/assessment-format.md) for the required artifact and [autonomy-states.md](references/autonomy-states.md) for local ownership notation. For `—`/`?` adjudication also read [negative-state-calibration.md](references/negative-state-calibration.md). The same Methodology release also governs cohort synthesis and deterministic ranking through the repository-level [SYNTHESIS.md](../../SYNTHESIS.md).
+Read [assessment-format.md](references/assessment-format.md) for the required artifact and [autonomy-states.md](references/autonomy-states.md) for local ownership notation. For `—`/`?` adjudication also read [negative-state-calibration.md](references/negative-state-calibration.md). For illustrative positive-evidence counterexamples (non-normative; no new thresholds), see [positive-evidence-calibration.md](references/positive-evidence-calibration.md). The same Methodology release also governs cohort synthesis and deterministic ranking through the repository-level [SYNTHESIS.md](../../SYNTHESIS.md).
 
 ## Workflow
 
