@@ -124,6 +124,8 @@ Methodology `0.3.6` is a patch-only normative-dependency/provenance update align
 
 Methodology `0.3.7` is a **calibration-only procedural patch**. It explains how the existing `—` bounded no-material-first-party-path conclusion differs from `?` when material in-boundary evidence is unresolved. It introduces a non-normative comparison guide, no new threshold, required artifact field, ownership state, Profile dependency, synthesis/ranking behavior, or automatic corpus migration. Reassessment/correction is separate under Index provenance and publication controls; immutable generation origin is not modified.
 
+Methodology `0.3.8` is a non-normative positive-evidence calibration patch over `0.3.7`: optional R1–R10 review questions, immutable source anchors and a reproducible 20-recent-plus-12-targeted / 23-distinct convenience sample. It changes no VSM function, ownership state, classification threshold, assessment field, synthesis or ranking rule. Structural completion requirements remain exactly those of `0.3.5+`, extended to accept `0.3.8` as compatible. Historical Index vectors and immutable generation provenance do not automatically change, and frozen research protocols retain their pinned Methodology.
+
 ## Release tracking
 
 Every explicitly versioned Methodology release from `0.2.0` onward must have both an immutable lightweight Git tag `v<version>` and a GitHub Release pointing to the same target commit. A deliberately skipped version such as `0.3.2` has no changelog release heading and therefore creates no release obligation. The release body is generated from the corresponding `CHANGELOG.md` section plus the exact release target; it is not a separately maintained semantic source.
@@ -140,7 +142,7 @@ At this release boundary:
 
 ```text
 Profile:     0.2.4
-Methodology: 0.3.7
+Methodology: 0.3.8
 Index:       exact Git revision
 ```
 

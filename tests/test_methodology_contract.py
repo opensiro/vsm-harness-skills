@@ -13,7 +13,7 @@ class MethodologyContractTests(unittest.TestCase):
 
     def test_version_surfaces_match_methodology_version(self):
         version = (SKILL / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "0.3.7")
+        self.assertEqual(version, "0.3.8")
         for relative in (
             "skills/assess-vsm-harness/SKILL.md",
             "skills/assess-vsm-harness/references/autonomy-states.md",
@@ -121,6 +121,8 @@ class MethodologyContractTests(unittest.TestCase):
         self.assertIn("0.3.6", checker.BOUNDARY_METHODS)
         self.assertIn("0.3.7", checker.SUPPORTED)
         self.assertIn("0.3.7", checker.BOUNDARY_METHODS)
+        self.assertIn("0.3.8", checker.SUPPORTED)
+        self.assertIn("0.3.8", checker.BOUNDARY_METHODS)
         self.assertEqual(len(checker.BOUNDARY_035), 2)
 
     def test_034_oracle_parses_s3star_separately(self):
