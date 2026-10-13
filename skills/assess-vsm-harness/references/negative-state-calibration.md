@@ -1,6 +1,6 @@
 # Negative-state calibration — bounded absence and unresolved evidence
 
-**Methodology version:** 0.3.7
+**Methodology version:** 0.3.8
 
 **Status:** adjudication examples / calibration guide; not a new VSM definition, classification symbol, or assessment field. Profile 0.2.4 and existing Methodology thresholds remain authoritative.
 

@@ -5,7 +5,7 @@ description: Produce a standalone evidence-backed VSM assessment of one autonomo
 
 # Assess a Harness as a Viable System
 
-**Methodology version:** 0.3.7
+**Methodology version:** 0.3.8
 
 Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this methodology is **v0.2.4**. The output is a standalone repository assessment, not a cross-catalog comparison.
 
@@ -29,6 +29,10 @@ Read [assessment-format.md](references/assessment-format.md) for the required ar
 14. Assign the local state only after function, decisive right, ownership, support, closure, and any required negative/composite evidence are separated. For S3/S4/S5, encode a separately evidenced first-party parent mode with `(P)` on `A` or `C`, or standalone `P` when no first-party `A`/`C` autonomous mode is established.
 15. Record recursion, variety, escalation, and unresolved evidence gaps separately from the six-state vector.
 16. Write `assessments/<harness_id>.md` for index work. Do not generate a cohort-relative signature in this skill.
+
+## Methodology 0.3.8 positive-evidence calibration patch
+
+This compatible patch adds an informative R1–R10 positive-evidence calibration guide and its frozen external-harness sample manifest. It illustrates existing function-first tests with runtime-boundary reachability, actual owner/decision, witness identity, and feedback/closure. It introduces no mandatory source-execution trace, positive threshold, required field, altered Profile semantics, ranking rule, or automatic Index regrade. Do not infer a gold label from an unresolved Index correction or revise a frozen experiment's original Methodology.
 
 ## Methodology 0.3.7 negative-state calibration patch
 
@@ -98,7 +102,7 @@ Every assessment newly created by Methodology v0.2.1 or later must preserve whic
 
 ```yaml
 generated_profile_version: 0.2.4
-generated_assessment_procedure_version: 0.3.7
+generated_assessment_procedure_version: 0.3.8
 ```
 
 These two fields are **immutable origin metadata**. Do not change them during reassessment, same-ref correction, methodology migration, or later Methodology upgrades.

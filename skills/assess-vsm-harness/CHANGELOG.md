@@ -1,5 +1,15 @@
 # assess-vsm-harness changelog
 
+## 0.3.8 — 2026-10-13
+
+- publish informative, source-pinned R1–R10 positive-evidence calibration cases from independent external harnesses, with an explicit 20-recent-admissions / 12-targeted / 23-distinct sample manifest;
+- illustrate existing tests for supported runtime entry/binding/guard, function-specific ownership and feedback, S3* complementary access, S3 current discretion, S4 capability adaptation and concrete evidence/event identity;
+- preserve Profile `0.2.4`, unchanged `A/A(P)/C/C(P)/P/—/?` thresholds, assessment fields, provenance, synthesis/ranking and Index canonical grades; no automated migration or blind/independent adjudication claim;
+- extend the existing structural completion checker to recognize `0.3.8` without introducing new completeness requirements.
+
+This is a backward-compatible, calibration-only Methodology patch. The sample is nonrandom, contested examples remain unresolved until Index-owner disposition, and original `generated_*` fields and frozen study inputs are not rewritten.
+
+
 ## 0.3.7 — 2026-10-10
 
 - clarify bounded negative-state adjudication without weakening the existing three-part absence-scope requirement;

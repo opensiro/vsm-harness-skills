@@ -1,6 +1,6 @@
 # Local autonomy states
 
-**Methodology version:** 0.3.7
+**Methodology version:** 0.3.8
 
 Methodology `0.3.x` adds a parent-governed mode modifier for S3, S4, and S5. This is a classification/publication procedure layered on unchanged VSM Harness Profile semantics.
 
