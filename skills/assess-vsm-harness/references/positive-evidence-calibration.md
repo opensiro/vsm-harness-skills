@@ -1,14 +1,14 @@
 # Positive-evidence calibration — reachable owners, complementary audits, and witness identity
 
-**Status:** informative reviewer calibration **proposal**, not a released Methodology update or independent Index adjudication. Based on cross-case review dated 2026-10-13; comparison confidence varies by case.
+**Status:** informative positive-evidence calibration for a proposed `0.3.8` patch; not an independent Index adjudication or executable semantic oracle. Based on cross-case review dated 2026-10-13; comparison confidence varies by case.
 
-**Baseline:** Profile `0.2.4` / released Methodology `0.3.7`. The authoritative rules remain [SKILL.md](../SKILL.md), [autonomy-states.md](autonomy-states.md), [assessment-format.md](assessment-format.md), and the [Profile](https://github.com/opensiro/vsm-harness-profile/blob/v0.2.4/PROFILE.md). For bounded negatives and unknowns see [negative-state-calibration.md](negative-state-calibration.md).
+**Source-analysis baseline:** Profile `0.2.4` / released Methodology `0.3.7`. Proposed `0.3.8` preserves their semantics. The authoritative rules remain [SKILL.md](../SKILL.md), [autonomy-states.md](autonomy-states.md), [assessment-format.md](assessment-format.md), and the [Profile](https://github.com/opensiro/vsm-harness-profile/blob/v0.2.4/PROFILE.md). For bounded negatives and unknowns see [negative-state-calibration.md](negative-state-calibration.md).
 
 This guide illustrates how to **apply existing** function-first, decision-owner, boundary-reachability, and return/closure requirements when a positive witness looks plausible but the exact operational path may be missing or misidentified. It does **not** change S1–S5/S3* semantics, states `A/A(P)/C/C(P)/P/—/?`, positive thresholds, mandatory fields, the `—`/ `?` distinction, or synthesis/ranking rules. It does not assign or overwrite any Index grade.
 
 ## A source-based reconstruction technique (optional)
 
-For a disputed positive claim, try to reconstruct one representative first-party operating path:
+For a disputed positive claim, try to reconstruct one representative first-party operating path. This is a source-inspection aid, **not a universal necessary executable trace for a composable `C`**:
 
 ```text
 supported entry point / declared mode
@@ -33,7 +33,7 @@ These checks are aids for spotting misapplied existing requirements, **not addit
 
 ## Frozen contrast workbook (R1–R10)
 
-Cases are **questions about evidence sufficiency**, not accepted state labels or gold grading fixtures. The named assessments, including those already canonically admitted, are not certified correct by inclusion. Preserve the **exact upstream revision in each URL** and the original historical Methodology when re-reading.
+Cases are **questions about evidence sufficiency**, not accepted state labels or gold grading fixtures. The named assessments, including those already canonically admitted, are not certified correct by inclusion. Preserve the **exact upstream revision in each URL** and the original historical Methodology when re-reading. The [source-pinned admission and targeted sample manifest](positive-evidence-sample-2026-10-13.md) makes the selection reproducible (20 recent admissions, 12 distinct targeted, 23 unique across both cohorts).
 
 ### R1 — Dedicated complementary review, same provider allowed
 
@@ -42,11 +42,11 @@ Pinned sources: [AtomCode coding assembly](https://github.com/karlorz/atomcode/b
 - **Expected evidence decision:** reconstruct mounted `code_review`, live Git diff, fresh read-only reviewer, findings and return. A shared provider is not itself failure of independence.
 - **Counter-check:** the tool is optional per call and may fail when its provider slot or Git context is unavailable; do not assert review happens on every normal turn.
 
-### R2 — Distinct stage is not automatically independent audit
+### R2 — Plan approval versus implementation-artifact review
 
 Pinned source: [OpenHuman plan-review module](https://github.com/tinyhumansai/openhuman/blob/eb4fdc0f4f4a036d8ab7c12bd52f16128e4a6b5d/crates/openhuman-core/src/agent/plan_review/mod.rs), [delegation](https://github.com/tinyhumansai/openhuman/blob/eb4fdc0f4f4a036d8ab7c12bd52f16128e4a6b5d/crates/openhuman-core/src/agent/orchestration/delegation.rs).
 
-- **Expected evidence decision:** separate a user-facing plan approval/revision gate from independent direct evidence inspection; check other supported modes before settling presence or bounded absence.
+- **Expected evidence decision:** separate a user-facing plan approval/revision gate from the delegation `review` stage in the accepted S3* assessment. Inspect what the reviewer actually receives or samples: plan approval is not itself independent operational-artifact audit. Check other supported modes before settling presence or bounded absence.
 - **Counter-check:** a different shipped reviewer path could alter the evidence conclusion; do not automatically turn this into a negative grade.
 
 ### R3 — Consensus on reports versus operational evidence
@@ -79,26 +79,26 @@ Pinned sources: [bb first-party reviewer vignette](https://github.com/get-bb/bb/
 
 ### R7 — Whole-current S3 discretion versus delegation
 
-Pinned sources: [KairoCode opt-in coordinator](https://github.com/yangf-Veda/KairoCode/blob/018c74035de1354f69a92eda626ddbb210fbebcc/src/kairocode/coordinator/__init__.py), [Capstan child dispatch](https://github.com/theStrangeAdventurer/capstan/blob/60f284fc94ce96d05e72b52d2ffe55b4096b0177/agent/tools.lua).
+Pinned sources: [KairoCode opt-in coordinator](https://github.com/yangf-Veda/KairoCode/blob/018c74035de1354f69a92eda626ddbb210fbebcc/src/kairocode/coordinator/__init__.py), [CLI mode wiring](https://github.com/yangf-Veda/KairoCode/blob/018c74035de1354f69a92eda626ddbb210fbebcc/src/kairocode/cli.py), [TUI runtime](https://github.com/yangf-Veda/KairoCode/blob/018c74035de1354f69a92eda626ddbb210fbebcc/src/kairocode/tui/app.py), [team task and message tools](https://github.com/yangf-Veda/KairoCode/blob/018c74035de1354f69a92eda626ddbb210fbebcc/src/kairocode/team/tools/__init__.py), contrasted with [Capstan child dispatch](https://github.com/theStrangeAdventurer/capstan/blob/60f284fc94ce96d05e72b52d2ffe55b4096b0177/agent/tools.lua).
 
 - **Expected evidence decision:** trace actual supported team mode, view of current commitments, agent-owned intervention and returned reassignments, rather than awarding S3 to any subagent queue.
 - **Counter-check:** no artificial crisis, minimum agent count, mandatory event journal or Organization-specific transaction state is required.
 
 ### R8 — S4 future capability versus extension scaffolding
 
-Pinned sources: [Capstan conditional self-improvement](https://github.com/theStrangeAdventurer/capstan/blob/60f284fc94ce96d05e72b52d2ffe55b4096b0177/skills/self-improvement/SKILL.md), [Xoder extension-capable harness](https://github.com/BANGHlxbackout/Xoder/blob/5a13d1cd4471cf95bb89befe2ac7634d93a610a7/src/xoder_agent/harness.py).
+Pinned sources: [Capstan conditional self-improvement](https://github.com/theStrangeAdventurer/capstan/blob/60f284fc94ce96d05e72b52d2ffe55b4096b0177/skills/self-improvement/SKILL.md), [plugin runtime](https://github.com/theStrangeAdventurer/capstan/blob/60f284fc94ce96d05e72b52d2ffe55b4096b0177/src/plugins_runtime.c), contrasted with [Xoder create-extension skill](https://github.com/BANGHlxbackout/Xoder/blob/5a13d1cd4471cf95bb89befe2ac7634d93a610a7/src/xoder_coding/data/skills/create-xoder-extension/SKILL.md) and [extension runtime](https://github.com/BANGHlxbackout/Xoder/blob/5a13d1cd4471cf95bb89befe2ac7634d93a610a7/src/xoder_coding/extensions/runtime.py).
 
-- **Expected evidence decision:** distinguish an enabled first-party pathway to durable, future-reusable agent-initiated capability change from generic user-directed plugin authoring and static configuration.
+- **Expected evidence decision:** distinguish an enabled first-party pathway to durable, future-reusable capability change from generic user-directed plugin authoring and static configuration. For Capstan, distinguish the user's reason or authorization for initiating self-improvement from the agent's discretionary choice and design of the reusable capability; confirm that the installed runtime can load it.
 - **Counter-check:** Capstan's capability is opt-in; neither automatic self-evolution nor unconditional permission bypass is implied.
 
-### R9 — Do not rewrite historical assessment provenance
+### R9 — Cross-cutting provenance safeguard (not a positive-state example)
 
 Frozen anchors: [Claw Code](https://github.com/ultraworkers/claw-code/tree/08106b0c3771ef5b4a5aa176acccd460e88b7325) and [SuisuiCode](https://github.com/Yangtianspike/suisui-code/tree/c9017b0613b22151325a5904a521aefe4c62abbc) assessed under **0.3.6**; [Rum](https://github.com/KAJdev/rum/tree/9c00bdb35f2a55959d6e56bd0d27b9573aac6fdd) under **0.3.7**.
 
 - **Expected evidence decision:** keep original `review_ref` and immutable `generated_*` origin; a separate successful governed reassessment may advance current methodology provenance, not the generation pair.
 - **Counter-check:** a newly written guide alone is not a reassessment, a migration trigger, or a reason to repin sources.
 
-### R10 — Bounded no-path versus materially unresolved shipped path
+### R10 — Cross-cutting negative/unknown safeguard (not a positive-state example)
 
 Pinned anchors: [mini-swe-agent](https://github.com/SWE-agent/mini-swe-agent/tree/04d809ceab9df28f9adaed044884180159172930) and [AgentScope](https://github.com/agentscope-ai/agentscope/tree/5ff52f877de12d66a30d55af279dd4f42b1590f3).
 
@@ -111,4 +111,4 @@ These ten contrasts are a **reviewer worksheet**, not an executable semantic ora
 
 A future reviewer can record for each case: examined operating mode; reachable invocation and guards; primary artifact/event identity; function/owner/return; counterevidence and unresolved alternate routes. These are **suggested notes**, not a required new artifact schema.
 
-No corpus-wide prevalence or false-positive rate can be inferred from the nonrandom 20-recent-plus-10-targeted (23 distinct systems) source review. No changes to Profile, Skills released version, Index vectors, `assessment-format.md`, validators, `SYNTHESIS.md`, ranking projections, or frozen research datasets follow from this guide. Promotion or versioning decisions require explicit Skills governance.
+No corpus-wide prevalence or false-positive rate can be inferred from the nonrandom 20 recent admissions plus 12 distinct targeted harnesses (23 unique across both cohorts). The frozen manifest documents the selection, not fresh complete independent re-execution of all 23 source trees. The proposed `0.3.8` introduces no new Profile semantics, classification threshold, assessment field, ranking/synthesis procedure or automatic Index correction. Disputed assessments require their own owner-controlled reviews; frozen experiments retain their pinned Methodology.
