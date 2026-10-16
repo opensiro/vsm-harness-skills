@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "When applying the general VSM assessment methodology, cite the versioned assessment procedure in preferred-citation."
+title: "VSM Harness Methodology"
+authors:
+  - name: "OpenSiro contributors"
+type: software
+version: "0.3.8"
+date-released: "2026-10-13"
+repository-code: "https://github.com/opensiro/vsm-harness-skills"
+url: "https://github.com/opensiro/vsm-harness-skills/tree/v0.3.8"
+preferred-citation:
+  type: manual
+  title: "VSM Harness Methodology: assess-vsm-harness"
+  authors:
+    - name: "OpenSiro contributors"
+  year: 2026
+  version: "0.3.8"
+  url: "https://github.com/opensiro/vsm-harness-skills/blob/v0.3.8/skills/assess-vsm-harness/SKILL.md"
