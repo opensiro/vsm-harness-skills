@@ -78,6 +78,16 @@ def main() -> int:
         if not values.get("description"):
             failures.append(f"{path}: missing description")
 
+        # Only a deliberately marked experimental skill may carry an independent
+        # version without being bound to the released general Methodology.
+        status = values.get("status", "")
+        if status not in ("", "experimental"):
+            failures.append(f"{path}: unsupported status {status!r}")
+            continue
+        if path.parent.name == "assess-vsm-harness" and status:
+            failures.append(f"{path}: canonical general skill cannot be experimental")
+            continue
+
         version_path = path.parent / "VERSION"
         version = read(version_path, failures).strip()
         if not version:
@@ -85,6 +95,16 @@ def main() -> int:
         if not SEMVER.fullmatch(version):
             failures.append(f"{version_path}: invalid semantic version {version!r}")
             continue
+        if status == "experimental":
+            # The separate build/research workflow has no generated Profile
+            # snapshot, assessment format, autonomy publication schema, or
+            # synthesis/ranking release contract. Keep its own version explicit.
+            if f"**Skill version:** {version}" not in text:
+                failures.append(
+                    f"{path}: experimental skill version must match VERSION {version}"
+                )
+            continue
+
         methodology_versions.add(version)
 
         # Assessment-facing documents identify the unified Methodology release.
@@ -157,7 +177,7 @@ def main() -> int:
                     failures,
                 )
 
-    # Today the repository intentionally has one Methodology release line.
+    # Only general assessment skills participate in the released Methodology line.
     if len(methodology_versions) == 1:
         methodology_version = next(iter(methodology_versions))
         require_methodology_version(repo / "SYNTHESIS.md", methodology_version, failures)
