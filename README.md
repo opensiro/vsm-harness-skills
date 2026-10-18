@@ -90,8 +90,11 @@ deterministic ranking projection
 | Skill | Purpose |
 | --- | --- |
 | [assess-vsm-harness](skills/assess-vsm-harness/SKILL.md) | Produce a detailed evidence-backed **general** repository assessment with out-of-the-box autonomy states. |
+| [build-harness-cognee-first](skills/build-harness-cognee-first/SKILL.md) | **Experimental v0.1.0:** build a new harness using real Cognee-first discovery, verified VSM sources, design trace, and reproducible evaluation (not an assessment methodology release). |
 
 The general assessment skill owns repository evidence collection and classification. It does not generate cohort-relative signatures or rankings.
+
+The independent experimental `build-harness-cognee-first` skill consumes canonical assessments for **build-time research and construction**, without authoring or changing Index classifications. It has its own `VERSION` and does **not** advance the released general Methodology or alter the Profile, S1–S5 ownership semantics, or synthesis/ranking. The [Flash API example](https://github.com/opensiro/harness-build-example-flash-api) is an external historical case study, not a mandated architecture.
 
 [SYNTHESIS.md](SYNTHESIS.md) defines the ordered comparison procedure and deterministic ranking projection consumed by the **general** `vsm-harness-index`. Assessment, synthesis, ranking, and their validation contract share the single released general Methodology version in `skills/assess-vsm-harness/VERSION`; they do not have independent semantic versions.
 
