@@ -44,10 +44,10 @@ Note: the Flash API example ingested complete assessments but indexed **only six
 | `C2_SHA` | Actual Cognee import, independent audit, native query receipts and coverage |
 | `COMPARISON_SHA` | Post-Cognee candidate shortlist, full assessment/upstream inspection, alternatives |
 | `DECISION_SHA` | Separate source-backed decision that cites `COMPARISON_SHA` |
-| `FIRST_ADAPTED_CODE_SHA` | First implementation of selected mechanism; must be after decision |
+| `FIRST_IMPLEMENTATION_SHA` (conditional) | First implementation commit for a selected new mechanism; omit only for a documented null/no-adaptation decision |
 | `C4_SHA` | Built harness code, source-to-code mapping, verification receipts if any, hash manifest and limitations |
 
-Review [Decision Trace contract](decision-trace.md) and verify all five chronological ancestry edges. Report missed/unreachable commits or preselected mechanisms as gate failures, not harmless clerical omissions. Do not use this checklist itself as proof of execution.
+Review [Decision Trace contract](decision-trace.md) and verify the required C1→C2→comparison→decision→C4 ancestry. If an adaptation was chosen, verify its first implementation commit also follows the decision and precedes C4. Report missed/unreachable commits or preselected mechanisms as gate failures, not harmless clerical omissions. Do not use this checklist itself as proof of execution.
 
 ## 4. Final result contract (C4)
 

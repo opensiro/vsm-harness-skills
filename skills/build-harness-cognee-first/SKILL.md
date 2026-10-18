@@ -48,7 +48,7 @@ This is an **experimental build-time skill in opensiro/vsm-harness-skills**. It 
 4. Publish a candidate comparison and alternatives at a pinned Git commit **before** choosing a mechanism. Include which Cognee result produced each candidate, the source files actually inspected, and an honest coverage gap for potentially missed candidates.
 5. Record the architecture decision at a **subsequent distinct Git commit** referring to the comparison SHA, with selected/rejected options and source support. Select the smallest justified adaptation, or explicitly select none. Do not cherry-pick code or retroactively edit the comparison to imply prior selection.
 
-**Gate 2 pass / C3 — decision checkpoint:** traceable retrieved hits → complete assessments and pinned GitHub inspection → published comparison → subsequent decision commit. The comparison commit must be an ancestor of the decision commit. The decision commit must precede the first adapted-implementation commit; check Git ancestry and record these SHAs. Existing case-study conclusions are not reusable as fresh findings.
+**Gate 2 pass / C3 — decision checkpoint:** traceable retrieved hits → complete assessments and pinned GitHub inspection → published comparison → subsequent decision commit. The comparison commit must be an ancestor of the decision commit. The decision commit must precede implementation of the selected mechanism; check Git ancestry and record these SHAs. If the decision is no-adaptation, record the null outcome without fabricating an adapted-code commit. Existing case-study conclusions are not reusable as fresh findings.
 
 ## Stage 3 — construct the harness
 

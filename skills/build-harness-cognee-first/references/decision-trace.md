@@ -34,19 +34,21 @@ Use four immutable commit SHA anchors belonging to the **new experiment reposito
 | --- | --- | --- |
 | C1 / preflight | Task baseline and constraints, pinned source revisions, canonical admission and corpus policy, query plan | First native Cognee query |
 | C2 / discovery | Import and independent audit receipts, raw native query results (including negatives), coverage limits | Candidate comparison |
-| C3 / design | Pinned full-assessment/upstream inspection and published alternatives comparison, then a **separate** architecture-decision commit | First adaptation implementation |
+| C3 / design | Pinned full-assessment/upstream inspection and published alternatives comparison, then a **separate** architecture-decision commit | First selected-mechanism implementation (if any) |
 | C4 / construction | Produced source (or explicit null decision), source-to-code map, optional validation, limitations and hashes | Final completion report |
 
 Track both `comparison_commit` and `decision_commit` inside C3. Publish the full baseline/fixture provenance and C1/C2 commits *before* claiming causal selection. Never use an uncommitted local file's modification time as a substitute for independently accessible Git order.
 
-Confirm in Git:
+Confirm in Git (the implementation-specific ancestry checks are conditional on an actual adaptation):
 
 ```bash
 git merge-base --is-ancestor "$C1_SHA" "$C2_SHA"
 git merge-base --is-ancestor "$C2_SHA" "$COMPARISON_SHA"
 git merge-base --is-ancestor "$COMPARISON_SHA" "$DECISION_SHA"
-git merge-base --is-ancestor "$DECISION_SHA" "$FIRST_ADAPTED_CODE_SHA"
-git merge-base --is-ancestor "$FIRST_ADAPTED_CODE_SHA" "$C4_SHA"
+git merge-base --is-ancestor "$DECISION_SHA" "$C4_SHA"
+# Conditional: only if a new mechanism was implemented
+git merge-base --is-ancestor "$DECISION_SHA" "$FIRST_IMPLEMENTATION_SHA"
+git merge-base --is-ancestor "$FIRST_IMPLEMENTATION_SHA" "$C4_SHA"
 ```
 
 These tests validate commit ancestry only, **not** truthfulness of source inspection, Cognee native results, or the timing of unpublished actions. Independently examine the artifacts in those commits. Fail closed if any reference is missing/unreachable or chronology contradicts claimed causal ordering. If no remote publishing was possible, label the evidence as locally anchored, not independently published.
