@@ -18,7 +18,12 @@ class ExperimentalBuildSkillTests(unittest.TestCase):
         self.assertEqual(version, "0.1.0")
         self.assertIn(f"**Skill version:** {version}", text)
         self.assertNotIn("**Methodology version:**", text)
-        self.assertEqual((GENERAL / "VERSION").read_text().strip(), "0.3.8")
+        # Read the canonical release line dynamically: this experimental skill
+        # must not block a future general Methodology release.
+        general_version = (GENERAL / "VERSION").read_text(encoding="utf-8").strip()
+        self.assertRegex(general_version, r"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$")
+        general_skill = (GENERAL / "SKILL.md").read_text(encoding="utf-8")
+        self.assertIn(f"**Methodology version:** {general_version}", general_skill)
 
     def test_gate_and_evidence_contract_is_explicit(self):
         text = (BUILD / "SKILL.md").read_text(encoding="utf-8")
@@ -39,6 +44,40 @@ class ExperimentalBuildSkillTests(unittest.TestCase):
         self.assertIn("not a mandatory C4 gate", skill)
         self.assertIn("acceptable final states", contract)
         self.assertIn("source-to-code mapping", skill)
+
+    def test_preimport_c1_and_real_connector_contract(self):
+        skill = (BUILD / "SKILL.md").read_text(encoding="utf-8")
+        run_contract = (BUILD / "references/run-contract.md").read_text(encoding="utf-8")
+        trace = (BUILD / "references/decision-trace.md").read_text(encoding="utf-8")
+        for text in (skill, run_contract, trace):
+            with self.subTest(document=text.splitlines()[0]):
+                self.assertIn("connector import", text)
+                self.assertIn("native Cognee", text)
+                self.assertIn("C1", text)
+        self.assertIn("before the first Cognee import", skill)
+        self.assertIn("pinned OpenSiro Cognee connector", skill)
+        self.assertIn("direct-SDK-only import", run_contract)
+        self.assertIn("first connector import/index build", trace)
+
+    def test_no_adaptation_still_requires_constructed_harness(self):
+        skill = (BUILD / "SKILL.md").read_text(encoding="utf-8")
+        contract = (BUILD / "references/run-contract.md").read_text(encoding="utf-8")
+        trace = (BUILD / "references/decision-trace.md").read_text(encoding="utf-8")
+        self.assertIn("NO_ADAPTATION still requires a produced", skill)
+        self.assertIn("no constructed harness", contract)
+        self.assertIn("NO_ADAPTATION versus no built harness", trace)
+
+    def test_discovery_contribution_is_explicit_and_bounded(self):
+        skill = (BUILD / "SKILL.md").read_text(encoding="utf-8")
+        contract = (BUILD / "references/run-contract.md").read_text(encoding="utf-8")
+        trace = (BUILD / "references/decision-trace.md").read_text(encoding="utf-8")
+        for text in (skill, contract, trace):
+            with self.subTest(document=text.splitlines()[0]):
+                for value in ("discovery_contribution", "DIRECT", "CORROBORATIVE",
+                              "NONE", "INDETERMINATE"):
+                    self.assertIn(value, text)
+        self.assertIn("Only DIRECT", skill)
+        self.assertIn("not a positive Cognee", trace)
 
     def test_documents_have_no_dangling_relative_links(self):
         for path in sorted(BUILD.rglob("*.md")):
