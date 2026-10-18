@@ -77,7 +77,7 @@ class ExperimentalBuildSkillTests(unittest.TestCase):
                               "NONE", "INDETERMINATE"):
                     self.assertIn(value, text)
         self.assertIn("Only DIRECT", skill)
-        self.assertIn("not a positive Cognee", trace)
+        self.assertIn("positive Cognee architecture-discovery result", trace)
 
     def test_documents_have_no_dangling_relative_links(self):
         for path in sorted(BUILD.rglob("*.md")):
