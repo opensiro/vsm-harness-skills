@@ -60,7 +60,7 @@ This is an **experimental build-time skill in opensiro/vsm-harness-skills**. It 
 
 ## C4 — constructed artifact and provenance checkpoint
 
-Publish the resulting source (or an explicitly supported null/no-adaptation decision), dependencies/entry points, implementation mapping, source/static validation if actually performed, remaining risks, and artifact hashes at a commit after C3. Verify ancestry.
+Publish the resulting source (or an explicitly supported null/no-adaptation decision), dependencies/entry points, a source-to-code mapping, source/static validation if actually performed, remaining risks, and artifact hashes at a commit after C3. Verify ancestry.
 
 The primary C4 evidence is **Cognee output → inspected upstream source → alternatives → recorded decision → produced harness code**. Runtime and model evaluations are optional follow-ups, **not a mandatory C4 gate**. Preserve historical receipts; never retrofit chronology. Git commits prove public artifact order rather than private intent or performance.
 
