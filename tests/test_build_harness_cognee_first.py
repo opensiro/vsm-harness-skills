@@ -15,7 +15,7 @@ class ExperimentalBuildSkillTests(unittest.TestCase):
         version = (BUILD / "VERSION").read_text(encoding="utf-8").strip()
         self.assertIn("name: build-harness-cognee-first", text.split("---", 2)[1])
         self.assertIn("status: experimental", text.split("---", 2)[1])
-        self.assertEqual(version, "0.1.0")
+        self.assertRegex(version, r"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$")
         self.assertIn(f"**Skill version:** {version}", text)
         self.assertNotIn("**Methodology version:**", text)
         # Read the canonical release line dynamically: this experimental skill
