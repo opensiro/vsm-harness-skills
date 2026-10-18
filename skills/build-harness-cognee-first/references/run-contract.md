@@ -8,16 +8,16 @@ This is an **input/checklist for a new experiment**, not historical evidence. Fi
 | --- | --- |
 | Experiment ID / new repository | Unique ID and intended public Git URL |
 | Concrete task | Operational input, output, and task boundary |
-| Success/failure oracle | How an external check determines whether the task succeeded |
-| Baseline behavior | Minimal behavior and acceptance criteria, without selecting an adaptation |
+| Construction acceptance | What source/interfaces constitute the required harness artifact |
+| Baseline / scaffold | Minimal initial design without a selected adaptation |
 | Safe execution | Allowed target files, tools, network destinations, and trust boundary |
 | Runtime | OS / language / package and model client versions |
-| Models / provider | Available backend(s), credentials source by env var **name only**, fallback if unavailable |
+| Models / provider (optional) | Only if separately needed; credentials referenced by env var **name only** |
 | Limits | Allowed model/tool calls, tokens, wall time, hardware, disk/memory, estimated cost |
-| Evaluation plan | Dataset/fixture(s), split if relevant, task outcome and model-resource metrics, replication policy |
-| No-model path | What deterministic or scripted tests can prove; what they cannot prove |
+| Verification plan | Source/static validation; runtime or gameplay evaluations only if expressly authorized |
+| No-execution path | Source/provenance verification and its limits, without model or game execution |
 
-A missing optional live-model provider may reduce evaluation strength; it must not silently become a fake completed real-model run.
+Model or gameplay execution is not required for development-process completion. Never claim it ran when it did not.
 
 ## 2. Corpus and Cognee scope (C1 → C2)
 
@@ -45,20 +45,17 @@ Note: the Flash API example ingested complete assessments but indexed **only six
 | `COMPARISON_SHA` | Post-Cognee candidate shortlist, full assessment/upstream inspection, alternatives |
 | `DECISION_SHA` | Separate source-backed decision that cites `COMPARISON_SHA` |
 | `FIRST_ADAPTED_CODE_SHA` | First implementation of selected mechanism; must be after decision |
-| `C4_SHA` | Runnable result, tests, evaluation receipts, hash manifest and limitations |
+| `C4_SHA` | Built harness code, source-to-code mapping, verification receipts if any, hash manifest and limitations |
 
 Review [Decision Trace contract](decision-trace.md) and verify all five chronological ancestry edges. Report missed/unreachable commits or preselected mechanisms as gate failures, not harmless clerical omissions. Do not use this checklist itself as proof of execution.
 
 ## 4. Final result contract (C4)
 
-Always report:
+Report `process_status` (PASS/PARTIAL/FAIL) for C1–C4 and `build_status` (PASS/PARTIAL/FAIL) for the produced inspectable source. State separately `verification_level` (SOURCE_ONLY/STATIC_CHECKED/UNIT_TESTED/RUNTIME_SMOKE/NOT_RUN).
 
-- `process_status`: PASS / PARTIAL / FAIL, with evidence for C1–C4.
-- `build_status`: PASS / PARTIAL / FAIL, including exact runnable commands. If the source comparison justifies **no adaptation**, describe that null decision and avoid fabricating a modified variant.
-- `evaluation_level`: NOT_RUN / DETERMINISTIC_ONLY / SCRIPTED_PROTOCOL / REAL_MODEL_RUN, and all actual evidence types when multiple exist.
-- `model_quality_claim`: NOT_EVALUATED by default; an improvement claim requires a relevant comparable real-model evaluation and appropriate uncertainty.
-- Baseline/adapted **observed** task outcomes, model/tool calls and token use when available, elapsed time/resources and costs when available, errors/retries, negatives, and scope limits.
-- Original receipts and file SHA256 manifest; correct prior records with new append-only events, never overwrite their history.
+`evaluation_level=NOT_RUN` and `model_quality_claim=NOT_EVALUATED` are **acceptable final states**: no gameplay, model-backed execution, or baseline-versus-adapted benchmark is mandatory. If such checks are separately executed, retain their original receipts and distinguish measured outcomes from architecture-source evidence.
+
+The principal output is an auditable map from **Cognee connector discovery → full assessment/upstream inspection → alternatives → decision → implementation**. Do not claim runtime correctness solely from source construction, and do not infer Cognee-caused task-performance improvement.
 
 ## 5. Required output paths
 
@@ -67,7 +64,7 @@ README.md
 reports/discovery.md
 reports/candidate-comparison.md
 reports/architecture-decision.md
-reports/evaluation.md
+reports/construction-verification.md
 traces/decision-trace.jsonl
 receipts/
 ```

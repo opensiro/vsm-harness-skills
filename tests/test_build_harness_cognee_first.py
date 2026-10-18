@@ -25,11 +25,20 @@ class ExperimentalBuildSkillTests(unittest.TestCase):
         for requirement in (
             "Gate 1", "Gate 2", "C1", "C2", "C3", "C4",
             "process_status", "build_status", "evaluation_level",
-            "model_quality_claim", "not a release of the canonical",
+            "model_quality_claim", "verification_level",
+            "A successful Cognee-first construction trace does not depend on running",
+            "not a release of the canonical",
             "references/run-contract.md",
         ):
             with self.subTest(requirement=requirement):
                 self.assertIn(requirement, text)
+
+    def test_gameplay_or_model_run_not_mandatory(self):
+        skill = (BUILD / "SKILL.md").read_text(encoding="utf-8")
+        contract = (BUILD / "references/run-contract.md").read_text(encoding="utf-8")
+        self.assertIn("not a mandatory C4 gate", skill)
+        self.assertIn("acceptable final states", contract)
+        self.assertIn("source-to-code mapping", skill)
 
     def test_documents_have_no_dangling_relative_links(self):
         for path in sorted(BUILD.rglob("*.md")):

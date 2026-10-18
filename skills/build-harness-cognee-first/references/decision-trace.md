@@ -9,12 +9,12 @@ Use newline-delimited JSON in traces/decision-trace.jsonl, written append-only. 
 - event ID, event type, observation/recording timestamp (UTC), and experiment/run identity;
 - task/problem being addressed, current gate/stage, and status;
 - relevant source identity and pinned Git SHA/assessment content digest;
-- input artifact references (native import/query/evaluation receipts) and output artifact references;
+- input artifact references (native import/query/construction-verification receipts) and output artifact references;
 - candidate alternatives and externally inspectable reasons for selection/rejection **when an explicit design decision is made**;
-- linked commit or file change and evaluation outcome as the workflow proceeds;
+- linked commit or file change and optional verification outcome as the workflow proceeds;
 - explicit uncertainty, failures, and limitations.
 
-Not every event needs every field: an import event records dataset facts; an architecture_decision event records considered options; a model-run event records backend and execution evidence.
+Not every event needs every field: an import event records dataset facts; an architecture_decision event records considered options; an optional model-run event records backend and execution evidence, if a model was actually run.
 
 ## Required chronology
 
@@ -22,7 +22,7 @@ Not every event needs every field: an import event records dataset facts; an arc
 2. Actual Cognee import → independent audit → native queries, including raw negative hits.
 3. Post-search candidates → full assessment reading → pinned upstream code comparison.
 4. Recorded decision and rejections → adapted implementation.
-5. Reproducible baseline/adapted test receipts → late corrections and reviews.
+5. Produced harness implementation → construction/source verification (if allowed) → later corrections and reviews.
 
 Keep previously published receipts immutable. For corrections append a new event pointing to the superseded record; never silently overwrite or fabricate the earlier state. If a trace starts after an action, label the entry as **retrospective record**, not contemporaneous evidence.
 
@@ -35,7 +35,7 @@ Use four immutable commit SHA anchors belonging to the **new experiment reposito
 | C1 / preflight | Task baseline and constraints, pinned source revisions, canonical admission and corpus policy, query plan | First native Cognee query |
 | C2 / discovery | Import and independent audit receipts, raw native query results (including negatives), coverage limits | Candidate comparison |
 | C3 / design | Pinned full-assessment/upstream inspection and published alternatives comparison, then a **separate** architecture-decision commit | First adaptation implementation |
-| C4 / build & evaluation | Baseline/adapted (or explicitly no-adaptation) source, tests, evaluation receipts, final limitations and hashes | Final completion report |
+| C4 / construction | Produced source (or explicit null decision), source-to-code map, optional validation, limitations and hashes | Final completion report |
 
 Track both `comparison_commit` and `decision_commit` inside C3. Publish the full baseline/fixture provenance and C1/C2 commits *before* claiming causal selection. Never use an uncommitted local file's modification time as a substitute for independently accessible Git order.
 
@@ -65,4 +65,4 @@ Do not equate imported raw documents to an automatically searchable full-documen
 
 ## Verification
 
-The auditor should be able to follow receipt references and Git history in both directions: source → evidence → alternative comparison → decision → code change → test outcome. If a receipt or chronology gate is missing, mark it incomplete.
+The auditor should be able to follow receipt references and Git history in both directions: source → evidence → alternative comparison → decision → code change → any actual verification. Gameplay or model-performance tests are not required for this chain. If a receipt or chronology gate is missing, mark it incomplete.

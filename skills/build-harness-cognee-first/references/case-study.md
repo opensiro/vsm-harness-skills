@@ -1,8 +1,8 @@
-# Flash API case: a reproducible process example, not an architecture recipe
+# Flash API case: a reproducible development-process example, not an architecture recipe
 
 Historical source: https://github.com/opensiro/harness-build-example-flash-api/tree/5202f0a9330b54da69bce657cbea8e206ffe5658
 
-This case study is external to the present Skills repository. Its code and original receipts are **unchanged** and permanently referenced at the historical merge SHA.
+This case study is external to the present Skills repository. Its code and original receipts are **unchanged** and permanently referenced at the historical merge SHA. Its intended result is the **construction decision trace**; scripted task evaluation was extra evidence, not a required benchmark or the skill's success criterion.
 
 Observed chronology in PR #1:
 1. A Python dependency repair task and source selection were fixed before architectural discovery. Index commit 14a2182e2d6d0ecd851cef118906431b2c851aaa; connector d176484e85da55c84450d67040cb4a2d096353c7, with a disclosed one-line sharded-path fix.
