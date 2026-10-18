@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
   "methodology_version": "0.3.8",
-  "skill_catalog_entries": 1,
+  "skill_catalog_entries": 2,
   "skill_ids": [
-    "assess-vsm-harness"
+    "assess-vsm-harness",
+    "build-harness-cognee-first"
   ]
 }
