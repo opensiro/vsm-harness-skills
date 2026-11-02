@@ -90,6 +90,7 @@ deterministic ranking projection
 | Skill | Purpose |
 | --- | --- |
 | [assess-vsm-harness](skills/assess-vsm-harness/SKILL.md) | Produce a detailed evidence-backed **general** repository assessment with out-of-the-box autonomy states. |
+| [founder-system5-self-check](skills/founder-system5-self-check/SKILL.md) | **Experimental v0.1.0:** a first-person S5 reflection on the invoking founder's own policy choices and organizational consequences; no third-party profiles, Index scores or general Methodology change. |
 | [build-harness-cognee-first](skills/build-harness-cognee-first/SKILL.md) | **Experimental v0.1.0:** build a new harness using real Cognee-first discovery, verified VSM sources, an auditable design trace, and a constructed harness (performance evaluation optional) (not an assessment methodology release). |
 
 The general assessment skill owns repository evidence collection and classification. It does not generate cohort-relative signatures or rankings.
