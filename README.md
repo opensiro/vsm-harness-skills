@@ -92,10 +92,13 @@ deterministic ranking projection
 | [assess-vsm-harness](skills/assess-vsm-harness/SKILL.md) | Produce a detailed evidence-backed **general** repository assessment with out-of-the-box autonomy states. |
 | [founder-system5-self-check](skills/founder-system5-self-check/SKILL.md) | **Experimental v0.1.0:** a first-person S5 reflection on the invoking founder's own policy choices and organizational consequences; no third-party profiles, Index scores or general Methodology change. |
 | [build-harness-cognee-first](skills/build-harness-cognee-first/SKILL.md) | **Experimental v0.1.0:** build a new harness using real Cognee-first discovery, verified VSM sources, an auditable design trace, and a constructed harness (performance evaluation optional) (not an assessment methodology release). |
+| [opensiro-oss](skills/opensiro-oss/SKILL.md) | **Experimental v0.1.0:** portable agent onboarding that refreshes current public Organization bootstrap and routes OSS work; it grants no new authority and does not execute work merely by loading. |
 
 The general assessment skill owns repository evidence collection and classification. It does not generate cohort-relative signatures or rankings.
 
 The independent experimental `build-harness-cognee-first` skill consumes canonical assessments for **build-time research and construction**, without authoring or changing Index classifications. It has its own `VERSION` and does **not** advance the released general Methodology or alter the Profile, S1–S5 ownership semantics, or synthesis/ranking. The [Flash API example](https://github.com/opensiro/harness-build-example-flash-api) is an external historical case study, not a mandated architecture.
+
+The experimental `opensiro-oss` skill is only a **distribution wrapper** around Organization's current public bootstrap and Control Plane. Its own version does not advance the released general Methodology. To invoke it as `/opensiro-oss` in Claude Code, install the skill directory in a supported Claude Code skills location; a file in this catalog is not automatically installed into every client. Direct use of Organization `START_HERE.md` remains supported without the skill.
 
 [SYNTHESIS.md](SYNTHESIS.md) defines the ordered comparison procedure and deterministic ranking projection consumed by the **general** `vsm-harness-index`. Assessment, synthesis, ranking, and their validation contract share the single released general Methodology version in `skills/assess-vsm-harness/VERSION`; they do not have independent semantic versions.
 
