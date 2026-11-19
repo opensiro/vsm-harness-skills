@@ -8,6 +8,10 @@
 
 You can inspect and use the assessment methodology directly without first learning the OpenSiro control structure. The contribution guide gives you a copy-paste route for handing an idea, issue, or open-ended contribution to an AI agent.
 
+## Use OpenSiro on your own project
+
+**OpenSiro Local (experimental):** apply the existing VSM harness assessment and evidence-first capability roadmap to a local, private or self-hosted agent project without joining the public Index or publishing its code. Start with the [opensiro-local skill](skills/opensiro-local/SKILL.md) and [copy-paste quickstart](skills/opensiro-local/references/quickstart.md). It is an agent workflow, not an automatically installed CLI; local does not promise offline model processing. Local assessments remain unreviewed and separate from accepted Index results.
+
 ## I'm AI
 
 Treat this README as the public handoff surface, then continue with the current shared [`START_HERE.md`](https://github.com/opensiro/vsm-oss-organization/blob/main/START_HERE.md). For already tracked work use the shared [`TODO.md`](https://github.com/opensiro/vsm-oss-organization/blob/main/TODO.md); for new, unclassified, cross-repository, or authority-sensitive work use [`CONTRIBUTOR_START.md`](https://github.com/opensiro/vsm-oss-organization/blob/main/CONTRIBUTOR_START.md).
@@ -94,6 +98,7 @@ deterministic ranking projection
 | [founder-system5-self-check](skills/founder-system5-self-check/SKILL.md) | **Experimental v0.1.0:** a first-person S5 reflection on the invoking founder's own policy choices and organizational consequences; no third-party profiles, Index scores or general Methodology change. |
 | [build-harness-cognee-first](skills/build-harness-cognee-first/SKILL.md) | **Experimental v0.1.0:** build a new harness using real Cognee-first discovery, verified VSM sources, an auditable design trace, and a constructed harness (performance evaluation optional) (not an assessment methodology release). |
 | [opensiro-oss](skills/opensiro-oss/SKILL.md) | **Experimental v0.1.0:** portable agent onboarding that refreshes current public Organization bootstrap and routes OSS work; it grants no new authority and does not execute work merely by loading. |
+| [opensiro-local](skills/opensiro-local/SKILL.md) | **Experimental v0.1.0:** apply canonical harness assessment and Upstream-inspired, plan-only capability roadmaps to an owner's local/private/self-hosted project; no Index admission or publication is implied. |
 
 The general assessment skill owns repository evidence collection and classification. It does not generate cohort-relative signatures or rankings.
 

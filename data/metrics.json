@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
   "methodology_version": "0.3.8",
-  "skill_catalog_entries": 4,
+  "skill_catalog_entries": 5,
   "skill_ids": [
     "assess-vsm-harness",
     "founder-system5-self-check",
     "build-harness-cognee-first",
-    "opensiro-oss"
+    "opensiro-oss",
+    "opensiro-local"
   ]
 }
