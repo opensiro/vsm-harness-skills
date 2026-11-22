@@ -13,7 +13,7 @@ class MethodologyContractTests(unittest.TestCase):
 
     def test_version_surfaces_match_methodology_version(self):
         version = (SKILL / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "0.3.8")
+        self.assertEqual(version, "0.3.9")
         for relative in (
             "skills/assess-vsm-harness/SKILL.md",
             "skills/assess-vsm-harness/references/autonomy-states.md",
@@ -123,7 +123,34 @@ class MethodologyContractTests(unittest.TestCase):
         self.assertIn("0.3.7", checker.BOUNDARY_METHODS)
         self.assertIn("0.3.8", checker.SUPPORTED)
         self.assertIn("0.3.8", checker.BOUNDARY_METHODS)
+        self.assertIn("0.3.9", checker.SUPPORTED)
+        self.assertIn("0.3.9", checker.BOUNDARY_METHODS)
         self.assertEqual(len(checker.BOUNDARY_035), 2)
+
+    def test_039_s1_calibration_distinguishes_configuration_from_construction(self):
+        states = self.text("skills/assess-vsm-harness/references/autonomy-states.md")
+        skill = self.text("skills/assess-vsm-harness/SKILL.md")
+        changelog = self.text("skills/assess-vsm-harness/CHANGELOG.md")
+        self.assertIn("## S1: autonomous runtime vs. developer composition", states)
+        self.assertIn("S1 ownership calibration:", skill)
+        self.assertIn("Do not downgrade `S1=A` to `C` solely", skill)
+        self.assertIn("Merely instantiating or configuring an already implemented autonomous agent", states)
+        self.assertIn("exact missing autonomous owner", states)
+        self.assertIn("Generic graph/tool/LLM APIs alone", states)
+        self.assertIn("source-proven", states)
+        self.assertIn("Profile `0.2.4`", changelog)
+        self.assertIn("not** a mandatory mass reassessment", changelog)
+
+    def test_039_s1_examples_are_non_gold_and_cover_three_cases(self):
+        states = self.text("skills/assess-vsm-harness/references/autonomy-states.md")
+        scenarios = states.split("### Non-gold S1 contrast scenarios", 1)[1].split("## S2 constructor threshold", 1)[0]
+        self.assertIn("evidence questions, not preapproved state labels", scenarios)
+        for phrase in ("Autonomous agent nested in an authored workflow",
+                       "Constructor-only path",
+                       "Unresolved, broken, or adjacent agent runtime"):
+            self.assertIn(phrase, scenarios)
+        self.assertIn("existing `?`, bounded absence, or exclusion", scenarios)
+        self.assertIn("not automatically qualify for `C` or `A`", scenarios)
 
     def test_034_oracle_parses_s3star_separately(self):
         checker_path = ROOT / "scripts" / "check_assessment_contract.py"

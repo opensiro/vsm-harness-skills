@@ -1,6 +1,6 @@
 # Standalone assessment format
 
-**Methodology version:** 0.3.8
+**Methodology version:** 0.3.9
 
 An assessment is repository-relative and revision-relative. It must not contain cohort-relative signatures, rank positions, or claims that depend on which other harnesses happen to be indexed.
 
@@ -14,9 +14,9 @@ repository: https://github.com/example/harness
 review_ref: <40-character commit SHA>
 reviewed_at: YYYY-MM-DD
 generated_profile_version: 0.2.4
-generated_assessment_procedure_version: 0.3.8
+generated_assessment_procedure_version: 0.3.9
 profile_version: 0.2.4
-assessment_procedure_version: 0.3.8
+assessment_procedure_version: 0.3.9
 status: included
 autonomy_s1: A
 autonomy_s2: C
