@@ -5,7 +5,7 @@ description: Produce a standalone evidence-backed VSM assessment of one autonomo
 
 # Assess a Harness as a Viable System
 
-**Methodology version:** 0.3.8
+**Methodology version:** 0.3.9
 
 Use the bundled [VSM Harness Profile](references/profile/PROFILE.md) as the sole definition of S1-S5, S3*, recursion, autonomy, variety, homeostasis, and algedonic signalling. The bundled Profile for this methodology is **v0.2.4**. The output is a standalone repository assessment, not a cross-catalog comparison.
 
@@ -16,6 +16,8 @@ Read [assessment-format.md](references/assessment-format.md) for the required ar
 1. Pin the repository revision and declare system-in-focus, purpose, environment, standard-distribution boundary, first-party operating/deployment modes considered, recursion level, review date, Profile version, and Methodology version. On first creation, also record the immutable generation-origin pair: `generated_profile_version` and `generated_assessment_procedure_version`.
 2. Describe repository architecture before VSM mapping: runtime, agent loop, state, tools, delegation, persistence, scheduling, evaluation, human involvement, maintainer/contributor governance, self-hosted/operator modes, and external integration when material.
 3. Identify operational outcomes and real S1 units.
+   - **S1 ownership calibration:** distinguish developer configuration of an autonomous agent from developer construction of the autonomy loop itself. For agent-in-node, agent-in-workflow, SDK, and framework implementations, trace the supported first-party agent decision/action/observation path separately from deterministic orchestration. Do not downgrade `S1=A` to `C` solely because the developer instantiates or configures the agent. Apply the existing function-first, owner, boundary-reachability, and closure requirements; name the missing autonomy element when claiming `S1=C`. See [S1 contrast scenarios](references/autonomy-states.md#non-gold-s1-contrast-scenarios); they are not gold labels.
+
 4. For each VSM function, first establish the organizational function from behavior and relationships. State the disturbance or variety being regulated.
 5. For S2 specifically, identify the distinct S1 units, the specific actual or structurally evidenced inter-S1 interference/conflict/oscillation, the coordination relation that attenuates it, and the feedback/closure path into subsequent S1 behaviour. Generic messaging, shared state, sequencing, routing, or speaker selection is not enough by itself.
 6. Identify the **decisive decision right or feedback path** that closes the function.
@@ -29,6 +31,12 @@ Read [assessment-format.md](references/assessment-format.md) for the required ar
 14. Assign the local state only after function, decisive right, ownership, support, closure, and any required negative/composite evidence are separated. For S3/S4/S5, encode a separately evidenced first-party parent mode with `(P)` on `A` or `C`, or standalone `P` when no first-party `A`/`C` autonomous mode is established.
 15. Record recursion, variety, escalation, and unresolved evidence gaps separately from the six-state vector.
 16. Write `assessments/<harness_id>.md` for index work. Do not generate a cohort-relative signature in this skill.
+
+## Methodology 0.3.9 S1 ownership calibration patch
+
+This compatible clarification distinguishes developer configuration of an already autonomous first-party S1 agent from developer construction of its decisive action/feedback loop. Supported agent-in-workflow/graph modes must be examined separately from deterministic orchestration; a source-proven operational owner is not downgraded to `C` merely for setup, and a generic builder is not upgraded to `A`. The three illustrative S1 contrast scenarios are not adjudicated gold labels.
+
+No Profile 0.2.4 changes, ownership-symbol redefinitions, new evidence threshold, new required assessment field, executable semantic oracle, synthesis/ranking rule, or retroactive Index regrade. Contested grades require independent same-ref primary-source review and existing Index gates; immutable historical and frozen research provenance stays intact.
 
 ## Methodology 0.3.8 positive-evidence calibration patch
 
@@ -102,7 +110,7 @@ Every assessment newly created by Methodology v0.2.1 or later must preserve whic
 
 ```yaml
 generated_profile_version: 0.2.4
-generated_assessment_procedure_version: 0.3.8
+generated_assessment_procedure_version: 0.3.9
 ```
 
 These two fields are **immutable origin metadata**. Do not change them during reassessment, same-ref correction, methodology migration, or later Methodology upgrades.

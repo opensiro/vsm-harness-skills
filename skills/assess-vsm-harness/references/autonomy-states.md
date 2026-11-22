@@ -1,6 +1,6 @@
 # Local autonomy states
 
-**Methodology version:** 0.3.8
+**Methodology version:** 0.3.9
 
 Methodology `0.3.x` adds a parent-governed mode modifier for S3, S4, and S5. This is a classification/publication procedure layered on unchanged VSM Harness Profile semantics.
 
@@ -60,6 +60,26 @@ The notation does not relax the function-first rule. A human, maintainer, approv
 A positive ownership state is boundary-relative. The actor or construction path used to justify `A`, `A(P)`, `C`, `C(P)`, or `P` must be reachable in the declared first-party operating/deployment mode. A development-only, dogfood, test/eval, CI/release, contributor, or governance actor in the same repository does not become part of the assessed harness merely by co-location.
 
 For `A`, the autonomous decisive actor and closure must be available in the supported assessed mode. For `C`, a function-specific first-party construction path must be intentionally exposed to that boundary, while actor, authority, independence, or closure may still require composition. A concrete dogfood implementation can strengthen evidence that the constructor is real without changing the target boundary's ownership state.
+
+## S1: autonomous runtime vs. developer composition
+
+Classify S1 by the **decisive operational action/feedback loop**, not merely by who instantiates, configures, or connects the harness. The existing function-first, owner, first-party boundary-reachability, and closure requirements still apply.
+
+- **`S1=A` candidate:** a supported first-party operating/deployment mode provides an autonomous agent that chooses meaningful operational actions, invokes or executes them, observes their outcomes, and can use those observations for subsequent operational choices. Developer-authored prompts, model selection, tool bindings, roles, workflow nodes, and configuration do not, by themselves, make the autonomous owner developer-composed. A local autonomous S1 loop can exist inside an otherwise deterministic graph or orchestrator; a supported optional agent mode can qualify even when not enabled in every deployment.
+- **`S1=C` candidate:** a **function-specific first-party S1 construction path** is intentionally exposed at the assessed boundary, but the developer must still compose the autonomous decision owner, its authority, or the material action/observation/next-decision closure. Merely instantiating or configuring an already implemented autonomous agent is **not** sufficient grounds for `C`. Generic graph/tool/LLM APIs alone are not an S1-specific constructor witness.
+- **Insufficient evidence:** a class name, README assertion, isolated LLM invocation, or available generic tool API does not establish autonomous ownership. When only a deterministic orchestrator has been examined and a supported agent path remains plausible, inspect that agent-specific route before deciding. If material in-boundary evidence is unresolved, preserve `?` where permitted by the existing evidence rules, and apply the existing S1 inclusion/exclusion boundary rather than inventing a positive grade.
+
+Use the **existing assessment fields** to reconstruct the S1 unit and environment, decisive next-action owner, action → observation → subsequent-action closure, and reachability in a supported first-party mode. For `S1=C`, name the **exact missing autonomous owner, decision authority, or closure element**; do not infer it from developer setup alone.
+
+### Non-gold S1 contrast scenarios
+
+These are **evidence questions, not preapproved state labels**. The source and reviewed deployment boundary, not the example's description, determine an actual assessment.
+
+1. **Autonomous agent nested in an authored workflow:** a developer wires a supported first-party agent node into a deterministic graph, but primary source shows that the agent independently selects tool actions, consumes tool results, and decides the next action in that supported mode. Assess `A` eligibility from this inner runtime loop, not the outer graph's deterministic edges; check reachability and closure before assigning any state.
+2. **Constructor-only path:** an SDK exposes a first-party S1-specific agent/action constructor, but the developer must implement the autonomous owner or connect the observation back into the next discretionary action. A source-proven S1-specific path may support `C`; a generic LLM or tool/graph builder without such a path does not automatically qualify for `C` or `A`.
+3. **Unresolved, broken, or adjacent agent runtime:** a workflow advertises an agent but the only proven path is a demo, development fixture, external runtime, or a supported-mode guard whose real action/feedback closure has not been established. Do not borrow adjacent autonomy or award `A`; investigate the plausible in-boundary path and use the existing `?`, bounded absence, or exclusion procedure as evidence warrants.
+
+This clarification does not revise Profile semantics, the `A`/`C` definitions, positive-evidence thresholds, required artifact fields, or historical Index decisions.
 
 ## S2 constructor threshold
 

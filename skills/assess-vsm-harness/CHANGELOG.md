@@ -1,5 +1,15 @@
 # assess-vsm-harness changelog
 
+## 0.3.9 — 2026-11-22
+
+- clarify the existing S1 `A` versus `C` ownership test: developer configuration of a first-party autonomous agent is not itself developer construction of the autonomy loop;
+- trace a supported first-party agent's operational action, observation and subsequent-action decision separately from deterministic graph/workflow orchestration, while preserving boundary reachability and function-first evidence;
+- specify that `S1=C` requires a function-specific first-party constructor and the exact missing autonomous owner/authority/closure, not merely an SDK instantiation or generic builder;
+- add three explicitly non-gold contrasts for an agent nested in a workflow, a constructor-only path, and an unresolved/broken/adjacent agent runtime;
+- carry the same clarification through the assessment workflow and update the compatible completion-checker version without changing its structural checks.
+
+This is a compatible calibration-only patch over Methodology 0.3.8, retaining Profile `0.2.4`, all ownership symbols and thresholds, existing artifact fields, synthesis/ranking, immutable origin provenance, and frozen assessment records. It is **not** a mandatory mass reassessment or automatic S1 regrade. Any disputed Index assessment needs separate same-ref source review and normal Index publication gates.
+
 ## 0.3.8 — 2026-10-13
 
 - publish informative, source-pinned R1–R10 positive-evidence calibration cases from independent external harnesses, with an explicit 20-recent-admissions / 12-targeted / 23-distinct sample manifest;

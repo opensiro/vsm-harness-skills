@@ -126,6 +126,8 @@ Methodology `0.3.7` is a **calibration-only procedural patch**. It explains how 
 
 Methodology `0.3.8` is a non-normative positive-evidence calibration patch over `0.3.7`: optional R1–R10 review questions, immutable source anchors and a reproducible 20-recent-plus-12-targeted / 23-distinct convenience sample. It changes no VSM function, ownership state, classification threshold, assessment field, synthesis or ranking rule. Structural completion requirements remain exactly those of `0.3.5+`, extended to accept `0.3.8` as compatible. Historical Index vectors and immutable generation provenance do not automatically change, and frozen research protocols retain their pinned Methodology.
 
+Methodology `0.3.9` is a compatible **S1 ownership calibration patch** over `0.3.8`. It prevents inferring `S1=C` merely from developer instantiation/configuration of a supported first-party autonomous agent, without automatically classifying agent-in-workflow nodes as `A`. A `C` claim still needs an evidenced S1-specific constructor with a named missing autonomous ownership, authority or closure element; an `A` claim still requires a supported reachable agent-owned operational loop. The added non-gold contrast scenarios and existing-field guidance introduce no Profile `0.2.4` change, state redefinition, new evidence threshold, required field, semantic oracle, synthesis/ranking change, or automatic historical Index migration. Disputed grades remain subject to independent same-ref source review and existing Index gates.
+
 ## Release tracking
 
 Every explicitly versioned Methodology release from `0.2.0` onward must have both an immutable lightweight Git tag `v<version>` and a GitHub Release pointing to the same target commit. A deliberately skipped version such as `0.3.2` has no changelog release heading and therefore creates no release obligation. The release body is generated from the corresponding `CHANGELOG.md` section plus the exact release target; it is not a separately maintained semantic source.
@@ -142,7 +144,7 @@ At this release boundary:
 
 ```text
 Profile:     0.2.4
-Methodology: 0.3.8
+Methodology: 0.3.9
 Index:       exact Git revision
 ```
 
