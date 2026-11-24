@@ -32,6 +32,10 @@ Read [assessment-format.md](references/assessment-format.md) for the required ar
 15. Record recursion, variety, escalation, and unresolved evidence gaps separately from the six-state vector.
 16. Write `assessments/<harness_id>.md` for index work. Do not generate a cohort-relative signature in this skill.
 
+## Candidate interpretation calibration (experimental; not active Methodology)
+
+For an explicitly selected and pinned candidate evaluation only, consult [interpretation-calibration-candidate.md](references/interpretation-calibration-candidate.md). It proposes function-first contrast tests, supported-mode scope, A/C ownership distinctions, claim-relative S3* independence, alternative parent-mode review, and symmetric adjudication of competing interpretations. No release or default procedure change is authorized by this candidate section; preserve the currently pinned normative contract and all historical assessment provenance.
+
 ## Methodology 0.3.9 S1 ownership calibration patch
 
 This compatible clarification distinguishes developer configuration of an already autonomous first-party S1 agent from developer construction of its decisive action/feedback loop. Supported agent-in-workflow/graph modes must be examined separately from deterministic orchestration; a source-proven operational owner is not downgraded to `C` merely for setup, and a generic builder is not upgraded to `A`. The three illustrative S1 contrast scenarios are not adjudicated gold labels.
